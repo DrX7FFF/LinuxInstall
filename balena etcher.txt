@@ -1,0 +1,6 @@
+## balena etcher
+wget -N -q https://github.com/balena-io/etcher/releases/download/v1.19.21/balena-etcher_1.19.21_amd64.deb
+sudo apt install ./balena-etcher_1.19.21_amd64.deb
+
+# uninstall
+sudo apt remove balena-etcher

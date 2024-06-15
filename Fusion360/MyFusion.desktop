@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Fusion 360
+Exec=env WINEPREFIX="/home/moi/.myfusion" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+Type=Application
+StartupNotify=true
+Icon=ECF6_Fusion360.0
+StartupWMClass=fusionlauncher.exe

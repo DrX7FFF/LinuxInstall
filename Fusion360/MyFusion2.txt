@@ -1,0 +1,71 @@
+export env ROOTFOLDER=~/.fusion
+mkdir {$ROOTFOLDER,$ROOTFOLDER/wineprefixes,$ROOTFOLDER/Downloads}
+rm -r $ROOTFOLDER/wineprefixes/default
+export env WINEPREFIX=$ROOTFOLDER/wineprefixes/default
+export env WINEDEBUG=fixme-all #Hide the fixme messages intended for Wine developers
+SP_FUSION360_INSTALLER_URL="https://dl.appstreaming.autodesk.com/production/installers/Fusion%20Admin%20Install.exe"
+SP_WEBVIEW2_INSTALLER_URL="https://github.com/aedancullen/webview2-evergreen-standalone-installer-archive/releases/download/109.0.1518.78/MicrosoftEdgeWebView2RuntimeInstallerX64.exe"
+
+#Wine version checking, warn user if their wine install is out of date
+WINE_VERSION="$(wine --version  | cut -d ' ' -f1 | sed -e 's/wine-//' -e 's/-rc.*//')"
+WINE_VERSION_MINIMUM=8.14
+if (( $(echo "$WINE_VERSION < $WINE_VERSION_MINIMUM" | bc -l) )); then
+    echo "Your version of wine ${WINE_VERSION} is too old and will not work with Autodesk Fusion. You should upgrade to at least ${WINE_VERSION_MINIMUM}"
+fi
+
+#Install required Font, the Navigation bar will not work without this font.
+wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O $ROOTFOLDER/Downloads/winetricks
+chmod +x $ROOTFOLDER/Downloads/winetricks
+$ROOTFOLDER/Downloads/winetricks arial
+wine winecfg -v win10
+
+#Remove tracking metrics/calling home
+wine REG ADD "HKCU\Software\Wine\DllOverrides" /v "adpclientservice.exe" /t REG_SZ /d "" /f
+#Navigation bar does not work well with anything other than the wine builtin DX9
+wine REG ADD "HKCU\Software\Wine\DllOverrides" /v "AdCefWebBrowser.exe" /t REG_SZ /d builtin /f
+#Use Visual Studio Redist that is bundled with the application
+wine REG ADD "HKCU\Software\Wine\DllOverrides" /v "msvcp140" /t REG_SZ /d native /f
+wine REG ADD "HKCU\Software\Wine\DllOverrides" /v "mfc140u" /t REG_SZ /d native /f
+
+cat > $ROOTFOLDER/Downloads/NMachineSpecificOptions.xml << EOL
+<?xml version="1.0" encoding="UTF-16" standalone="no" ?>
+<OptionGroups>
+  <BootstrapOptionsGroup SchemaVersion="2" ToolTip="Special preferences that require the application to be restarted after a change." UserName="Bootstrap">
+    <driverOptionId ToolTip="The driver used to display the graphics" UserName="Graphics driver" Value="VirtualDeviceDx9"/></BootstrapOptionsGroup>
+</OptionGroups>
+EOL
+
+#Download and install WebView2 to handle Login attempts, required even though we redirect to your default browser
+wget -N $SP_WEBVIEW2_INSTALLER_URL -P $ROOTFOLDER/Downloads
+wine $ROOTFOLDER/Downloads/MicrosoftEdgeWebView2RuntimeInstallerX64.exe /install #/silent
+
+#Download latest Admin Install, only if the file has changes since last time we connected to the server
+wget -N $SP_FUSION360_INSTALLER_URL -P $ROOTFOLDER/Downloads
+
+#Extract the icon from the installer, this will give the latest icon without breaking any distribution licenses
+wrestool -x --output=$ROOTFOLDER/Downloads/Fusion360.ico -t14 "${ROOTFOLDER}/Downloads/Fusion Admin Install.exe"
+
+#Install the application, the UI doesn't work for us, so install in the background. Could do with tracking folder size to get a progress bar for the user here
+wine $ROOTFOLDER/Downloads/Fusion\ Admin\ Install.exe --quiet
+
+mkdir -p "${ROOTFOLDER}/wineprefixes/default/drive_c/users/$USER/AppData/Roaming/Autodesk/Neutron Platform/Options"
+
+cp $ROOTFOLDER/Downloads/NMachineSpecificOptions.xml "${ROOTFOLDER}/wineprefixes/default/drive_c/users/$USER/AppData/Roaming/Autodesk/Neutron Platform/Options"
+
+#Disable Debug messages on regular runs, we dont have a terminal, so speed up the system by not wasting time prining them into the Void
+sed -i 's/=env WINEPREFIX=/=env WINEDEBUG=-all env WINEPREFIX=/g' "$HOME/.local/share/applications/wine/Programs/Autodesk/Autodesk Fusion.desktop"
+
+#Cleanup any shortcuts created we dont want, though they seem to work well now
+#rm -f "$HOME/.config/menus/applications-merged/wine-Programs-Autodesk-Autodesk Fusion.menu"
+#rm -rf "$HOME/.local/share/applications/wine/Programs/Autodesk/Autodesk Fusion.desktop"
+
+#Create mimetype link to handle web login call backs to the Identity Manager
+cat > $HOME/.local/share/applications/adskidmgr-opener.desktop << EOL
+[Desktop Entry]
+Type=Application
+Name=adskidmgr Scheme Handler
+Exec=env WINEPREFIX="$ROOTFOLDER/wineprefixes/default" wine "C:\Program Files\Autodesk\webdeploy\production\99249ee497b13684a43f5bacd5f1f09974049c6b\Autodesk Identity Manager\AdskIdentityManager.exe" %u
+StartupNotify=false
+MimeType=x-scheme-handler/adskidmgr;
+EOL
+xdg-mime default adskidmgr-opener.desktop x-scheme-handler/adskidmgr

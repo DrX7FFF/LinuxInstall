@@ -1,0 +1,116 @@
+## MYFusion
+# Sources à voir :
+https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/issues/311
+https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/issues/381
+https://github.com/str0g/Autodesk-Fusion360-Linux
+https://github.com/Winetricks/winetricks/issues/1236
+https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/issues/418
+https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/issues/300
+
+# Notes
+winetricks msxml6 win10
+winetricks atmlib gdiplus msxml3 msxml6 vcrun2017 corefonts win10
+
+winetricks msxml6 corefonts win10
+
+WINEPREFIX="/home/moi/.fusion360/wineprefixes/default"
+
+# Doc Wine
+https://simpler-website.pages.dev/html/2021/2/winetricks-tutorial-for-beginners/
+https://simpler-website.pages.dev/html/2021/2/winecfg-tutorial-for-beginners/
+https://simpler-website.pages.dev/html/2021/1/wine-environment-variables/
+https://www.winehq.org/docs/en/wineusr-guide.html#EXPLORER-LIKE-WINE
+
+# Autre ressource 
+https://github.com/andyholst/robotic_experimentation/blob/2bb44f3776536e287339854ee0f2cc7d08dd9b8f/fusion360_in_docker/install_fusion360.sh
+#!/usr/bin/env bash
+
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" WINEDLLOVERRIDES="mscoree,mshtml=" wine wineboot
+
+wget -nc "https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.3.0/wine-mono-6.3.0-x86.msi"
+wget -nc "http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86_64.msi"
+
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" ${WINE} msiexec /i wine-mono-6.3.0-x86.msi
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" ${WINE} msiexec /i wine-gecko-2.47.2-x86_64.msi
+
+rm wine-mono-6.3.0-x86.msi
+rm wine-gecko-2.47.2-x86_64.msi
+
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q atmlib
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q gdiplus
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q corefonts
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q fontsmooth=rgb
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q winhttp
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q vcrun2017
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q d9vk
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks -q win10
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" winetricks vcruntime140_1=native
+
+touch log.txt
+./watch_fusion360_install_proccess.sh &
+WINEPREFIX="${WINE_PATH}" WINEARCH="${ARCHITECTURE}" ${WINE} "${HOME}/setup/streamer.exe" -p deploy -g -f log.txt --quiet
+
+
+# All Info
+https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/issues/418#issuecomment-2140426917
+
+mkdir -p $HOME/.fusion360/bin
+mkdir -p $HOME/.fusion360/downloads
+# wget -N -P $HOME/.fusion360/bin https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+# chmod +x $HOME/.fusion360/bin/winetricks
+wget https://dl.appstreaming.autodesk.com/production/installers/Fusion%20360%20Admin%20Install.exe -O Fusion360installer.exe
+cp "Fusion360installer.exe" "$HOME/.fusion360/downloads/Fusion360installer.exe"
+WINEPREFIX=$HOME/.fusion360/wineprefixes/default sh $HOME/.fusion360/bin/winetricks -q atmlib gdiplus corefonts cjkfonts dotnet452 msxml4 msxml6 vcrun2017 fontsmooth=rgb winhttp win10
+# DXVK
+WINEPREFIX=$HOME/.fusion360/wineprefixes/default sh $HOME/.fusion360/bin/winetricks -q dxvk
+wget -N -P $HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/Downloads https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/DXVK.reg
+WINEPREFIX=$HOME/.fusion360/wineprefixes/default wine regedit.exe $HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/Downloads/DXVK.reg
+mkdir -p "$HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/AppData/Roaming/Autodesk/Neutron Platform/Options"
+wget -N -P "$HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/AppData/Roaming/Autodesk/Neutron Platform/Options" https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/NMachineSpecificOptions.xml
+mkdir -p "$HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/AppData/Local/Autodesk/Neutron Platform/Options"
+wget -N -P "$HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/AppData/Local/Autodesk/Neutron Platform/Options" https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/NMachineSpecificOptions.xml
+mkdir -p "$HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/Application Data/Autodesk/Neutron Platform/Options"
+wget -N -P "$HOME/.fusion360/wineprefixes/default/drive_c/users/$USER/Application Data/Autodesk/Neutron Platform/Options" https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/NMachineSpecificOptions.xml
+
+
+## My Sequence
+export env WINEPREFIX=$HOME/.myfusion
+export env WINEDEBUG=fixme-all #Hide the fixme messages intended for Wine developers
+
+WINEPREFIX=$HOME/.myfusion winecfg
+
+# Affection du WINEPREFIX sur la session terminal en cours
+WINEPREFIX=$HOME/.myfusion winetricks msxml6 corefonts win10
+WINEPREFIX=$HOME/.myfusion winetricks dxvk
+
+# Mise à jour du wineprefix
+WINEPREFIX=$HOME/.myfusion wineboot -u
+
+# installation WinMono
+wget "https://dl.winehq.org/wine/wine-mono/7.4.0/wine-mono-7.4.0-x86.msi"
+WINEPREFIX=$HOME/.myfusion wine start wine-mono-7.4.0-x86.msi
+
+# vérifier la liste des installation
+WINEPREFIX=$HOME/.myfusion  wine uninstaller --list
+
+wget -N -P $HOME/.myfusion/drive_c/users/$USER/Downloads https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/DXVK.reg
+WINEPREFIX=$HOME/.myfusion wine regedit.exe $HOME/.myfusion/drive_c/users/$USER/Downloads/DXVK.reg
+mkdir -p "$HOME/.myfusion/drive_c/users/$USER/AppData/Roaming/Autodesk/Neutron Platform/Options"
+wget -N -P "$HOME/.myfusion/drive_c/users/$USER/AppData/Roaming/Autodesk/Neutron Platform/Options" https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/NMachineSpecificOptions.xml
+mkdir -p "$HOME/.myfusion/drive_c/users/$USER/AppData/Local/Autodesk/Neutron Platform/Options"
+wget -N -P "$HOME/.myfusion/drive_c/users/$USER/AppData/Local/Autodesk/Neutron Platform/Options" https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/NMachineSpecificOptions.xml
+mkdir -p "$HOME/.myfusion/drive_c/users/$USER/Application Data/Autodesk/Neutron Platform/Options"
+wget -N -P "$HOME/.myfusion/drive_c/users/$USER/Application Data/Autodesk/Neutron Platform/Options" https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/NMachineSpecificOptions.xml
+
+# Installation 
+WINEPREFIX="/home/moi/.myfusion/" wine ~/Téléchargements/WebView2installer.exe
+WINEPREFIX="/home/moi/.myfusion/" wine ~/Téléchargements/Fusion360installer.exe --quiet
+
+# Consulter les fichiers
+env WINEPREFIX=$HOME/.myfusion winefile
+
+# Execution
+WINEPREFIX="/home/moi/.myfusion/" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+
+# Kill à la fermerture :
+kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
