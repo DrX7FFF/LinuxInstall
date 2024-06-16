@@ -1,0 +1,5 @@
+# restart pyload
+docker restart pyload
+
+# renamer
+/storage/.kodi/userdata/mediarenamer/mediarenamer.py

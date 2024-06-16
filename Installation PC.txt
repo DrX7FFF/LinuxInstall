@@ -1,0 +1,245 @@
+Installation PC
+
+sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
+sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
+sudo apt autoremove
+
+
+TODO:
+	Purger les snaps : /snap
+	    snap list
+logiciel gestionnaire de packet Mint
+	synaptic
+
+
+Ubuntu 24.04
+LinuxMint 21.3 Cinnamon
+
+## Ubuntu MàJ Snap
+sudo snap refresh snap-store
+sudo snap refresh
+
+## installation Flatpak
+# https://flatpak.org/setup/Ubuntu
+sudo apt install -y flatpak
+sudo apt install -y gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+## chemin d'enregistrement des applications :
+/home/moi/.var/app/
+
+## Chemin des raccourcis Snap :
+/var/lib/snapd/desktop/applications
+
+## version bureau
+echo $XDG_SESSION_TYPE
+
+## ToDo
+# Synaptic package Manager
+sudo apt install -y synaptic
+
+# Creation usb iso
+sudo apt install -y usb-creator-gtk
+
+## Installation driver Vulkan AMD Ubuntu 
+# https://linuxconfig.org/install-and-test-vulkan-on-linux
+# https://linuxconfig.org/improve-your-wine-gaming-on-linux-with-dxvk
+sudo add-apt-repository ppa:oibaf/graphics-drivers
+sudo apt update
+sudo apt upgrade
+apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
+
+# A activer
+Activer FireWall
+(?) Activer TimeShift : Quotidienne sur 5J
+# Special Ubuntu pour retarder la détection application qui ne répond pas
+gsettings set org.gnome.mutter check-alive-timeout 60000
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
+
+#  Désactiver application au démarrage
+# Pour afficher toutes les applications masquès
+$ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
+evolution
+mintwelcome
+Relevés du système
+sticky notes
+warpinator
+mintreport
+
+
+## Installer depuis la logitèque (Paquet système sont moins volumineux mais pas isolés):
+Meld
+VLC
+Solaar
+
+## Installer avec des AppImages
+DB_Browser_for_SQLite-v3.12.2-x86_64
+OrcaSlicer_Linux_V2.0.0
+balenaEtcher-1.18.11-x64
+
+#### Installation spéciales :
+## Sur Ubuntu 24.04
+# Gestionnaire graphique firewall
+sudo apt -y install gufw
+# Personalisation Gnome
+sudo apt -y install dconf-editor
+sudo apt -y install gnome-tweak-tool
+sudo apt -y install gnome-tweaks
+
+## Sur Mint
+# Gestionnaire de profile alimentation et performance
+# power-profiles-daemon
+$ powerprofilesctl
+
+## Wine
+https://wiki.winehq.org/Ubuntu
+./wineInstall
+
+## Fusion 360
+# Installation manuelle de FireFox
+# https://support.mozilla.org/fr/kb/installer-firefox-linux
+sudo apt-get -y purge firefox
+sudo install -d -m 0755 /etc/apt/keyrings
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nL’empreinte numérique de la clé correspond ("$0").\n"; else print "\nÉchec de vérification de la clé : l’empreinte ("$0") ne correspond pas à celle attendue.\n"}'
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+
+# section en 1 fois les lignes suivantes
+echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+# fin section
+
+sudo apt update && sudo apt install firefox
+sudo apt install firefox-l10n-fr
+
+# Installation Fusion
+mkdir -p "$HOME/.fusion360/bin" && cd "$HOME/.fusion360/bin" && wget -N https://raw.githubusercontent.com/cryinkfly/Autodesk-Fusion-360-for-Linux/main/files/builds/stable-branch/bin/install.sh && chmod +x install.sh && ./install.sh
+
+# Demarrage
+/home/moi/.fusion360/wineprefixes/default/box-run.sh
+
+# Kill à la fermerture :
+kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+
+## Input Remapper
+# https://medium.com/@canadaduane/key-remapping-in-linux-2021-edition-47320999d2aa
+# https://github.com/sezanzeb/input-remapper
+git clone https://github.com/sezanzeb/input-remapper.git
+cd input-remapper && ./scripts/build.sh
+sudo apt install -f ./dist/input-remapper-2.0.1.deb
+sudo apt install git python3-setuptools gettext
+
+https://unix.stackexchange.com/questions/326373/configure-extra-mouse-button-as-a-second-middle-click-under-wayland
+https://github.com/PixlOne/logiops
+https://wiki.archlinux.org/title/Logitech_MX_Master
+
+## Python
+# Installation PIP
+sudo apt install python3-pip
+	ou
+		wget https://bootstrap.pypa.io/get-pip.py
+		python3 ./get-pip.py
+
+
+
+## Git
+./gitInstall
+
+#### GoogleDrive
+## https://github.com/astrada/google-drive-ocamlfuse
+# Paramétrage de l'API Google pour l'authentification OAuth2 à faire 1 fois
+# Nom = DroitGDriveLinux
+# https://console.cloud.google.com/apis/credentials?project=droitgdrive
+
+# Nouvelle Methode
+https://github.com/astrada/google-drive-ocamlfuse/issues/764
+
+# reprendre le fichier de configuration
+# A modifier :
+background_folder_fetching. If set to a true (the default is false), it starts a thread to fetch folder data in background.
+
+# Installation
+./googledriveInstall
+
+## Informations :
+# Montage automatique via un service, chapitre Mount using systemd :
+# Attention pour l'utilisation du Label, il faut le faire avec la création du fichier de configuration (-id -secret)
+https://github.com/astrada/google-drive-ocamlfuse/wiki/Automounting#mount-using-systemd
+
+# Monter manuellement
+google-drive-ocamlfuse ~/GoogleDrive
+# Démonter manuellement
+fusermount -u ~/GoogleDrive
+## Démarrer/Arrêter le service
+sudo systemctl start google-drive.service
+sudo systemctl stop google-drive.service
+
+
+## VSCodium
+https://vscodium.com/#install-on-debian-ubuntu-deb-package
+./vscodiumInstall
+
+# Ajout des modules C++ et platformIO
+https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
+https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide
+Open extension in the Microsoft Marketplace following the link above
+Download extension's VSIX file by clicking on "Download Extension" in "Resources" section (right sidebar)
+Navigate to VSCodium Extensions view and click "...", select "Install from ".VSIX".
+Repeat for each VSIX/Extension.
+Restart VSCodium.
+
+
+## AppImageLauncher
+# https://github.com/TheAssassin/AppImageLauncher
+./appimagelauncher-lite* install
+
+
+## Bottle
+## chemin d'enregistrement des bottles :
+/home/moi/.var/app/com.usebottles.bottles/data/bottles/bottles
+## Commande pour lanceur :
+flatpak run --command=bottles-cli com.usebottles.bottles run -b MyNotePad++ -p notepad++
+flatpak run --command=bottles-cli com.usebottles.bottles run -b NomDeLaBouteille -p ProgrammeDansLaBouteille 
+
+
+
+## Gestion boot
+# Version simple
+sudo add-apt-repository ppa:yannubuntu/boot-repair
+sudo apt update
+sudo apt install boot-repair
+
+# Version de paramétrage
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+sudo apt update
+sudo apt upgrade
+sudo apt install grub-customizer
+
+
+## NotePad Next
+https://github.com/dail8859/NotepadNext/releases
+
+
+## Addon Applets Cinnamon :
+* Cinnamenu
+* Indicateur touches de verrouillage
+* Power profiles
+
+
+-- Plus utile --
+
+## NotePadQQ
+# Pas maintenu
+
+## Pour TinyMediaManager
+Download from https://www.tinymediamanager.org/download/
+Extract in "~/Programs" folder
+install libmediainfo
+    https://mediaarea.net/en/MediaInfo/Download/Ubuntu
+apt install mediainfo-gui
+apt install mediainfo
+
