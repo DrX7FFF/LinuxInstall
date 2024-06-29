@@ -29,3 +29,15 @@ wineboot -u
 wine winefile
 winetricks dx9
 wine dxdiag
+
+# NE fonctionne pas
+winetricks galliumnine
+
+export WINEPREFIX=~/winetest2
+export WINEDEBUG=-all
+wineboot -u
+winetricks vkd3d
+#winetricks -q --force dotnet48 corefonts
+winetricks dotnet48 
+winetricks corefonts
+wine "/home/moi/winetest2/drive_c/users/moi/Downloads/3DMark-v2-25-8043/3dmark-setup.exe"

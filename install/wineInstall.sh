@@ -7,5 +7,7 @@ sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/
 sudo apt -y update
 sudo apt install --install-recommends winehq-staging
 sudo apt install winetricks
-sudo apt install yad
+# sudo apt install yad
 
+# wget -O ~/Téléchargements/WineGUI.deb https://winegui.melroy.org/downloads/WineGUI-v2.5.0.deb
+# sudo apt install ~/Téléchargements/WineGUI.deb
