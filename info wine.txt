@@ -1,0 +1,28 @@
+## Commandes
+wine <nom de l'exe>
+winecfg
+winetricks
+wineconsole
+wine uninstaller
+
+winefile
+winepath 	# traduit le chemin windows en chemin relatif à l'OS linux
+
+## notes
+dossier installe ~/.wine
+
+## ?
+WINEPREFIX
+		env WINEPREFIX=~/.winetest sh winetricks mfc40 
+env WINEPREFIX=~/.local/share/wineprefixes/Test winetricks
+
+WINEPREFIX="/home/moi/.fusion360/wineprefixes/default"
+echo $WINEPREFIX
+
+
+## pour associer les .exe à wine
+sudo cp /usr/share/doc/wine/examples/wine.desktop /usr/share/applications/
+
+## pour forcer le reboot :
+https://wiki.winehq.org/Wineboot
+wineboot

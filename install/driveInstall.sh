@@ -1,5 +1,19 @@
 #! /bin/bash
 
+## Montage automatique via un service, chapitre Mount using systemd :
+## Attention pour l'utilisation du Label, il faut le faire avec la création du fichier de configuration (-id -secret)
+## https://github.com/astrada/google-drive-ocamlfuse/wiki/Automounting#mount-using-systemd
+
+## Monter manuellement
+# google-drive-ocamlfuse ~/GoogleDrive
+## Démonter manuellement
+# fusermount -u ~/GoogleDrive
+## Démarrer/Arrêter le service
+# sudo systemctl start google-drive.service
+# sudo systemctl stop google-drive.service
+
+
+
 sudo add-apt-repository ppa:alessandro-strada/ppa
 sudo apt update -y
 sudo apt install -y google-drive-ocamlfuse

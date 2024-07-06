@@ -8,16 +8,9 @@ sudo apt autoremove
 TODO:
 	Purger les snaps : /snap
 	    snap list
-logiciel gestionnaire de packet Mint
-	synaptic
 
-
-Ubuntu 24.04
 LinuxMint 21.3 Cinnamon
 
-## Ubuntu MàJ Snap
-sudo snap refresh snap-store
-sudo snap refresh
 
 ## installation Flatpak
 # https://flatpak.org/setup/Ubuntu
@@ -33,10 +26,6 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 
 ## version bureau
 echo $XDG_SESSION_TYPE
-
-## ToDo
-# Synaptic package Manager
-sudo apt install -y synaptic
 
 # Creation usb iso
 sudo apt install -y usb-creator-gtk
@@ -78,22 +67,13 @@ OrcaSlicer_Linux_V2.0.0
 balenaEtcher-1.18.11-x64
 
 #### Installation spéciales :
-## Sur Ubuntu 24.04
-# Gestionnaire graphique firewall
-sudo apt -y install gufw
-# Personalisation Gnome
-sudo apt -y install dconf-editor
-sudo apt -y install gnome-tweak-tool
-sudo apt -y install gnome-tweaks
-
 ## Sur Mint
 # Gestionnaire de profile alimentation et performance
 # power-profiles-daemon
 $ powerprofilesctl
 
-## Wine
-https://wiki.winehq.org/Ubuntu
-./wineInstall
+
+chmod +x *
 
 ## Fusion 360
 # Installation manuelle de FireFox
@@ -137,17 +117,6 @@ https://unix.stackexchange.com/questions/326373/configure-extra-mouse-button-as-
 https://github.com/PixlOne/logiops
 https://wiki.archlinux.org/title/Logitech_MX_Master
 
-## Python
-# Installation PIP
-sudo apt install python3-pip
-	ou
-		wget https://bootstrap.pypa.io/get-pip.py
-		python3 ./get-pip.py
-
-
-
-## Git
-./gitInstall
 
 #### GoogleDrive
 ## https://github.com/astrada/google-drive-ocamlfuse
@@ -161,36 +130,6 @@ https://github.com/astrada/google-drive-ocamlfuse/issues/764
 # reprendre le fichier de configuration
 # A modifier :
 background_folder_fetching. If set to a true (the default is false), it starts a thread to fetch folder data in background.
-
-# Installation
-./googledriveInstall
-
-## Informations :
-# Montage automatique via un service, chapitre Mount using systemd :
-# Attention pour l'utilisation du Label, il faut le faire avec la création du fichier de configuration (-id -secret)
-https://github.com/astrada/google-drive-ocamlfuse/wiki/Automounting#mount-using-systemd
-
-# Monter manuellement
-google-drive-ocamlfuse ~/GoogleDrive
-# Démonter manuellement
-fusermount -u ~/GoogleDrive
-## Démarrer/Arrêter le service
-sudo systemctl start google-drive.service
-sudo systemctl stop google-drive.service
-
-
-## VSCodium
-https://vscodium.com/#install-on-debian-ubuntu-deb-package
-./vscodiumInstall
-
-# Ajout des modules C++ et platformIO
-https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
-https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide
-Open extension in the Microsoft Marketplace following the link above
-Download extension's VSIX file by clicking on "Download Extension" in "Resources" section (right sidebar)
-Navigate to VSCodium Extensions view and click "...", select "Install from ".VSIX".
-Repeat for each VSIX/Extension.
-Restart VSCodium.
 
 
 ## AppImageLauncher
