@@ -12,11 +12,13 @@ TODO:
 LinuxMint 21.3 Cinnamon
 
 
-## installation Flatpak
-# https://flatpak.org/setup/Ubuntu
-sudo apt install -y flatpak
-sudo apt install -y gnome-software-plugin-flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+[Desktop Entry]
+Name=GravitDesigner
+Exec=/home/<path-to-folder>/GravitDesigner.AppImage
+Type=Application
+
+https://github.com/SoftFever/OrcaSlicer/releases/latest/download/package.zip
+https://github.com/SoftFever/OrcaSlicer/releases/download/v2.1.1/OrcaSlicer_Linux_V2.1.1.AppImage
 
 ## chemin d'enregistrement des applications :
 /home/moi/.var/app/

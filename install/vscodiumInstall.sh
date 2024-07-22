@@ -30,3 +30,10 @@ sudo apt install -y python3-venv
 # Utile si Python < 3.12
 # sudo apt install -y python3-distutils  
 
+## autoriser le port TCP en entrée pour OTA
+## Spécifier le port dans pltaformio.ini
+# upload_flags = --host_port=54010
+sudo ufw allow 54010/tcp
+
+# droit sur le port USB
+sudo chmod a+rw /dev/ttyUSB0
