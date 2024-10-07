@@ -32,4 +32,10 @@ sudo apt -y install python3-pip
 # droit sur le port USB
 sudo chmod a+rw /dev/ttyUSB0
 
+# Gestion logitech
+#sudo apt -y install logiops
+
+# traitement basic d'images
+sudo apt -y install gthumb
+
 # sudo apt -y install nautilus-actions

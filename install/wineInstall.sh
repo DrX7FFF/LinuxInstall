@@ -16,6 +16,8 @@ sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/
 # sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources
 sudo apt -y update
 
+# installationStable branch
+#sudo apt install --install-recommends winehq-stable
 # installation version Staging
 sudo apt install --install-recommends winehq-staging
 # installation version Devel

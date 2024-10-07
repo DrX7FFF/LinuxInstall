@@ -61,7 +61,10 @@ mintreport
 ## Installer depuis la logitèque (Paquet système sont moins volumineux mais pas isolés):
 Meld
 VLC
-Solaar
+Solaar ou Piper ou logiops 
+# Piper ne fonctionne pas avec Fusion
+# logiops difficile à paramétrer
+# Solaar ne semble pas fonctionner avec Fusion
 
 ## Installer avec des AppImages
 DB_Browser_for_SQLite-v3.12.2-x86_64
