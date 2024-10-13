@@ -36,6 +36,6 @@ sudo chmod a+rw /dev/ttyUSB0
 #sudo apt -y install logiops
 
 # traitement basic d'images
-sudo apt -y install gthumb
+#sudo apt -y install gthumb
 
 # sudo apt -y install nautilus-actions
