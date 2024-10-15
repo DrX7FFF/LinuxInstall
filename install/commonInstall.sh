@@ -41,4 +41,4 @@ sudo chmod a+rw /dev/ttyUSB0
 # sudo apt -y install nautilus-actions
 
 # Outils pour avoir les informations GPU : glxinfo
-sudo apt install mesa-utils
+sudo apt -y install mesa-utils
