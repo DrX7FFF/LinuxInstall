@@ -42,3 +42,9 @@ sudo chmod a+rw /dev/ttyUSB0
 
 # Outils pour avoir les informations GPU : glxinfo
 sudo apt -y install mesa-utils
+
+# Samba
+sudo apt -y install samba
+
+# accéder aux ressources partagées sur des serveurs Windows
+sudo apt -y install winbind
