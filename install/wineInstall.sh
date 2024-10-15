@@ -24,7 +24,7 @@ sudo apt install --install-recommends winehq-staging
 # sudo apt install -y --install-recommends winehq-devel
 
 # installation WineTricks
-sudo apt install winetricks
+sudo apt -y install winetricks
 # sudo apt install yad
 
 # wget -O ~/Téléchargements/WineGUI.deb https://winegui.melroy.org/downloads/WineGUI-v2.5.0.deb
