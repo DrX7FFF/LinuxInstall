@@ -8,3 +8,5 @@ git config --global user.email "dubourg.v@gmail.com"
 git config --global init.defaultBranch main
 git config --list
 
+# create folder
+mkdir ~/GIT
