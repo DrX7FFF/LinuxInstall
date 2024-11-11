@@ -1,0 +1,6 @@
+info graphique :
+sudo lshw -C display
+vulkaninfo --summary
+glxinfo -B
+
+apt info {package Name}

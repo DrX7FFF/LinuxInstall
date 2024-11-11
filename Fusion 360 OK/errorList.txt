@@ -1,0 +1,26 @@
+0158:fixme:ui:factory_QueryInterface {94ea2b94-e9cc-49e0-c0ff-ee64ca8f5b90} not implemented, returning E_NOINTERFACE.
+0158:err:module:import_dll Library Qt6Pdf.dll (which is needed by L"C:\\Program Files\\Autodesk\\webdeploy\\production\\c4a5520f9bb0f0174c02662af8bd1ab67cee6298\\plugins\\imageformats\\qpdf.dll") not found
+0158:fixme:shcore:SetCurrentProcessExplicitAppUserModelID L"AutodeskInc.Fusion360": stub
+
+0158:fixme:bcrypt:BCryptGenRandom ignoring selected algorithm
+0158:err:sync:RtlLeaveCriticalSection section 0000000009923280 "?" is not acquired
+0158:fixme:seh:WerRegisterRuntimeExceptionModule (L"C:\\Program Files\\Autodesk\\webdeploy\\production\\c4a5520f9bb0f0174c02662af8bd1ab67cee6298\\cer.dll", 0000000007C7D3C0) stub
+
+err:   D3D11VideoDevice::GetVideoDecoderProfileCount: Stub
+
+0848:fixme:cryptnet:check_ocsp_response_info check responder id
+Error: Failed to open Wayland display, fallback to X11. WAYLAND_DISPLAY='wayland-0' DISPLAY=':0'
+08e4:fixme:process:SetProcessShutdownParameters (0000027f, 00000001): partial stub.
+
+0918:fixme:process:NtQueryInformationProcess ProcessHandleTable (0xffffffffffffffff,0x2c98002ca000,0x00000fa0,0x81eb6c) stub
+0918:fixme:process:SetProcessMitigationPolicy (8, 000000000081ECD0, 4): stub
+ATTENTION: default value of option mesa_glthread overridden by environment.
+09bc:fixme:thread:NtSetInformationThread ThreadPowerThrottling stub!
+09a0:fixme:thread:QueryThreadCycleTime (FFFFFFFFFFFFFFFE,000000004971EE38): stub!
+
+
+New version :
+
+0338:fixme:mpr:WNetGetUniversalNameW (L"C:\\users\\moi\\AppData\\Roaming\\Autodesk\\ADPSDK\\JSON\\e4701240-587d-4c73-b1ed-b137aace1261_20.json.user", 0x00000001, 0000000000000000, 00000000175BEF20): stub
+05a8:err:d3d:wined3d_context_gl_set_pixel_format wglSetPixelFormatWINE failed to set pixel format 1 on device context 0000000008010070.
+017c:fixme:d3d9:Direct3DShaderValidatorCreate9 Returning stub validator 00006FFFD7B6B040.

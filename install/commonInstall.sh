@@ -13,11 +13,6 @@ sudo apt install -y synaptic
 sudo snap refresh snap-store
 sudo snap refresh
 
-# Personalisation Gnome
-sudo apt -y install dconf-editor
-sudo apt -y install gnome-tweak-tool
-sudo apt -y install gnome-tweaks
-
 # Gestionnaire graphique firewall
 sudo apt -y install gufw
 
@@ -42,9 +37,25 @@ sudo chmod a+rw /dev/ttyUSB0
 
 # Outils pour avoir les informations GPU : glxinfo
 sudo apt -y install mesa-utils
+sudo apt -y install vulkan-tools
+# drivers 386 pas de changement 
+# sudo apt -y install libgl1-mesa-dri:i386
+# sudo apt -y install mesa-vulkan-drivers 
+# sudo apt -y install mesa-vulkan-drivers:i386
 
+### Complément pour Fusion 360
 # Samba
 sudo apt -y install samba
-
 # accéder aux ressources partagées sur des serveurs Windows
 sudo apt -y install winbind
+
+
+### Configuration de Gnome Ubuntu
+# Personalisation Gnome
+sudo apt -y install dconf-editor
+sudo apt -y install gnome-tweak-tool
+sudo apt -y install gnome-tweaks
+# Ajout du preview sur le Dock
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
+# Retarder la détection application qui ne répond pas
+# gsettings set org.gnome.mutter check-alive-timeout 60000

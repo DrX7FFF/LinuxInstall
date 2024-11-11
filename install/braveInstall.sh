@@ -7,3 +7,6 @@ sudo apt install -y brave-browser
 
 # Reouvrir la session pour le 1e Démarrage
 # Reouvrir la session après avoir paramétré la synchronisation
+
+# pour pouvoir gérer les extension Gnome avec Brave
+sudo apt install -y chrome-gnome-shell

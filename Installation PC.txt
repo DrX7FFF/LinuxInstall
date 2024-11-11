@@ -40,12 +40,14 @@ sudo apt update
 sudo apt upgrade
 apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
 
+# retour arrière 
+sudo apt-get install ppa-purge
+sudo ppa-purge ppa:oibaf/graphics-drivers
+
 # A activer
 Activer FireWall
 (?) Activer TimeShift : Quotidienne sur 5J
-# Special Ubuntu pour retarder la détection application qui ne répond pas
-gsettings set org.gnome.mutter check-alive-timeout 60000
-gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
+
 
 #  Désactiver application au démarrage
 # Pour afficher toutes les applications masquès
@@ -61,6 +63,7 @@ mintreport
 ## Installer depuis la logitèque (Paquet système sont moins volumineux mais pas isolés):
 Meld
 VLC
+Hardinfo
 Solaar ou Piper ou logiops 
 # Piper ne fonctionne pas avec Fusion
 # logiops difficile à paramétrer
