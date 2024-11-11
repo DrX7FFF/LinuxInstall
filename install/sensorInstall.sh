@@ -5,7 +5,9 @@
 # https://github.com/UshakovVasilii/gnome-shell-extension-freon
 
 sudo apt install -y lm-sensors
-sudo apt install -y psensor
+
+# Non utile car utilisation de l'extention Freon
+#sudo apt install -y psensor
 
 # Non compatible Ubuntu 24.04
 #sudo apt install -y hddtemp

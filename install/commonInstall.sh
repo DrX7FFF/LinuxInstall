@@ -1,8 +1,8 @@
 #! /bin/bash
 
 # Ubuntu 24.04
-
-sudo apt update -y
+sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
+#sudo apt update -y
 
 sudo apt install -y curl
 
@@ -33,15 +33,18 @@ sudo chmod a+rw /dev/ttyUSB0
 # traitement basic d'images
 #sudo apt -y install gthumb
 
-# sudo apt -y install nautilus-actions
+# utilisation des derniers drivers vidéo GPU
+sudo add-apt-repository ppa:oibaf/graphics-drivers && apt update -y && apt -y upgrade
 
 # Outils pour avoir les informations GPU : glxinfo
+sudo apt -y install libvulkan1 mesa-vulkan-drivers vulkan-utils
 sudo apt -y install mesa-utils
 sudo apt -y install vulkan-tools
 # drivers 386 pas de changement 
 # sudo apt -y install libgl1-mesa-dri:i386
 # sudo apt -y install mesa-vulkan-drivers 
 # sudo apt -y install mesa-vulkan-drivers:i386
+
 
 ### Complément pour Fusion 360
 # Samba
@@ -52,6 +55,7 @@ sudo apt -y install winbind
 
 ### Configuration de Gnome Ubuntu
 # Personalisation Gnome
+# sudo apt -y install nautilus-actions
 sudo apt -y install dconf-editor
 sudo apt -y install gnome-tweak-tool
 sudo apt -y install gnome-tweaks

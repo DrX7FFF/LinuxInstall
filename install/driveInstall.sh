@@ -1,5 +1,14 @@
 #! /bin/bash
 
+#### GoogleDrive
+## https://github.com/astrada/google-drive-ocamlfuse
+# Paramétrage de l'API Google pour l'authentification OAuth2 à faire 1 fois
+# Nom = DroitGDriveLinux
+# https://console.cloud.google.com/apis/credentials?project=droitgdrive
+# Nouvelle Methode
+# https://github.com/astrada/google-drive-ocamlfuse/issues/764
+
+
 ## Montage automatique via un service, chapitre Mount using systemd :
 ## Attention pour l'utilisation du Label, il faut le faire avec la création du fichier de configuration (-id -secret)
 ## https://github.com/astrada/google-drive-ocamlfuse/wiki/Automounting#mount-using-systemd
@@ -11,7 +20,12 @@
 ## Démarrer/Arrêter le service
 # sudo systemctl start google-drive.service
 # sudo systemctl stop google-drive.service
+# sudo systemctl restart google-drive.service
 
+# reprendre le fichier de configuration
+# /home/moi/.gdfuse/default/config
+# A modifier :
+# background_folder_fetching. If set to a true (the default is false), it starts a thread to fetch folder data in background.
 
 
 sudo add-apt-repository ppa:alessandro-strada/ppa

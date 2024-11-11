@@ -1,6 +1,12 @@
-info graphique :
+## info GPU + drivers :
 sudo lshw -C display
 vulkaninfo --summary
 glxinfo -B
 
+## Commande de package
 apt info {package Name}
+
+chmod +x *
+
+## version bureau
+echo $XDG_SESSION_TYPE

@@ -4,30 +4,47 @@ sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
 sudo apt autoremove
 
+# A activer
+Activer FireWall
+(?) Activer TimeShift : Quotidienne sur 5J
 
-TODO:
-	Purger les snaps : /snap
-	    snap list
+## Installer depuis la logitèque (Paquet système sont moins volumineux mais pas isolés):
+Meld
+VLC
+Hardinfo
+Solaar ou Piper ou logiops 
+# Piper ne fonctionne pas avec Fusion
+# logiops difficile à paramétrer
+# Solaar ne semble pas fonctionner avec Fusion
 
-LinuxMint 21.3 Cinnamon
+## Installer avec des AppImages
+DB_Browser_for_SQLite-v3.12.2-x86_64
+
+OrcaSlicer_Linux_V2.0.0
+https://github.com/SoftFever/OrcaSlicer/releases/latest/download/package.zip
+https://github.com/SoftFever/OrcaSlicer/releases/download/v2.1.1/OrcaSlicer_Linux_V2.1.1.AppImage
+
+balenaEtcher-1.18.11-x64
 
 
+## Installer extension Gnome : 
+# https://extensions.gnome.org/local/
+https://extensions.gnome.org/extension/5177/vertical-workspaces/
+https://extensions.gnome.org/extension/841/freon/
+
+
+## Exemple de Desktop entry
 [Desktop Entry]
 Name=GravitDesigner
 Exec=/home/<path-to-folder>/GravitDesigner.AppImage
 Type=Application
 
-https://github.com/SoftFever/OrcaSlicer/releases/latest/download/package.zip
-https://github.com/SoftFever/OrcaSlicer/releases/download/v2.1.1/OrcaSlicer_Linux_V2.1.1.AppImage
 
 ## chemin d'enregistrement des applications :
 /home/moi/.var/app/
 
 ## Chemin des raccourcis Snap :
 /var/lib/snapd/desktop/applications
-
-## version bureau
-echo $XDG_SESSION_TYPE
 
 # Creation usb iso
 sudo apt install -y usb-creator-gtk
@@ -44,44 +61,6 @@ apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
 sudo apt-get install ppa-purge
 sudo ppa-purge ppa:oibaf/graphics-drivers
 
-# A activer
-Activer FireWall
-(?) Activer TimeShift : Quotidienne sur 5J
-
-
-#  Désactiver application au démarrage
-# Pour afficher toutes les applications masquès
-$ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
-evolution
-mintwelcome
-Relevés du système
-sticky notes
-warpinator
-mintreport
-
-
-## Installer depuis la logitèque (Paquet système sont moins volumineux mais pas isolés):
-Meld
-VLC
-Hardinfo
-Solaar ou Piper ou logiops 
-# Piper ne fonctionne pas avec Fusion
-# logiops difficile à paramétrer
-# Solaar ne semble pas fonctionner avec Fusion
-
-## Installer avec des AppImages
-DB_Browser_for_SQLite-v3.12.2-x86_64
-OrcaSlicer_Linux_V2.0.0
-balenaEtcher-1.18.11-x64
-
-#### Installation spéciales :
-## Sur Mint
-# Gestionnaire de profile alimentation et performance
-# power-profiles-daemon
-$ powerprofilesctl
-
-
-chmod +x *
 
 ## Fusion 360
 # Installation manuelle de FireFox
@@ -126,24 +105,9 @@ https://github.com/PixlOne/logiops
 https://wiki.archlinux.org/title/Logitech_MX_Master
 
 
-#### GoogleDrive
-## https://github.com/astrada/google-drive-ocamlfuse
-# Paramétrage de l'API Google pour l'authentification OAuth2 à faire 1 fois
-# Nom = DroitGDriveLinux
-# https://console.cloud.google.com/apis/credentials?project=droitgdrive
-
-# Nouvelle Methode
-https://github.com/astrada/google-drive-ocamlfuse/issues/764
-
-# reprendre le fichier de configuration
-# A modifier :
-background_folder_fetching. If set to a true (the default is false), it starts a thread to fetch folder data in background.
-
-
 ## AppImageLauncher
 # https://github.com/TheAssassin/AppImageLauncher
 ./appimagelauncher-lite* install
-
 
 ## Bottle
 ## chemin d'enregistrement des bottles :
@@ -151,8 +115,6 @@ background_folder_fetching. If set to a true (the default is false), it starts a
 ## Commande pour lanceur :
 flatpak run --command=bottles-cli com.usebottles.bottles run -b MyNotePad++ -p notepad++
 flatpak run --command=bottles-cli com.usebottles.bottles run -b NomDeLaBouteille -p ProgrammeDansLaBouteille 
-
-
 
 ## Gestion boot
 # Version simple
@@ -171,12 +133,6 @@ sudo apt install grub-customizer
 https://github.com/dail8859/NotepadNext/releases
 
 
-## Addon Applets Cinnamon :
-* Cinnamenu
-* Indicateur touches de verrouillage
-* Power profiles
-
-
 -- Plus utile --
 
 ## NotePadQQ
@@ -190,3 +146,23 @@ install libmediainfo
 apt install mediainfo-gui
 apt install mediainfo
 
+## LinuxMint 21.3 Cinnamon
+
+## Addon Applets Cinnamon :
+* Cinnamenu
+* Indicateur touches de verrouillage
+* Power profiles
+
+# Gestionnaire de profile alimentation et performance
+# power-profiles-daemon
+$ powerprofilesctl
+
+#  Désactiver application au démarrage
+# Pour afficher toutes les applications masquès
+$ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
+evolution
+mintwelcome
+Relevés du système
+sticky notes
+warpinator
+mintreport
