@@ -10,3 +10,6 @@ chmod +x *
 
 ## version bureau
 echo $XDG_SESSION_TYPE
+
+# Informations sur les périphériques 
+sudo lspci -v

@@ -24,6 +24,9 @@ OrcaSlicer_Linux_V2.0.0
 https://github.com/SoftFever/OrcaSlicer/releases/latest/download/package.zip
 https://github.com/SoftFever/OrcaSlicer/releases/download/v2.1.1/OrcaSlicer_Linux_V2.1.1.AppImage
 
+KDiskMark
+https://github.com/JonMagon/KDiskMark
+
 balenaEtcher-1.18.11-x64
 
 
@@ -60,7 +63,8 @@ apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
 # retour arrière 
 sudo apt-get install ppa-purge
 sudo ppa-purge ppa:oibaf/graphics-drivers
-
+# Si pas suffisant 
+sudo add-apt-repository --remove ppa:appimagelauncher-team/stable
 
 ## Fusion 360
 # Installation manuelle de FireFox

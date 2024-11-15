@@ -1,0 +1,91 @@
+# version: "3.8"
+
+services:
+  deconz:
+#    image: marthoc/deconz:stable
+    image: deconzcommunity/deconz
+    container_name: deconz
+    restart: always
+    ports:
+      - 8080:8080
+      - 443:443
+      - 5900:5900
+    privileged: true
+    volumes:
+#      - ~/docker/deconz:/root/.local/share/dresden-elektronik/deCONZ
+      - ~/docker/deconz:/opt/deCONZ
+      - /etc/localtime:/etc/localtime:ro
+    devices:
+      - /dev/ttyACM0
+    environment:
+      - TZ=Europe/Paris
+      - DECONZ_VNC_MODE=1
+      - DECONZ_VNC_PASSWORD=nopassword
+      - DECONZ_WEB_PORT=8080
+#      - DECONZ_WS_PORT=443
+      - DECONZ_DEVICE=/dev/ttyACM0
+      - UDEV=1
+
+#  mosquitto:
+#    image: eclipse-mosquitto
+#    container_name: mosquitto
+#    restart: always
+#    ports:
+#      - "1883:1883"
+#      - "9001:9001"
+#    volumes:
+##      - ~/mosquitto.conf:/mosquitto/config/mosquitto.conf
+##      - ~/docker/mosquitto/:/mosquitto/:rw
+#      - ~/docker/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  nodered:
+    image: nodered/node-red
+    container_name: nodered
+    restart: always
+    ports:
+      - "80:1880"
+# dans le cas de PiHole qui a besoin du port 80 alors utilisation du port 81
+#      - "81:1880"
+#8888 UDP pour temperature ESP
+      - "8888:8888/udp"
+      - "8887:8887/tcp"
+    volumes:
+      - ~/docker/nodered:/data
+    environment:
+      - TZ=Europe/Paris
+
+#  pihole:
+#    image: pihole/pihole:latest
+#    container_name: pihole
+#    restart: always
+#    network_mode: host
+##    ports:
+##      - "53:53/tcp"
+##      - "53:53/udp"
+##      - "67:67/udp"
+##      - "8081:80/tcp"
+##      - "443:443/tcp"
+#    volumes:
+#      - ~/docker/pihole/pihole:/etc/pihole
+##      - ~/docker/pihole/pihole.log:/var/log/pihole.log
+#      - ~/docker/pihole/dnsmasq.d:/etc/dnsmasq.d
+#    cap_add:
+#      - NET_ADMIN
+#    environment:
+#      - ServerIP= 192.168.1.101
+#      - TZ=Europe/Paris
+#      - WEBPASSWORD=PIHOLEWEBPASSWORD
+#      - DNS1=1.1.1.1
+#      - DNS2=1.0.0.1
+#      - IPv6=false
+
+#  openvpn:
+#    image: registry.gitlab.com/ix.ai/openvpn
+#    container_name: openvpn
+#    restart: always
+#    ports:
+#      - "1194:1194/udp"
+#    volumes:
+#      - ~/docker/ovpn:/etc/openvpn
+#    cap_add:
+#      - NET_ADMIN

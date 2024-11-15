@@ -20,9 +20,16 @@ sudo apt -y install gufw
 sudo apt -y install net-tools
 sudo apt -y install nmap
 sudo apt -y install zenmap
+sudo apt -y install iperf3
+
+# Inxi https://www.linuxtricks.fr/wiki/inxi-un-script-complet-d-informations-systeme
+sudo apt -y install inxi
 
 # Python Installation PIP
 sudo apt -y install python3-pip
+
+# Outil de purge des PPA proprement et vérifie qu'il n'y a pas de packet en référence
+sudo apt -y install ppa-purge
 
 # droit sur le port USB
 sudo chmod a+rw /dev/ttyUSB0
