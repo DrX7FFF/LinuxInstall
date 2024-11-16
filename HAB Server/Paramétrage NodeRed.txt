@@ -1,0 +1,17 @@
+## Sauvegarder variable de contexte sur disque :
+https://nodered.org/docs/user-guide/context#context-stores
+Utilisation : https://nodered.org/docs/user-guide/writing-functions#multiple-context-stores
+
+Dans settings.js
+    contextStorage: {
+          default: "memory",
+          memory: { module: 'memory' },
+          file: { module: 'localfilesystem' }
+    },
+
+		
+
+# Paramétrage de settings.js pour simplifier l'url du dashboard
+    uiPort: process.env.PORT || 1880,
+    httpAdminRoot: '/admin',
+    ui: { path: "" },

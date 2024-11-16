@@ -4,6 +4,9 @@ Minimal/IOT images with Armbian Linux v6.6
 Build Date: Nov 12, 2024
 Debian 12 (Bookworm)
 
+# Restaurer l'image sur la carte SD
+# l'expension de la partition est automatique au 1e boot
+
 # Copier le fichier .not_logged_in_yet in /root/.not_logged_in_yet
 
 ssh -l root 192.168.1.100
@@ -47,7 +50,7 @@ reboot
 # Connecter avec nouveau compte 
 ssh -l habadm 192.168.1.100
 
-# Rine à modifier dans armbian-config
+# Rien à modifier dans armbian-config
 # armbian-config
 
 ### Préparation dossiers dockers
