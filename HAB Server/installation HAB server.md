@@ -1,3 +1,10 @@
+### info interessantes
+# https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html
+# https://forum.armbian.com/topic/11341-replace-ntp-with-chrony/
+#
+# les logs system sont dans /run qui est tmpfs donc en RAM
+# l'expension de la partition est automatique au 1e boot
+
 # Image NanoPi Neo 2 (Bleu)
 https://www.armbian.com/nanopi-neo-2/
 Minimal/IOT images with Armbian Linux v6.6
@@ -5,14 +12,14 @@ Build Date: Nov 12, 2024
 Debian 12 (Bookworm)
 
 # Restaurer l'image sur la carte SD
-# l'expension de la partition est automatique au 1e boot
 
 # Copier le fichier .not_logged_in_yet in /root/.not_logged_in_yet
+# Copier le fichier setup.sh in /root/setup.sh
 
 ssh -l root 192.168.1.100
 PWD : 1234
 
-# problème de clé ssh :
+# si problème de clé ssh :
 ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
 
 # modification PWD root EA@Adm
@@ -43,34 +50,30 @@ ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
 #### Result
 
 ### Préparation
-apt update
-apt -y upgrade
+chmode +x /root/setup.sh
+./root/setup.sh
 reboot
 
 # Connecter avec nouveau compte 
 ssh -l habadm 192.168.1.100
 
-# Rien à modifier dans armbian-config
-# armbian-config
 
-### Préparation dossiers dockers
-mkdir -p ~/docker/nodered
-mkdir -p ~/docker/deconz
-sudo chown -R $USER:$USER ~/docker/nodered
-sudo chmod -R 777 ~/docker/nodered
+# Vérifier que ça fonctionne
 
-### Installation Docker
-# Voir différence en Minimal et Engine
-# armbian-config --cmd CON002
-armbian-config --cmd CON001
-sudo systemctl enable docker
-sudo usermod -aG docker $USER
-sudo reboot
 
-sudo apt-get install docker-compose-plugin
+
+
+# sudo mount -t tmpfs -o size=1m tmpfs /home/habadm/docker/deconz.ram
+sudo nano /etc/fstab
+# ajouter
+deconzram /home/habadm/docker/deconz.ram tmpfs  defaults,size=1m 0 0
+###
+
+# cp -p -f -R /home/habadm/docker/deconz/* /home/habadm/docker/deconz.ram
+
 
 # Tester le dongle ConBee 2, vérifier que /dev/ttyACM0 est présent
-ls -all /dev/tty*
+ls -all /dev/ttyACM0
 # droit pour accéder à la clé USB (Pas utile)
 # sudo usermod -aG dialout $USER
 

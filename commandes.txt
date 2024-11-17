@@ -16,3 +16,9 @@ sudo lspci -v
 
 # Liste des derniers fichiers modifiés
 sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -10 -type f
+
+# Liste des services démarrés
+sudo systemctl --type=service --state=running
+
+# Afficher l'heure
+timedatectl
