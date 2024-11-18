@@ -11,7 +11,7 @@ services:
     privileged: true
     volumes:
 #      - ~/docker/deconz:/root/.local/share/dresden-elektronik/deCONZ
-      - ~/docker/deconz:/opt/deCONZ
+      - ~/docker.ram/deconz:/opt/deCONZ
       - /etc/localtime:/etc/localtime:ro
     devices:
       - /dev/ttyACM0

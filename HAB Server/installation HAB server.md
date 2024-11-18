@@ -50,12 +50,34 @@ ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
 #### Result
 
 ### Préparation
-chmode +x /root/setup.sh
-./root/setup.sh
+chmod +x /root/setup.sh
+./setup.sh
 reboot
 
 # Connecter avec nouveau compte 
 ssh -l habadm 192.168.1.100
+
+# git config --global user.name "DrX7FFF"
+# git config --global user.email "dubourg.v@gmail.com"
+# git config --global init.defaultBranch main
+# git config --list
+
+gh auth login
+
+# Ajouter COMPOSE_FILE dans Bash
+nano .bashrc
+## A la fin
+export COMPOSE_FILE=/home/habadm/docker/compose.yaml
+
+
+
+### Commande GIT
+git status
+git add deconz/session.default deconz/zll.db nodered/context/global/global.json nodered/flows.json nodered/flows_cred.json 
+nano .gitignore
+git commit -a -m 'Sauvegarde'
+git push
+git pull
 
 
 # Vérifier que ça fonctionne
