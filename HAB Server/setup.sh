@@ -19,7 +19,7 @@ apt -y -qq install chrony
 
 
 echo "### Prepare dockers RAM folders ###"
-mkdir -p /home/$USER_NAME/docker.ram/deconz
+mkdir -p /home/$USER_NAME/docker.ram
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/docker.ram
 sudo chmod -R 777 /home/$USER_NAME/docker.ram
 
