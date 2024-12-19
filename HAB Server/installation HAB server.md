@@ -54,6 +54,10 @@ chmod +x /root/setup.sh
 ./setup.sh
 reboot
 
+# Mise à jour
+sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
+sudo apt autoremove
+
 # Connecter avec nouveau compte 
 ssh -l habadm 192.168.1.100
 

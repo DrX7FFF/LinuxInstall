@@ -59,6 +59,17 @@ systemctl enable docker
 usermod -aG docker $USER_NAME
 apt -y -qq install docker-compose-plugin
 
+# Log to journald https://docs.docker.com/engine/logging/drivers/journald/
+DOCKER_MAIN_CONFIG="/etc/docker/daemon.json"
+TEMP_CONFIG="/tmp/docker_temp_config.json"
+if [ ! -f "$DOCKER_MAIN_CONFIG" ]; then
+    echo "{}" | sudo tee "$DOCKER_MAIN_CONFIG" > /dev/null
+fi
+sudo jq '. * {"log-driver": "journald"}' "$DOCKER_MAIN_CONFIG" | sudo tee "$TEMP_CONFIG" > /dev/null
+sudo mv "$TEMP_CONFIG" "$DOCKER_MAIN_CONFIG"
+
+
+
 echo "### Disable kernel auto update ###"
 armbian-config --cmd SY002
 
