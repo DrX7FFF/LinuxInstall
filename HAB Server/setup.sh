@@ -76,35 +76,22 @@ if ! grep -qE --regexp="^\s*export\s+COMPOSE_FILE\s*=" /home/$USER_NAME/.bashrc;
 fi
 
 
-
 echo "### Disable kernel auto update ###"
 armbian-config --cmd SY002
 
 
 echo "### Install GIT + config ###"
 apt -y -qq install git
-git config --global user.name "DrX7FFF"
-git config --global user.email "dubourg.v@gmail.com"
-git config --global init.defaultBranch main
 
 
 echo "### Install GitHub client gh ###"
 apt -y -qq install wget
 mkdir -p -m 755 /etc/apt/keyrings
 wget -q -O /etc/apt/keyrings/githubcli-archive-keyring.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
-#wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
 chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-apt update
+apt -qq update
 apt -y -qq install gh
-
-# (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
-# 	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
-# 	&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
-# 	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-# 	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-# 	&& sudo apt update \
-# 	&& sudo apt install gh -y
 
 
 echo "##### Check #####"
@@ -119,6 +106,3 @@ systemctl status deconzramcopy.service
 
 echo "### USB ConBee 2 ###"
 ls -all /dev/ttyACM0
-
-echo "### Git Config ###"
-git config --list

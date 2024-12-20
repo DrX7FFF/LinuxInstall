@@ -52,7 +52,7 @@ Result :
 
 Installation :
 ```
-chmod +x /root/setup.sh && ./setup.sh
+chmod +x ./setup.sh && ./setup.sh
 ```
 ```
 reboot
@@ -65,7 +65,12 @@ ssh -l habadm 192.168.1.100
 
 Login to Github :
 ```
-gh auth login  
+git config --global user.name "DrX7FFF" && \
+git config --global user.email "dubourg.v@gmail.com" && \
+git config --global init.defaultBranch main
+```
+```
+gh auth login
 ```
 
 Clone de la conf docker :
@@ -76,22 +81,27 @@ git clone https://github.com/DrX7FFF/DockerHAB.git ~/docker
 git config --global --add safe.directory ~/docker
 ```
 
-> ~~mkdir -p ~/docker/nodered~~  
-> ~~mkdir -p ~/docker/deconz~~  
-> chown -R $USER:$USER ~/docker  
-> chmod -R 777 ~/docker  
+> ~~chown -R $USER:$USER ~/docker~~  
+> ~~chmod -R 777 ~/docker~~  
 
-
-Ajouter COMPOSE_FILE dans Bash :
+Relancer la copie de la conf de deconz :
 ```
-nano .bashrc  
+sudo systemctl restart deconzramcopy.service
 ```
-Ajouter à la fin :
-> export COMPOSE_FILE=/home/habadm/docker/compose.yaml
 
 Démarrer les containers :
 ```
 docker compose up -d
+```
+Réinstaller 1 élément de la palette (Tous les éléments sont réinstallés)  
+Reconnecter Node Deconz au serveur Deconz  
+Sauvegarde de la conf de deconz :
+```
+cp -f ~/docker.ram/deconz/zll.db ~/docker.ram/deconz/session.default ~/docker.ram/deconz/config.ini ~/docker/deconz
+```
+Reparametrer le noeud de config FireBase :
+```
+Clé API + URL RTDB
 ```
 
 # Info interessantes

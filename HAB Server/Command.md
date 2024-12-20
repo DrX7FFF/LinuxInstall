@@ -1,7 +1,19 @@
-# Docker
+# Tools
+Mise ajour des images docker :
 ```
 docker compose pull
 ```
+Relancer les containers :
+```
+docker compose down && docker compose up -d
+```
+Memoriser la conf de deconz (Attention, fair GIT COMMIT + PUSH après) :
+```
+cp -f ~/docker.ram/deconz/zll.db ~/docker.ram/deconz/session.default ~/docker.ram/deconz/config.ini ~/docker/deconz
+```
+
+
+# Docker
 ```
 docker compose down && docker compose up -d
 ```
@@ -44,11 +56,14 @@ git push
 git pull
 ```
 
-# Linux
+# Linux
 ```
 sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -10 -type f
 ```
 
 # Lien Firebase
-https://console.firebase.google.com/project/hab-datalog/database/hab-datalog-default-rtdb/data
-
+Data :
+https://console.firebase.google.com/project/hab-datalog/database/hab-datalog-default-rtdb/data  
+  
+Paramètres :
+https://console.firebase.google.com/u/0/project/hab-datalog/settings/general/web:MjUyMDY2NDYtZGQzYS00ZTBjLTg2NjItZmM3MTgzODIzN2Jl  
