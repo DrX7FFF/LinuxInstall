@@ -1,31 +1,29 @@
-### info interessantes
-# https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html
-# https://forum.armbian.com/topic/11341-replace-ntp-with-chrony/
-#
-# les logs system sont dans /run qui est tmpfs donc en RAM
-# l'expension de la partition est automatique au 1e boot
-
-# Image NanoPi Neo 2 (Bleu)
+# Préparation carte SD
+Télécharger image iso NanoPi Neo 2 (version Bleu) :
 https://www.armbian.com/nanopi-neo-2/
-Minimal/IOT images with Armbian Linux v6.6
-Build Date: Nov 12, 2024
-Debian 12 (Bookworm)
+```
+Minimal/IOT images with Armbian Linux v6.6  
+Build Date: Nov 12, 2024  
+Debian 12 (Bookworm)  
+```
+Restaurer l'image sur la carte SD
 
-# Restaurer l'image sur la carte SD
+Copier les fichiers dans /root :
+* .not_logged_in_yet
+* setup.sh
 
-# Copier le fichier .not_logged_in_yet in /root/.not_logged_in_yet
-# Copier le fichier setup.sh in /root/setup.sh
+# 1e connexion ssh root
+> ssh -l root 192.168.1.100  
+> PWD : 1234  
 
-ssh -l root 192.168.1.100
-PWD : 1234
+si problème de clé ssh :
+> ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
 
-# si problème de clé ssh :
-ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
+modification PWD root + (pwd)  
+création PWD habadm (pwd) 
 
-# modification PWD root EA@Adm
-# création PWD habadm
-
-#### Result
+Result :
+```
     _             _    _                                         _ _        
    /_\  _ _ _ __ | |__(_)__ _ _ _    __ ___ _ __  _ __ _  _ _ _ (_) |_ _  _ 
   / _ \| '_| '  \| '_ \ / _` | ' \  / _/ _ \ '  \| '  \ || | ' \| |  _| || |
@@ -35,7 +33,7 @@ ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
 
  Packages:     Debian stable (bookworm)
  Support:      for advanced users (rolling release)
- IP addresses: (LAN) IPv4: 192.168.1.100 IPv6: fe80::1:7aff:fec0:3c76 (WAN) 176.136.10.173
+ IP addresses: (LAN) IPv4: 192.168.1.100 IPv6: fe80::1:7aff:fec0:3c76 (WAN) 000.000.000.000
 
  Performance:  
 
@@ -47,72 +45,66 @@ ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
 
  Configuration : armbian-config
  Monitoring    : htop
-#### Result
+```
 
-### Préparation
-chmod +x /root/setup.sh
-./setup.sh
-reboot
+Installation :
+> chmod +x /root/setup.sh  
+> ./setup.sh  
+> reboot  
 
-# Connecter avec nouveau compte 
-ssh -l habadm 192.168.1.100
+# 1e connexion ssh habadm
+> ssh -l habadm 192.168.1.100  
 
-gh auth login
+Login to Github :
+> gh auth login  
 
-git clone https://github.com/DrX7FFF/DockerHAB.git /home/$USER_NAME/docker
-git config --global --add safe.directory /home/$USER_NAME/docker
+Clone de la conf docker :
+> git clone https://github.com/DrX7FFF/DockerHAB.git ~/docker  
+> git config --global --add safe.directory ~/docker  
 
-echo "### Prepare dockers folders ###"
-# mkdir -p /home/$USER_NAME/docker/nodered
-# mkdir -p /home/$USER_NAME/docker/deconz
-chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/docker
-chmod -R 777 /home/$USER_NAME/docker
+> ~~mkdir -p ~/docker/nodered~~  
+> ~~mkdir -p ~/docker/deconz~~  
+> chown -R $USER:$USER ~/docker  
+> chmod -R 777 ~/docker  
 
 
+Ajouter COMPOSE_FILE dans Bash :
+> nano .bashrc  
 
-# Ajouter COMPOSE_FILE dans Bash
-nano .bashrc
-## A la fin
+Ajouter à la fin :
+```
 export COMPOSE_FILE=/home/habadm/docker/compose.yaml
+```
+##  Commande GIT
+> git status  
+> git add deconz/session.default deconz/zll.db nodered/context/global/global.json nodered/flows.json nodered/flows_cred.json  
+> nano .gitignore  
+> git commit -a -m 'Sauvegarde'  
+> git push  
+> git pull  
 
 
+## Tester le dongle ConBee 2, vérifier que /dev/ttyACM0 est présent
+> ls -all /dev/ttyACM0  
 
-### Commande GIT
-git status
-git add deconz/session.default deconz/zll.db nodered/context/global/global.json nodered/flows.json nodered/flows_cred.json 
-nano .gitignore
-git commit -a -m 'Sauvegarde'
-git push
-git pull
+~~droit pour accéder à la clé USB (Pas utile)~~  
+~~>  sudo usermod -aG dialout $USER~~
 
 ### Lien Firebase
 https://console.firebase.google.com/project/hab-datalog/database/hab-datalog-default-rtdb/data
 
-# Vérifier que ça fonctionne
 
 
+# info interessantes
+https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html  
+https://forum.armbian.com/topic/11341-replace-ntp-with-chrony/
 
+les logs system sont dans /run qui est tmpfs donc en RAM  
+l'expension de la partition est automatique au 1e boot
 
-# sudo mount -t tmpfs -o size=1m tmpfs /home/habadm/docker/deconz.ram
-sudo nano /etc/fstab
-# ajouter
-deconzram /home/habadm/docker/deconz.ram tmpfs  defaults,size=1m 0 0
-###
-
-# cp -p -f -R /home/habadm/docker/deconz/* /home/habadm/docker/deconz.ram
-
-
-# Tester le dongle ConBee 2, vérifier que /dev/ttyACM0 est présent
-ls -all /dev/ttyACM0
-# droit pour accéder à la clé USB (Pas utile)
-# sudo usermod -aG dialout $USER
-
-
-
----------
-
+# Notes
 ## Purge auto du log
-# https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container
+https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container
 sudo nano /etc/docker/daemon.json
 	#ajout ou modif :
 	{
