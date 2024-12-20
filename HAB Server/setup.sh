@@ -69,6 +69,12 @@ fi
 jq '. * {"log-driver": "journald"}' "$DOCKER_MAIN_CONFIG" | tee "$TEMP_CONFIG" > /dev/null
 mv "$TEMP_CONFIG" "$DOCKER_MAIN_CONFIG"
 
+echo "### Check default compose files ###"
+if ! grep -qE --regexp="^\s*export\s+COMPOSE_FILE\s*=" /home/$USER_NAME/.bashrc; then
+  echo "### Add default compose files in /home/$USER_NAME/.bashrc ###"
+  echo "export COMPOSE_FILE=/home/$USER_NAME/docker/compose.yaml" >> /home/$USER_NAME/.bashrc
+fi
+
 
 
 echo "### Disable kernel auto update ###"

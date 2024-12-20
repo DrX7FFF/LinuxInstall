@@ -13,7 +13,7 @@ Copier les fichiers dans /root :
 
 # 1e connexion ssh root
 ```
-> ssh -l root 192.168.1.100
+ssh -l root 192.168.1.100
 ```
 PWD : 1234  
 
@@ -89,15 +89,10 @@ nano .bashrc
 Ajouter à la fin :
 > export COMPOSE_FILE=/home/habadm/docker/compose.yaml
 
-
-
-## Tester le dongle ConBee 2, vérifier que /dev/ttyACM0 est présent
+Démarrer les containers :
 ```
-ls -all /dev/ttyACM0  
+docker compose up -d
 ```
-~~droit pour accéder à la clé USB (Pas utile)~~  
-~~sudo usermod -aG dialout $USER~~
-
 
 # Info interessantes
 https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html  
@@ -115,3 +110,10 @@ sudo nano /etc/docker/daemon.json
 	  "log-driver": "local",
 	  "log-opts": {"max-size": "10m", "max-file": "3"}
 	}
+
+## Tester le dongle ConBee 2, vérifier que /dev/ttyACM0 est présent
+```
+ls -all /dev/ttyACM0  
+```
+~~droit pour accéder à la clé USB (Pas utile)~~  
+~~sudo usermod -aG dialout $USER~~
