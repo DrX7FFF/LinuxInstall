@@ -21,7 +21,7 @@ apt -y -qq install chrony
 echo "### Prepare dockers RAM folders ###"
 mkdir -p /home/$USER_NAME/docker.ram
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/docker.ram
-sudo chmod -R 777 /home/$USER_NAME/docker.ram
+chmod -R 777 /home/$USER_NAME/docker.ram
 
 echo "### Check in dockers RAM automount in /etc/fstab ###"
 if ! grep -q "/home/$USER_NAME/docker.ram" /etc/fstab; then
@@ -33,7 +33,7 @@ if ! grep -q "/home/$USER_NAME/docker.ram" /etc/fstab; then
 fi
 
 echo "### Create service : Copy Deconz parameters files to RAM ###"
-sudo tee /etc/systemd/system/deconzramcopy.service > /dev/null <<EOL 
+tee /etc/systemd/system/deconzramcopy.service > /dev/null <<EOL 
 [Unit]
 Description=Copy Deconz parameters files to RAM
 After=home-$USER_NAME-docker-deconz.ram.mount
@@ -49,9 +49,10 @@ ExecStart=cp -RT /home/$USER_NAME/docker/deconz /home/$USER_NAME/docker.ram/deco
 WantedBy=default.target
 EOL
 
-sudo systemctl daemon-reload
-sudo systemctl enable deconzramcopy.service
-#sudo systemctl start deconzramcopy.service
+systemctl daemon-reload
+systemctl enable deconzramcopy.service
+#systemctl start deconzramcopy.service
+
 
 echo "### Install Docker ###"
 armbian-config --cmd CON001
@@ -63,10 +64,10 @@ apt -y -qq install docker-compose-plugin
 DOCKER_MAIN_CONFIG="/etc/docker/daemon.json"
 TEMP_CONFIG="/tmp/docker_temp_config.json"
 if [ ! -f "$DOCKER_MAIN_CONFIG" ]; then
-    echo "{}" | sudo tee "$DOCKER_MAIN_CONFIG" > /dev/null
+    echo "{}" | tee "$DOCKER_MAIN_CONFIG" > /dev/null
 fi
-sudo jq '. * {"log-driver": "journald"}' "$DOCKER_MAIN_CONFIG" | sudo tee "$TEMP_CONFIG" > /dev/null
-sudo mv "$TEMP_CONFIG" "$DOCKER_MAIN_CONFIG"
+jq '. * {"log-driver": "journald"}' "$DOCKER_MAIN_CONFIG" | tee "$TEMP_CONFIG" > /dev/null
+mv "$TEMP_CONFIG" "$DOCKER_MAIN_CONFIG"
 
 
 
@@ -76,29 +77,28 @@ armbian-config --cmd SY002
 
 echo "### Install GIT + config ###"
 apt -y -qq install git
-# git config --global user.name "DrX7FFF"
-# git config --global user.email "dubourg.v@gmail.com"
-# git config --global init.defaultBranch main
-# git config --list
+git config --global user.name "DrX7FFF"
+git config --global user.email "dubourg.v@gmail.com"
+git config --global init.defaultBranch main
 
-git clone https://github.com/DrX7FFF/DockerHAB.git /home/$USER_NAME/docker
-git config --global --add safe.directory /home/$USER_NAME/docker
-
-echo "### Prepare dockers folders ###"
-mkdir -p /home/$USER_NAME/docker/nodered
-mkdir -p /home/$USER_NAME/docker/deconz
-chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/docker
-chmod -R 777 /home/$USER_NAME/docker
 
 echo "### Install GitHub client gh ###"
-(type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
-	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
-	&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
-	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-	&& sudo apt update \
-	&& sudo apt install gh -y
+apt -y -qq install wget
+mkdir -p -m 755 /etc/apt/keyrings
+wget -q -O /etc/apt/keyrings/githubcli-archive-keyring.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
+#wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+apt update
+apt -y -qq install gh
 
+# (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
+# 	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+# 	&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+# 	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+# 	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+# 	&& sudo apt update \
+# 	&& sudo apt install gh -y
 
 
 echo "##### Check #####"
@@ -114,6 +114,5 @@ systemctl status deconzramcopy.service
 echo "### USB ConBee 2 ###"
 ls -all /dev/ttyACM0
 
-
-git clone https://github.com/DrX7FFF/DockerHAB.git /home/$USER_NAME/docker
-
+echo "### Git Config ###"
+git config --list

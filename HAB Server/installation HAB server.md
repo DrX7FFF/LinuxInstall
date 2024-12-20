@@ -54,19 +54,21 @@ chmod +x /root/setup.sh
 ./setup.sh
 reboot
 
-# Mise à jour
-sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-sudo apt autoremove
-
 # Connecter avec nouveau compte 
 ssh -l habadm 192.168.1.100
 
-# git config --global user.name "DrX7FFF"
-# git config --global user.email "dubourg.v@gmail.com"
-# git config --global init.defaultBranch main
-# git config --list
-
 gh auth login
+
+git clone https://github.com/DrX7FFF/DockerHAB.git /home/$USER_NAME/docker
+git config --global --add safe.directory /home/$USER_NAME/docker
+
+echo "### Prepare dockers folders ###"
+# mkdir -p /home/$USER_NAME/docker/nodered
+# mkdir -p /home/$USER_NAME/docker/deconz
+chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/docker
+chmod -R 777 /home/$USER_NAME/docker
+
+
 
 # Ajouter COMPOSE_FILE dans Bash
 nano .bashrc
