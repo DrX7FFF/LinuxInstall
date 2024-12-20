@@ -12,16 +12,15 @@ Copier les fichiers dans /root :
 * setup.sh
 
 # 1e connexion ssh root
+Effacer les clé ssh locales existantes :
+```
+ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
+```
 ```
 ssh -l root 192.168.1.100
 ```
 PWD : 1234  
-
-si problème de clé ssh :
-```
-ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
-```
-
+  
 modification PWD root + (pwd)  
 création PWD habadm (pwd) 
 
@@ -77,9 +76,7 @@ Clone de la conf docker :
 ```
 git clone https://github.com/DrX7FFF/DockerHAB.git ~/docker
 ```
-```
-git config --global --add safe.directory ~/docker
-```
+> ~~git config --global --add safe.directory ~/docker~~
 
 > ~~chown -R $USER:$USER ~/docker~~  
 > ~~chmod -R 777 ~/docker~~  
@@ -94,14 +91,18 @@ Démarrer les containers :
 docker compose up -d
 ```
 Réinstaller 1 élément de la palette (Tous les éléments sont réinstallés)  
+Relancer les containers :
+```
+docker compose down && docker compose up -d
+```
 Reconnecter Node Deconz au serveur Deconz  
+Reparametrer Node configuration FireBase (Clé API Web + databaseURL)  
 Sauvegarde de la conf de deconz :
 ```
 cp -f ~/docker.ram/deconz/zll.db ~/docker.ram/deconz/session.default ~/docker.ram/deconz/config.ini ~/docker/deconz
 ```
-Reparametrer le noeud de config FireBase :
 ```
-Clé API + URL RTDB
+git commit -a -m 'Sauvegarde suite réinstallation' && git push
 ```
 
 # Info interessantes
