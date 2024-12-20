@@ -1,11 +1,10 @@
 # Préparation carte SD
 Télécharger image iso NanoPi Neo 2 (version Bleu) :
 https://www.armbian.com/nanopi-neo-2/
-```
-Minimal/IOT images with Armbian Linux v6.6  
-Build Date: Nov 12, 2024  
-Debian 12 (Bookworm)  
-```
+> Minimal/IOT images with Armbian Linux v6.6  
+> Build Date: Nov 12, 2024  
+> Debian 12 (Bookworm)  
+
 Restaurer l'image sur la carte SD
 
 Copier les fichiers dans /root :
@@ -13,11 +12,15 @@ Copier les fichiers dans /root :
 * setup.sh
 
 # 1e connexion ssh root
-> ssh -l root 192.168.1.100  
-> PWD : 1234  
+```
+> ssh -l root 192.168.1.100
+```
+PWD : 1234  
 
 si problème de clé ssh :
-> ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
+```
+ssh-keygen -f '/home/moi/.ssh/known_hosts' -R '192.168.1.100'
+```
 
 modification PWD root + (pwd)  
 création PWD habadm (pwd) 
@@ -48,19 +51,30 @@ Result :
 ```
 
 Installation :
-> chmod +x /root/setup.sh  
-> ./setup.sh  
-> reboot  
+```
+chmod +x /root/setup.sh && ./setup.sh
+```
+```
+reboot
+```
 
 # 1e connexion ssh habadm
-> ssh -l habadm 192.168.1.100  
+```
+ssh -l habadm 192.168.1.100
+```
 
 Login to Github :
-> gh auth login  
+```
+gh auth login  
+```
 
 Clone de la conf docker :
-> git clone https://github.com/DrX7FFF/DockerHAB.git ~/docker  
-> git config --global --add safe.directory ~/docker  
+```
+git clone https://github.com/DrX7FFF/DockerHAB.git ~/docker
+```
+```
+git config --global --add safe.directory ~/docker
+```
 
 > ~~mkdir -p ~/docker/nodered~~  
 > ~~mkdir -p ~/docker/deconz~~  
@@ -69,33 +83,23 @@ Clone de la conf docker :
 
 
 Ajouter COMPOSE_FILE dans Bash :
-> nano .bashrc  
-
+```
+nano .bashrc  
+```
 Ajouter à la fin :
-```
-export COMPOSE_FILE=/home/habadm/docker/compose.yaml
-```
-##  Commande GIT
-> git status  
-> git add deconz/session.default deconz/zll.db nodered/context/global/global.json nodered/flows.json nodered/flows_cred.json  
-> nano .gitignore  
-> git commit -a -m 'Sauvegarde'  
-> git push  
-> git pull  
+> export COMPOSE_FILE=/home/habadm/docker/compose.yaml
+
 
 
 ## Tester le dongle ConBee 2, vérifier que /dev/ttyACM0 est présent
-> ls -all /dev/ttyACM0  
-
+```
+ls -all /dev/ttyACM0  
+```
 ~~droit pour accéder à la clé USB (Pas utile)~~  
-~~>  sudo usermod -aG dialout $USER~~
-
-### Lien Firebase
-https://console.firebase.google.com/project/hab-datalog/database/hab-datalog-default-rtdb/data
+~~sudo usermod -aG dialout $USER~~
 
 
-
-# info interessantes
+# Info interessantes
 https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html  
 https://forum.armbian.com/topic/11341-replace-ntp-with-chrony/
 
