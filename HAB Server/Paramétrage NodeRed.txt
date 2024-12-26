@@ -1,3 +1,7 @@
+icones :
+https://pictogrammers.com/library/mdi/
+
+
 ## Sauvegarder variable de contexte sur disque :
 https://nodered.org/docs/user-guide/context#context-stores
 Utilisation : https://nodered.org/docs/user-guide/writing-functions#multiple-context-stores

@@ -1,4 +1,12 @@
 # Tools
+Mise ajour packets :
+```
+sudo apt -qq update && sudo apt -y -qq upgrade 
+```
+```
+sudo apt -y -qq dist-upgrade
+sudo apt autopurge
+```
 Mise ajour des images docker :
 ```
 docker compose pull

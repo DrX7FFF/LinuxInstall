@@ -7,7 +7,7 @@ https://www.armbian.com/nanopi-neo-2/
 
 Restaurer l'image sur la carte SD
 
-Copier les fichiers dans /root :
+Copier les fichiers dans /root (attention au nom des fichiers qui peuvent changer durant le téléchargement) :
 * .not_logged_in_yet
 * setup.sh
 
