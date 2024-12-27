@@ -49,7 +49,13 @@ docker exec -it nodered /bin/bash
 git status -s
 ```
 ```
-git add deconz/session.default deconz/zll.db nodered/context/global/global.json nodered/flows.json nodered/flows_cred.json
+git add \
+deconz/session.default \
+deconz/zll.db \
+deconz/deCONZ.tar.gz \
+nodered/context/global/global.json \
+nodered/flows.json \
+nodered/flows_cred.json
 ```
 ```
 nano .gitignore
