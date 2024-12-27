@@ -17,7 +17,7 @@ docker compose down && docker compose up -d
 ```
 Memoriser la conf de deconz (Attention, fair GIT COMMIT + PUSH après) :
 ```
-cp -f ~/docker.ram/deconz/zll.db ~/docker.ram/deconz/session.default ~/docker.ram/deconz/config.ini ~/docker/deconz
+cp -f ~/docker.ram/deconz/zll.db ~/docker.ram/deconz/session.default ~/docker.ram/deconz/config.ini ~/docker.ram/deconz/deCONZ.tar.gz ~/docker/deconz
 ```
 
 
@@ -46,7 +46,7 @@ docker exec -it nodered /bin/bash
 
 # GIT
 ```
-git status
+git status -s
 ```
 ```
 git add deconz/session.default deconz/zll.db nodered/context/global/global.json nodered/flows.json nodered/flows_cred.json
