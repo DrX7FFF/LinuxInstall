@@ -96,7 +96,17 @@ Relancer les containers :
 docker compose down && docker compose up -d
 ```
 Reconnecter Node Deconz au serveur Deconz  
-Reparametrer Node configuration FireBase (Clé API Web + databaseURL)  
+
+Récupérer clé privée firebase :  
+https://console.firebase.google.com/u/0/project/hab-datalog/settings/serviceaccounts/adminsdk  
+Générer une nouvelle clé privée
+
+Reparamétrer Node configuration FireBase :
+- Connexion - Type = clé privé JSON  
+- Sécurité = Glisser le fichier de la clé privée
+- Base de données = https://hab-datalog-default-rtdb.europe-west1.firebasedatabase.app/  
+
+
 Sauvegarde de la conf de deconz :
 ```
 cp -f ~/docker.ram/deconz/zll.db ~/docker.ram/deconz/session.default ~/docker.ram/deconz/config.ini ~/docker/deconz

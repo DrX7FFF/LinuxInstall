@@ -6,6 +6,9 @@ echo "### update & upgrade ###"
 apt -qq update
 apt -y -qq upgrade
 
+echo "### set name ###"
+# echo 'habserver' > /etc/hostname
+hostnamectl set-hostname habserver
 
 echo "### Disable WPA WiFi service ###"
 systemctl stop wpa_supplicant.service
@@ -76,8 +79,8 @@ if ! grep -qE --regexp="^\s*export\s+COMPOSE_FILE\s*=" /home/$USER_NAME/.bashrc;
 fi
 
 
-echo "### Disable kernel auto update ###"
-armbian-config --cmd SY002
+# echo "### Disable kernel auto update ###"
+# armbian-config --cmd SY002
 
 
 echo "### Install GIT + config ###"
