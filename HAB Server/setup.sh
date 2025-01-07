@@ -14,6 +14,11 @@ echo "### Disable WPA WiFi service ###"
 systemctl stop wpa_supplicant.service
 systemctl disable wpa_supplicant.service
 
+# Pour laisser PiHole fonctionner sur le port 53
+echo "### Disable services de résolution de nom ###"
+systemctl stop systemd-resolved.service
+systemctl disable systemd-resolved.service
+
 
 echo "### Relace timesyncd by chrony (reduce SD card wear) ###"
 systemctl stop systemd-timesyncd
