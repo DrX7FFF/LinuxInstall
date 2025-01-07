@@ -111,8 +111,12 @@ Sauvegarde de la conf de deconz :
 ```
 cp -f ~/docker.ram/deconz/zll.db ~/docker.ram/deconz/session.default ~/docker.ram/deconz/config.ini ~/docker/deconz
 ```
+Commit + Push :
 ```
 git commit -a -m 'Sauvegarde suite réinstallation' && git push
+```
+```
+git -C ~/docker commit -a -m 'Sauvegarde suite réinstallation' && git -C ~/docker push
 ```
 
 # Info interessantes
