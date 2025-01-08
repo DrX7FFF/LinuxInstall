@@ -28,3 +28,13 @@ timedatectl
 
 # Disk Free + information si TMPFS (montage temporaire)
 df -h
+
+# Afficher la configuration réseau + DNS actif
+resolvectl status
+sudo resolvectl statistics
+# Purger le cache DNS
+sudo resolvectl flush-caches
+
+# résoudre un nom de domaine
+nslookup example.com
+dig example.com

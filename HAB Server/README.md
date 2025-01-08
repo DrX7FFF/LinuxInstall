@@ -53,6 +53,16 @@ Installation :
 ```
 chmod +x ./setup.sh && ./setup.sh
 ```
+Correction pour la cohabitation avec PiHole + Unbound
+```
+sudo nano /etc/systemd/resolved.conf
+```
+Remplacer :
+```
+[Resolve]
+DNSStubListener=no
+```
+  
 ```
 reboot
 ```

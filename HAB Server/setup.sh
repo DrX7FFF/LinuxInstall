@@ -15,9 +15,13 @@ systemctl stop wpa_supplicant.service
 systemctl disable wpa_supplicant.service
 
 # Pour laisser PiHole fonctionner sur le port 53
-echo "### Disable services de résolution de nom ###"
-systemctl stop systemd-resolved.service
-systemctl disable systemd-resolved.service
+# echo "### Disable services de résolution de nom ###"
+# systemctl stop systemd-resolved.service
+# systemctl disable systemd-resolved.service
+## il faut configure le serveur DNS dans /etc/resolv.conf
+## et mettre :
+## [Resolve]
+## DNSStubListener=no
 
 
 echo "### Relace timesyncd by chrony (reduce SD card wear) ###"
