@@ -27,6 +27,9 @@ docker compose down && docker compose up -d
 ```
 Purger les images inutiles (A faire qd les containers sont démarré) :
 ```
+docker system prune -a
+```
+```
 docker image prune
 ```
 Afficher les logs :
@@ -72,7 +75,7 @@ git pull
 
 # Linux
 ```
-sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -10 -type f
+sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -not -path '/var/log/*' -not -path '/run/*' -not -path '/home/habadm/docker.ram/*' -mmin -10 -type f
 ```
 
 # Lien Firebase
