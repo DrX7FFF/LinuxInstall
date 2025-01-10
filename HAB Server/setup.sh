@@ -84,7 +84,7 @@ mv "$TEMP_CONFIG" "$DOCKER_MAIN_CONFIG"
 echo "### Check default compose files ###"
 if ! grep -qE --regexp="^\s*export\s+COMPOSE_FILE\s*=" /home/$USER_NAME/.bashrc; then
   echo "### Add default compose files in /home/$USER_NAME/.bashrc ###"
-  echo "export COMPOSE_FILE=/home/$USER_NAME/docker/compose.yaml" >> /home/$USER_NAME/.bashrc
+  echo "export COMPOSE_FILE=/home/$USER_NAME/docker/domo.yaml:/home/$USER_NAME/docker/network.yaml" >> /home/$USER_NAME/.bashrc
 fi
 
 
