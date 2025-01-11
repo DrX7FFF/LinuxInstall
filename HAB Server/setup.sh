@@ -3,25 +3,17 @@
 USER_NAME="habadm"
 
 echo "### update & upgrade ###"
-apt -qq update
-apt -y -qq upgrade
+apt update
+# apt -y upgrade
 
 echo "### set name ###"
 # echo 'habserver' > /etc/hostname
 hostnamectl set-hostname habserver
 
+
 echo "### Disable WPA WiFi service ###"
 systemctl stop wpa_supplicant.service
 systemctl disable wpa_supplicant.service
-
-# Pour laisser PiHole fonctionner sur le port 53
-# echo "### Disable services de résolution de nom ###"
-# systemctl stop systemd-resolved.service
-# systemctl disable systemd-resolved.service
-## il faut configure le serveur DNS dans /etc/resolv.conf
-## et mettre :
-## [Resolve]
-## DNSStubListener=no
 
 
 echo "### Relace timesyncd by chrony (reduce SD card wear) ###"
@@ -72,6 +64,7 @@ systemctl enable docker
 usermod -aG docker $USER_NAME
 apt -y -qq install docker-compose-plugin
 
+
 # Log to journald https://docs.docker.com/engine/logging/drivers/journald/
 DOCKER_MAIN_CONFIG="/etc/docker/daemon.json"
 TEMP_CONFIG="/tmp/docker_temp_config.json"
@@ -81,10 +74,12 @@ fi
 jq '. * {"log-driver": "journald"}' "$DOCKER_MAIN_CONFIG" | tee "$TEMP_CONFIG" > /dev/null
 mv "$TEMP_CONFIG" "$DOCKER_MAIN_CONFIG"
 
+
 echo "### Check default compose files ###"
 if ! grep -qE --regexp="^\s*export\s+COMPOSE_FILE\s*=" /home/$USER_NAME/.bashrc; then
   echo "### Add default compose files in /home/$USER_NAME/.bashrc ###"
-  echo "export COMPOSE_FILE=/home/$USER_NAME/docker/domo.yaml:/home/$USER_NAME/docker/network.yaml" >> /home/$USER_NAME/.bashrc
+  echo "export COMPOSE_FILE=/home/$USER_NAME/docker/compose.yaml" >> /home/$USER_NAME/.bashrc
+  # echo "export COMPOSE_FILE=/home/$USER_NAME/docker/domo.yaml:/home/$USER_NAME/docker/network.yaml" >> /home/$USER_NAME/.bashrc
 fi
 
 

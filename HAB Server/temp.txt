@@ -1,0 +1,18 @@
+    _             _    _                                         _ _        
+   /_\  _ _ _ __ | |__(_)__ _ _ _    __ ___ _ __  _ __ _  _ _ _ (_) |_ _  _ 
+  / _ \| '_| '  \| '_ \ / _` | ' \  / _/ _ \ '  \| '  \ || | ' \| |  _| || |
+ /_/ \_\_| |_|_|_|_.__/_\__,_|_||_|_\__\___/_|_|_|_|_|_\_,_|_||_|_|\__|\_, |
+                                 |___|                                 |__/ 
+ v25.2 rolling for NanoPi Neo 2 running Armbian Linux 6.6.65-current-sunxi64
+
+ Packages:     Debian stable (bookworm)
+ Support:      for advanced users (rolling release)
+ IP addresses: (LAN) IPv4: 172.18.0.1, 192.168.1.100 IPv6: fe80::42:abff:fef0:6edf, fe80::dcb8:85ff:fe7b:ea4e, fe80::f844:ebff:fe29:1704 (WAN) 176.136.10.173
+
+ Performance:  
+
+ Load:         34%           	Up time:       0 min	
+ Memory usage: 34% of 412M   	Zram usage:    3% of 206M   	
+ CPU temp:     46°C           	Usage of /:    31% of 15G    
+
+ 

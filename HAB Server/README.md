@@ -53,15 +53,6 @@ Installation :
 ```
 chmod +x ./setup.sh && ./setup.sh
 ```
-Correction pour la cohabitation avec PiHole + Unbound
-```
-sudo nano /etc/systemd/resolved.conf
-```
-Remplacer :
-```
-[Resolve]
-DNSStubListener=no
-```
   
 ```
 reboot
@@ -129,6 +120,17 @@ git commit -a -m 'Sauvegarde suite réinstallation' && git push
 git -C ~/docker commit -a -m 'Sauvegarde suite réinstallation' && git -C ~/docker push
 ```
 
+Suppression IPV6 :
+https://pscl4rke.wordpress.com/2019/10/01/disabling-ipv6-on-ubuntu-18-04-the-netplan-version/
+aller dans les fichiers de : 
+/etc/netplan/99-no-ipv6.yaml
+```
+network:
+  ethernets:
+    end0:
+      link-local: [] #disable IPV6
+```
+
 # Info interessantes
 https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html  
 https://forum.armbian.com/topic/11341-replace-ntp-with-chrony/
@@ -152,3 +154,16 @@ ls -all /dev/ttyACM0
 ```
 ~~droit pour accéder à la clé USB (Pas utile)~~  
 ~~sudo usermod -aG dialout $USER~~
+
+# Installation de PiHole + Unbound
+Correction pour la cohabitation et laisser PiHole fonctionner sur le port 53  
+https://pimylifeup.com/pi-hole-docker/
+
+```
+sudo nano /etc/systemd/resolved.conf
+```
+Remplacer :
+```
+[Resolve]
+DNSStubListener=no
+```
