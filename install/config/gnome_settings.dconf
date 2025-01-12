@@ -1,25 +1,64 @@
+[apps/psensor]
+graph-alpha-channel-enabled=false
+graph-background-alpha=1.0
+graph-background-color='#e8f4e8f4a8f5'
+graph-foreground-color='#000000000000'
+graph-monitoring-duration=15
+graph-smooth-curves-enabled=true
+graph-update-interval=5
+interface-hide-on-startup=false
+interface-menu-bar-disabled=false
+interface-sensorlist-position=0
+interface-temperature-unit=0
+interface-unity-launcher-count-disabled=false
+interface-window-decoration-disabled=false
+interface-window-divider-pos=1088
+interface-window-h=990
+interface-window-keep-below-enabled=false
+interface-window-restore-enabled=true
+interface-window-w=1426
+interface-window-x=26
+interface-window-y=23
+notif-script=''
+provider-atiadlsdk-enabled=true
+provider-gtop2-enabled=true
+provider-hddtemp-enabled=false
+provider-libatasmart-enabled=false
+provider-lmsensors-enabled=true
+provider-nvctrl-enabled=true
+provider-udisks2-enabled=true
+sensor-update-interval=5
+slog-enabled=false
+slog-interval=300
+
 [apps/update-manager]
 first-run=false
-launch-count=5
-launch-time=int64 1730706123
+launch-count=15
+launch-time=int64 1736683703
 show-details=true
-window-height=959
-window-width=1482
+window-height=914
+window-width=1273
 
 [ca/desrt/dconf-editor]
-saved-pathbar-path='/apps/psensor/provider-nvctrl-enabled'
-saved-view='/apps/'
+saved-pathbar-path='/org/gnome/terminal/legacy/keybindings/find'
+saved-view='/org/gnome/terminal/legacy/keybindings/'
 show-warning=false
 window-height=833
 window-is-maximized=false
 window-width=985
 
 [com/ubuntu/update-notifier]
-release-check-time=uint32 1731275820
+release-check-time=uint32 1736115397
+
+[org/gnome/Disks]
+image-dir-uri='file:///home/moi/T%C3%A9l%C3%A9chargements'
 
 [org/gnome/Extensions]
 window-height=871
 window-width=1077
+
+[org/gnome/TextEditor]
+last-save-directory='file:///home/moi/GoogleDrive/Devel/homeserver%20Sauvegarde'
 
 [org/gnome/calculator]
 accuracy=9
@@ -34,7 +73,7 @@ source-units='degree'
 target-currency=''
 target-units='radian'
 window-maximized=false
-window-size=(386, 503)
+window-size=(386, 629)
 word-size=64
 
 [org/gnome/clocks/state/window]
@@ -97,10 +136,25 @@ icon-theme='Yaru'
 toolkit-accessibility=false
 
 [org/gnome/desktop/notifications]
-application-children=['org-gnome-software', 'firefox']
+application-children=['org-gnome-software', 'firefox', 'org-gnome-nautilus', 'gnome-power-panel', 'org-gnome-extensions', 'brave-browser', 'gnome-printers-panel']
+
+[org/gnome/desktop/notifications/application/brave-browser]
+application-id='brave-browser.desktop'
 
 [org/gnome/desktop/notifications/application/firefox]
 application-id='firefox.desktop'
+
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
+[org/gnome/desktop/notifications/application/gnome-printers-panel]
+application-id='gnome-printers-panel.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-extensions]
+application-id='org.gnome.Extensions.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-software]
 application-id='org.gnome.Software.desktop'
@@ -129,7 +183,7 @@ show-sidebar=true
 sidebar-page='thumbnails'
 sidebar-size=132
 sizing-mode='automatic'
-window-ratio=(3.1783362451283423, 1.3766644098397653)
+window-ratio=(3.178763440860215, 1.3766153553781832)
 
 [org/gnome/evolution-data-server]
 migrated=true
@@ -162,7 +216,7 @@ toggle-tiled-right=@as []
 
 [org/gnome/nautilus/list-view]
 default-column-order=['name', 'size', 'type', 'owner', 'group', 'permissions', 'date_modified', 'date_accessed', 'date_created', 'recency', 'detailed_type']
-default-visible-columns=['name', 'size', 'date_modified']
+default-visible-columns=['name', 'size', 'type', 'owner', 'date_modified']
 use-tree-view=true
 
 [org/gnome/nautilus/preferences]
@@ -171,7 +225,11 @@ migrated-gtk-settings=true
 search-filter-time-type='last_modified'
 
 [org/gnome/nautilus/window-state]
-initial-size=(1720, 1016)
+initial-size=(1266, 1194)
+
+[org/gnome/nm-applet/eap/dcbeef95-db40-448d-86c1-558e9745c873]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
 
 [org/gnome/portal/filechooser/brave-browser]
 last-folder-path='/home/moi/GoogleDrive/Documents/Appart Lens/AG 2024'
@@ -182,7 +240,7 @@ info-last-device='/org/freedesktop/UPower/devices/battery_hidpp_battery_0'
 info-stats-type='discharge-accuracy'
 
 [org/gnome/settings-daemon/plugins/media-keys]
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>e'
@@ -194,6 +252,16 @@ binding='<Shift><Control>Escape'
 command='gnome-system-monitor'
 name='Task Manager'
 
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>r'
+command='gnome-terminal'
+name='Gnome Terminal'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
+binding='<Super>z'
+command='brave-browser'
+name='Brave'
+
 [org/gnome/settings-daemon/plugins/power]
 sleep-inactive-ac-timeout=3600
 sleep-inactive-ac-type='nothing'
@@ -202,6 +270,7 @@ sleep-inactive-ac-type='nothing'
 app-picker-layout=[{'0ab041c8-d8d0-4a6a-95aa-b7d377ae7893': <{'position': <0>}>, 'Utilities': <{'position': <1>}>, '454791e7-5c4f-4c4c-97b3-f41d90775375': <{'position': <2>}>, '417de655-5d4b-4da8-81a0-395c5e9bec3f': <{'position': <3>}>, 'synaptic.desktop': <{'position': <4>}>, 'software-properties-gtk.desktop': <{'position': <5>}>, 'zenmap.desktop': <{'position': <6>}>, 'zenmap-root.desktop': <{'position': <7>}>, 'adskidmgr-opener.desktop': <{'position': <8>}>, 'firefox.desktop': <{'position': <9>}>, 'hardinfo.desktop': <{'position': <10>}>, 'psensor.desktop': <{'position': <11>}>, 'org.gnome.DiskUtility.desktop': <{'position': <12>}>, 'org.gnome.clocks.desktop': <{'position': <13>}>}]
 enabled-extensions=['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com', 'freon@UshakovVasilii_Github.yahoo.com', 'vertical-workspaces@G-dH.github.com']
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'codium.desktop', 'brave-browser.desktop', 'org.videolan.VLC.desktop', 'org.gnome.meld.desktop', 'org.inkscape.Inkscape.desktop', 'wine-Programs-Autodesk-Autodesk Fusion.desktop', 'org.gnome.TextEditor.desktop']
+remember-mount-password=true
 welcome-dialog-last-shown-version='46.0'
 
 [org/gnome/shell/extensions/dash-to-dock]
@@ -218,10 +287,11 @@ check-x11wayland=true
 show-home=false
 
 [org/gnome/shell/extensions/freon]
-hot-sensors=['GPU', 'CPU', 'Disk']
+hot-sensors=['GPU', 'CPU', 'Disk', 'WiFi']
 
 [org/gnome/shell/extensions/tiling-assistant]
 active-window-hint-color='rgb(211,70,21)'
+disable-tile-groups=false
 last-version-installed=46
 overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-left': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-right': <@mb nothing>}
 
@@ -229,8 +299,20 @@ overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>, 'org.gnome.m
 locations=@av []
 
 [org/gnome/software]
-check-timestamp=int64 1731308745
-flatpak-purge-timestamp=int64 1731290680
+check-timestamp=int64 1736660182
+flatpak-purge-timestamp=int64 1736645716
+
+[org/gnome/terminal/legacy/keybindings]
+copy='<Control>c'
+find='<Control>F'
+paste='<Control>v'
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-transparency-percent=5
+font='UbuntuMono Nerd Font Mono 14'
+use-system-font=false
+use-theme-transparency=false
+use-transparent-background=true
 
 [org/gtk/gtk4/settings/file-chooser]
 date-format='regular'
@@ -242,7 +324,7 @@ sort-directories-first=true
 sort-order='ascending'
 type-format='category'
 view-type='list'
-window-size=(1235, 822)
+window-size=(1435, 822)
 
 [org/gtk/settings/color-chooser]
 custom-colors=[(0.44705882352941179, 0.62352941176470589, 0.81176470588235294, 1.0), (0.90998702983138779, 0.90998702983138779, 0.65999847409781032, 1.0), (0.9882352941176471, 0.9137254901960784, 0.30980392156862746, 1.0)]
@@ -251,7 +333,7 @@ selected-color=(true, 0.10196078431372549, 0.37254901960784315, 0.70588235294117
 [org/gtk/settings/file-chooser]
 date-format='regular'
 location-mode='path-bar'
-show-hidden=false
+show-hidden=true
 show-size-column=true
 show-type-column=true
 sidebar-width=199
@@ -259,5 +341,5 @@ sort-column='name'
 sort-directories-first=false
 sort-order='ascending'
 type-format='category'
-window-position=(869, 321)
-window-size=(1231, 902)
+window-position=(140, 262)
+window-size=(1441, 902)

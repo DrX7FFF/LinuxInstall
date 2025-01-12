@@ -2,12 +2,41 @@
 
 # Ubuntu 24.04
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-#sudo apt update -y
 
+
+# outil CURL
 sudo apt install -y curl
+
+
+# outil Git
+sudo apt install -y git
+# paramétrage GIT
+git config --global user.name "DrX7FFF"
+git config --global user.email "dubourg.v@gmail.com"
+git config --global init.defaultBranch main
+mkdir -p ~/GIT
+
 
 # Packet Manager
 sudo apt install -y synaptic
+
+
+# Shell ZSH (https://www.youtube.com/watch?v=l-aPNBG1WVk)
+sudo apt -y install zsh
+# création fichier de configuration vide pour éviter de lancer zsh-newuser-install
+touch ~/.zshrc
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+
+
+# Installe la font UbuntuMonoNerdFontMono-Regular.ttf pour le shell (https://www.nerdfonts.com/)
+mkdir -p ~/.local/share/fonts
+curl -sL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/UbuntuMono.tar.xz | tar -xJf - --wildcards --no-anchored 'UbuntuMonoNerdFontMono-Regular.ttf' -O > ~/.local/share/fonts/UbuntuMonoNerdFontMono-Regular.ttf
+curl -sL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.tar.xz | tar -xJf - --wildcards --no-anchored 'UbuntuMonoNerdFontMono-Regular.ttf' -O > ~/.local/share/fonts/UbuntuMonoNerdFontMono-Regular.ttf
+fc-cache -fv
 
 # Ubuntu : Snap Store 
 sudo snap refresh snap-store
@@ -33,12 +62,6 @@ sudo apt -y install ppa-purge
 
 # droit sur le port USB
 sudo chmod a+rw /dev/ttyUSB0
-
-# Gestion logitech
-#sudo apt -y install logiops
-
-# traitement basic d'images
-#sudo apt -y install gthumb
 
 # utilisation des derniers drivers vidéo GPU
 sudo add-apt-repository ppa:oibaf/graphics-drivers && apt update -y && apt -y upgrade
@@ -70,3 +93,10 @@ sudo apt -y install gnome-tweaks
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 # Retarder la détection application qui ne répond pas
 # gsettings set org.gnome.mutter check-alive-timeout 60000
+
+# Gestion logitech
+#sudo apt -y install logiops
+
+# traitement basic d'images
+#sudo apt -y install gthumb
+

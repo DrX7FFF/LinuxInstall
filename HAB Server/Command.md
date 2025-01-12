@@ -77,6 +77,10 @@ git pull
 ```
 sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -not -path '/var/log/*' -not -path '/run/*' -not -path '/home/habadm/docker.ram/*' -mmin -10 -type f
 ```
+```
+sudo /etc/update-motd.d/10-armbian-header && \
+sudo /etc/update-motd.d/30-armbian-sysinfo
+```
 
 # Lien Firebase
 Data :

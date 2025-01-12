@@ -120,10 +120,10 @@ git commit -a -m 'Sauvegarde suite réinstallation' && git push
 git -C ~/docker commit -a -m 'Sauvegarde suite réinstallation' && git -C ~/docker push
 ```
 
-Suppression IPV6 :
-https://pscl4rke.wordpress.com/2019/10/01/disabling-ipv6-on-ubuntu-18-04-the-netplan-version/
-aller dans les fichiers de : 
-/etc/netplan/99-no-ipv6.yaml
+~~Suppression IPV6 :~~
+~~https://pscl4rke.wordpress.com/2019/10/01/disabling-ipv6-on-ubuntu-18-04-the-netplan-version/~~
+~~aller dans les fichiers de : ~~
+~~/etc/netplan/99-no-ipv6.yaml~~
 ```
 network:
   ethernets:
