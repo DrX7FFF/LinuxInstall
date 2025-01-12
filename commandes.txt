@@ -38,3 +38,6 @@ sudo resolvectl flush-caches
 # résoudre un nom de domaine
 nslookup example.com
 dig example.com
+
+#info réseau sous netplan
+sudo netplan status --all

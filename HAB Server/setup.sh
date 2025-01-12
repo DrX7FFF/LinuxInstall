@@ -4,16 +4,42 @@ USER_NAME="habadm"
 
 echo "### update & upgrade ###"
 apt update
-# apt -y upgrade
+apt -y upgrade
+
 
 echo "### set name ###"
-# echo 'habserver' > /etc/hostname
 hostnamectl set-hostname habserver
+if ! grep -q "192.168.1.100 " /etc/hosts; then
+  echo '192.168.1.100  habserver' >> /etc/hosts
+fi
 
 
 echo "### Disable WPA WiFi service ###"
 systemctl stop wpa_supplicant.service
 systemctl disable wpa_supplicant.service
+
+
+echo "### Disable IPV6 ###"
+tee /etc/sysctl.d/99-disable-ipv6.conf > /dev/null <<EOF
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+EOF
+
+
+echo "### Disable consoles locales ###"
+sudo systemctl stop serial-getty@ttyGS0.service
+sudo systemctl disable serial-getty@ttyGS0.service
+sudo systemctl mask serial-getty@ttyGS0.service
+sudo systemctl stop serial-getty@ttyS0.service
+sudo systemctl disable serial-getty@ttyS0.service
+sudo systemctl mask serial-getty@ttyS0.service
+sudo systemctl stop getty.target
+sudo systemctl disable getty.target
+sudo systemctl mask getty.target
+sudo systemctl stop getty@tty1.service
+sudo systemctl disable getty@tty1.service
+sudo systemctl mask getty@tty1.service
 
 
 echo "### Relace timesyncd by chrony (reduce SD card wear) ###"
