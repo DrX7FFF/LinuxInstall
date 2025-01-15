@@ -42,5 +42,9 @@ dig example.com
 #info réseau sous netplan
 sudo netplan status --all
 
+#info sur les ports ouverts
+netstat
+
 # Sur armbian
 armbianmonitor
+
