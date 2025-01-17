@@ -1,0 +1,27 @@
+sudo iptables -I DOCKER-USER -s 192.168.2.0/24 -d 192.168.1.0/24 -j REJECT
+sudo iptables -I DOCKER-USER -s 192.168.2.2 -j ACCEPT
+ 
+sudo iptables -I DOCKER-USER -s 192.168.2.0/24 -d 192.168.1.0/24 -j REJECT
+ 
+sudo iptables -I DOCKER-USER -p tcp -s 192.168.1.0/24 -d 192.168.2.3 --dport 8082 -j ACCEPT
+sudo iptables -I DOCKER-USER -p tcp -s 192.168.1.0/24 -d 192.168.2.4 --dport 9117 -j ACCEPT
+
+sudo iptables -I DOCKER-USER -i end0 -p tcp -s 192.168.1.0/24 -d 192.168.2.4 --dport 9117 -j ACCEPT
+sudo iptables -I DOCKER-USER -i end0 -p tcp -s 192.168.1.0/24 -d 192.168.2.3 --dport 8082 -j ACCEPT
+ 
+
+# Autoriser les connexions LAN vers les ports 8082 et 9117
+sudo iptables -I DOCKER-USER 1 -s 192.168.1.0/24 -d 192.168.2.3 -p tcp --dport 8082 -j ACCEPT
+sudo iptables -I DOCKER-USER 2 -s 192.168.1.0/24 -d 192.168.2.4 -p tcp --dport 9117 -j ACCEPT
+
+# Bloquer toute tentative de communication entre le VPN et le LAN
+sudo iptables -A DOCKER-USER -s 192.168.2.0/24 -d 192.168.1.0/24 -j REJECT
+
+# Laisser passer tout le reste
+sudo iptables -A DOCKER-USER -j RETURN
+
+
+sudo iptables -I DOCKER-USER -s 192.168.2.2 -j ACCEPT
+
+
+sudo iptables -L DOCKER-USER -v -n --line-numbers

@@ -15,4 +15,16 @@
  Memory usage: 34% of 412M   	Zram usage:    3% of 206M   	
  CPU temp:     46°C           	Usage of /:    31% of 15G    
 
- 
+
+
+  v25.2 rolling for NanoPi Neo 2 running Armbian Linux 6.6.70-current-sunxi64
+
+ Packages:     Debian stable (bookworm)
+ Support:      for advanced users (rolling release)
+ IP addresses: (LAN) IPv4: 192.168.1.100 IPv6:  (WAN) 176.136.10.173
+
+ Performance:  
+
+ Load:         9%           	Up time:       0 min	
+ Memory usage: 26% of 412M   	
+ CPU temp:     51°C           	Usage of /:    36% of 15G    	

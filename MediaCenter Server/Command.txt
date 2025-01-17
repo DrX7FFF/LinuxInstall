@@ -1,0 +1,15 @@
+ssh root@192.168.1.102
+
+
+# restart pyload
+docker restart pyload
+
+# renamer
+/storage/.kodi/userdata/mediarenamer/mediarenamer.py
+
+
+# Docker Glances
+docker run -d --name=glances --restart=unless-stopped \
+  -p 61208:61208 \
+  --pid host \
+  nicolargo/glances

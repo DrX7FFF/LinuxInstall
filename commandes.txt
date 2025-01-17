@@ -11,6 +11,11 @@ apt info {package Name}
 
 chmod +x *
 
+# information charge CPU + uptime
+uptime
+cat /proc/loadavg
+
+
 ## version bureau
 echo $XDG_SESSION_TYPE
 
@@ -32,8 +37,13 @@ df -h
 # Afficher la configuration réseau + DNS actif
 resolvectl status
 sudo resolvectl statistics
+
+# afficher inforamtion IP
+ip a
+
 # Purger le cache DNS
 sudo resolvectl flush-caches
+
 
 # résoudre un nom de domaine
 nslookup example.com
