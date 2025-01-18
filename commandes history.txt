@@ -1,0 +1,200 @@
+    1  curl --version
+    2  sudo apt install -y curl
+    3  sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    4  echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    5  sudo apt update
+    6  sudo apt install brave-browser
+    7  sudo apt install -y brave-browser
+    8  sudo dpkg --add-architecture i386 
+    9  sudo mkdir -pm755 /etc/apt/keyrings
+   10  sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+   11  sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/noble/winehq-noble.sources
+   12  sudo apt update
+   13  sudo apt install -y synaptic
+   14  sudo apt install --install-recommends winehq-devel
+   15  sudo apt install -y winetricks
+   16  sudo apt install -y yad
+   17  sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
+   18  sudo apt-get -y purge firefox
+   19  sudo install -d -m 0755 /etc/apt/keyrings
+   20  wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+   21  gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nL’empreinte numérique de la clé correspond ("$0").\n"; else print "\nÉchec de vérification de la clé : l’empreinte ("$0") ne correspond pas à celle attendue.\n"}'
+   22  echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+   23  echo '
+   24  Package: *
+   25  Pin: origin packages.mozilla.org
+   26  Pin-Priority: 1000
+   27  ' | sudo tee /etc/apt/preferences.d/mozilla
+   28  sudo apt update && sudo apt install firefox
+   29  history
+   30  mkdir -p "$HOME/.fusion360/bin" && cd "$HOME/.fusion360/bin" && wget -N https://raw.githubusercontent.com/cryinkfly/Autodesk-Fusion-360-for-Linux/main/files/builds/stable-branch/bin/install.sh && chmod +x install.sh && ./install.sh
+   31  sudo apt remove winehq-devel
+   32  sudo apt update
+   33  sudo apt install --install-recommends winehq-staging
+   34  mkdir -p "$HOME/.fusion360/bin" && cd "$HOME/.fusion360/bin" && wget -N https://raw.githubusercontent.com/cryinkfly/Autodesk-Fusion-360-for-Linux/main/files/builds/stable-branch/bin/install.sh && chmod +x install.sh && ./install.sh
+   35  sudo apt install -y winetricks
+   36  mkdir -p "$HOME/.fusion360/bin" && cd "$HOME/.fusion360/bin" && wget -N https://raw.githubusercontent.com/cryinkfly/Autodesk-Fusion-360-for-Linux/main/files/builds/stable-branch/bin/install.sh && chmod +x install.sh && ./install.sh
+   37  /home/moi/.fusion360/wineprefixes/default/box-run.sh
+   38  env WINEPREFIX="/home/moi/.fusion360/wineprefixes/default" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+   39  /home/moi/.fusion360/wineprefixes/default/box-run.sh
+   40  env WINEPREFIX="/home/moi/.fusion360/wineprefixes/default" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+   41  kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+   42  wine --version
+   43  winecfg
+   44  pwd
+   45  WINEPREFIX="~/.myfusion/" winecfg
+   46  WINEPREFIX="/home/moi/.myfusion/" winecfg
+   47  ls -a
+   48  env WINEPREFIX="/home/moi/.myfusion/" winefile
+   49  echo $WINEPREFIX
+   50  WINEPREFIX="/home/moi/.myfusion/"
+   51  echo $WINEPREFIX
+   52  winefile
+   53  echo $WINEPREFIX
+   54  winetricks msxml6 corefonts win10
+   55  WINEPREFIX="/home/moi/.myfusion/" winetricks msxml6 corefonts win10
+   56  WINEPREFIX="/home/moi/.myfusion/" winetricks
+   57  WINEPREFIX="/home/moi/.myfusion/" wine ~/Téléchargements/WebView2installer.exe
+   58  WINEPREFIX="/home/moi/.myfusion/" wine ~/Téléchargements/Fusion360installer.exe --quiet
+   59  env WINEPREFIX="/home/moi/.myfusion/" winefile
+   60  WINEPREFIX="/home/moi/.myfusion/" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+   61  kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+   62  WINEPREFIX="/home/moi/.myfusion/" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+   63  kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+   64  WINEPREFIX="/home/moi/.myfusion/" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+   65  vulkan-utils --version
+   66  sudo apt install vulkan-utils
+   67  vulkan-tools --version
+   68  sudo lspci -v
+   69  lspci -k | grep -EA3 'VGA|3D|Display' output:
+   70  lspci -k | grep -EA3 'VGA|3D|Display'
+   71  sudo dmesg | grep -i amd 
+   72  lscpu
+   73  cat /proc/cpuinfo
+   74  history
+   75  lspci -knnn | grep -A3 -E 'VGA|Display|3D'
+   76  lscpu
+   77  uname -a
+   78  ls /usr/share/vulkan/icd.d/
+   79  history
+   80  sudo apt install vulkan-tools
+   81  vulkaninfo
+   82  vainfo
+   83  vkcube
+   84  vkcube++
+   85  sudo apt install GravityMark
+   86  sudo apt install gravitymark
+   87  drm-info 
+   88  Superposition
+   89  ./Superposition
+   90  sudo add-apt-repository ppa:oibaf/graphics-drivers
+   91  vulkaninfo
+   92  lspci -knnn | grep -A3 -E 'VGA|Display|3D'
+   93  sudo add-apt-repository ppa:oibaf/graphics-drivers
+   94  sudo apt update
+   95  sudo apt upgrade
+   96  apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
+   97  sudo apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
+   98  WINEPREFIX="/home/moi/.myfusion/" winecfg
+   99  WINEPREFIX="/home/moi/.myfusion/" winetricks
+  100  WINEPREFIX="/home/moi/.myfusion/" winetricks dxvk
+  101  WINEPREFIX="/home/moi/.myfusion/" winecfg
+  102  WINEPREFIX="/home/moi/.myfusion/" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+  103  kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+  104  WINEPREFIX="/home/moi/.myfusion/" winecfg
+  105  pip install --upgrade --user fusion360-streamer
+  106  sudo apt install python3-pip
+  107  pip install --upgrade --user fusion360-streamer
+  108  git --version
+  109  cd Télé*
+  110  cd Inst*
+  111  ls
+  112  cd Install
+  113  ls
+  114  ./gitInstall
+  115  cd
+  116  cd GIT
+  117  git clone https://github.com/dzervas/fusion360-streamer.git
+  118  cd fusion360-streamer
+  119  pipenv install --dev
+  120  sudo apt install pipenv
+  121  pipenv install --dev
+  122  pipenv shell
+  123  python -m fusion360_streamer
+  124  echo $QT_QPA_PLATFORM
+  125  QT_QPA_PLATFORM=wayland
+  126  echo $QT_QPA_PLATFORM
+  127  python -m fusion360_streamer
+  128  echo $XDG_SESSION_TYPE
+  129  cd GIT
+  130  cd fusion360-streamer
+  131  pipenv install --dev
+  132  pipenv shell
+  133  python -m fusion360_streamer
+  134  cd Télé*
+  135  wget --help
+  136  cd Télé*
+  137  ls
+  138  sudo balenaEtcher-1.19.21-x64.AppImage
+  139  sudo ./balenaEtcher-1.19.21-x64.AppImage
+  140  ./balenaEtcher-1.19.21-x64.AppImage
+  141  ./balenaEtcher-1.19.21-x64.AppImage --no-sandbox --disable-gpu-sandbox
+  142  sudo apt install usb-creator-gtk
+  143  echo $XDG_SESSION_TYPE
+  144  WINEPREFIX="/home/moi/.myfusion/" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+  145  WINEPREFIX="/home/moi/.myfusion/" winecfg
+  146  WINEPREFIX="/home/moi/.myfusion/" wine "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Autodesk\\Autodesk Fusion.lnk"
+  147  kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+  148  sudo snap refresh snap-store
+  149  sudo snap refresh
+  150  sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
+  151  systemctl daemon-reload
+  152  sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
+  153  sudo apt install -y flatpak
+  154  sudo apt install -y gnome-software-plugin-flatpak
+  155  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  156  wget --help
+  157  cd $HOME
+  158  ls
+  159  cd GIT
+  160  cd $HOME
+  161  WINEPREFIX=$HOME/.myfusion winecfg
+  162  WINEPREFIX=$HOME/.myfusion winefile
+  163  wget -N -P $HOME/.myfusion/drive_c/users/$USER/Downloads https://github.com/cryinkfly/Autodesk-Fusion-360-for-Linux/raw/main/files/builds/stable-branch/driver/video/dxvk/DXVK.reg
+  164  wrestool --version
+  165  wine --versino
+  166  wine --version
+  167  wine-mono --version
+  168  wine_gecko --version
+  169  winetricks --version
+  170  p7zip --version
+  171  curl --version
+  172  lib32-gnutls --version
+  173  cd télé*
+  174  cd Télé*
+  175  ls
+  176  ./fusion_installer.sh
+  177  WINEPREFIX=$HOME/.myfusion wine uninstaller --list
+  178  WINEPREFIX=$HOME/.myfusion  wine uninstaller --list
+  179  export env WINEPREFIX=$HOME/.myfusion
+  180  export env WINEDEBUG=fixme-all 
+  181  wine uninstaller --list
+  182  winetricks mono
+  183  wine uninstaller
+  184  sudo apt install wine-mono
+  185  WINEPREFIX=$HOME/.myfusion  wine uninstaller --list
+  186  kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+  187  WINEPREFIX=$HOME/.myfusion  wine uninstaller --list
+  188  WINEPREFIX=$HOME/.myfusion wine uninstaller --list
+  189  WINEDEBUG=fixme-all WINEPREFIX=$HOME/.myfusion wine uninstaller --list
+  190  WINEPREFIX=$HOME/.myfusion wine uninstaller --list
+  191  WINEDEBUG=fixme-all WINEPREFIX=$HOME/.myfusion wine uninstaller --list
+  192  WINEPREFIX=$HOME/.myfusion wine uninstaller --list
+  193  kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')
+  194  reboot
+  195  sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
+  196  sudo reboot
+  197  sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
+  198  zgrep -h " upgrade " /var/log/dpkg.log* | sort | uniq
+  199  history
+  200  history > history.txt

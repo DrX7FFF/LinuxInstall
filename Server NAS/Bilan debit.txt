@@ -1,0 +1,34 @@
+Client 	Server 	
+PC		NAS		Wifi	116 Mbits/s
+
+
+Film :
+Durée	2h21:37		8497s
+Taille 	15 158 958 450 octets	121 271 667 600 bits
+Débit nécessaire : 	14 272 292 bits/s
+					14 272 kbits/s
+Débit du film : 1 509 kbits/s
+					
+Film théorique
+	SD		3 Mbits/s
+	HD		5 Mbits/s
+	UltraHD	25 Mbits/s
+	
+Lecture du film sur le disque :
+root@HOMENAS:/srv/dev-disk-by-label-Data/Vidéos/HD# dd if="Seul sur Mars (2015) .mkv" of=/dev/null
+29607340+1 records in
+29607340+1 records out
+15158958450 bytes (15 GB, 14 GiB) copied, 422.726 s, 35.9 MB/s
+soit 288 Mbits/s
+
+Test réseau :
+[ ID] Interval           Transfer     Bandwidth
+[  4]   0.00-10.00  sec   139 MBytes   116 Mbits/sec                  sender
+[  4]   0.00-10.00  sec   139 MBytes   116 Mbits/sec                  receiver
+
+Débit théorique USB2 :
+480 Mbit/s 60 Mo/s
+
+Copie du fichier :
+17 Mo/s
+136 Mbits/s

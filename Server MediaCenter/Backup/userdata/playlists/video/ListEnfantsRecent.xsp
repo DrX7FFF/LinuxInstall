@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<smartplaylist type="movies">
+    <name>ListEnfantsRecent</name>
+    <match>all</match>
+    <rule field="path" operator="startswith">
+        <value>/media/HD1/Enfants/</value>
+    </rule>
+    <limit>25</limit>
+    <order direction="descending">dateadded</order>
+</smartplaylist>

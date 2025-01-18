@@ -1,0 +1,29 @@
+Mapping touches et souris
+### Mapping de touches/boutons souris
+
+# Connaitre si on est sur X11 ou Wayland :
+echo $XDG_SESSION_TYPE
+	ou
+loginctl show-session $(loginctl | grep "$USER" | awk '{print $1}') -p Type
+
+
+## Fonctions en vrac pour X11 :
+xmodmap
+xbindkeys
+
+fichier : xorg.conf
+
+# détecter les boutons de la souris
+xev -event mouse | grep Button --before-context=1 --after-context=2
+
+# exemple
+https://les-enovateurs.com/parametrer-bouton-de-souris-ubuntu
+
+
+## Fonctions pour Wayland
+
+# détecter les boutons de la souris
+sudo apt install wev
+wev --version
+
+

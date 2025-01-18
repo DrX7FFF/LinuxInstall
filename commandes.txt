@@ -30,6 +30,7 @@ sudo systemctl --type=service --state=running
 
 # Afficher l'heure
 timedatectl
+date
 
 # Disk Free + information si TMPFS (montage temporaire)
 df -h

@@ -1,0 +1,11 @@
+Installation CentOS
+Télécharger ISO (CentOS Linux) : https://www.centos.org/download/
+
+https://miaffo.net/installer-centos-7-et-8-pas-a-pas/
+https://quick-tutoriel.com/creer-une-cle-usb-bootable-pour-installer-la-distribution-centos/
+
+http://unetbootin.sourceforge.net/
+http://unetbootin.github.io/
+
+https://www.howtoforge.com/tutorial/centos-8-minimal-server/
+https://tutorials.kurtobando.com/install-a-ssh-in-centos-7-minimal-server-with-screenshots/

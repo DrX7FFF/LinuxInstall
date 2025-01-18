@@ -1,0 +1,142 @@
+Preparation Kodi
+Odroid N2 + 4Gb
+
+Spécifications :
+https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram-2/#
+
+Alternative	: https://www.hardkernel.com/shop/odroid-c4/
+Fournisseur : https://www.reichelt.com/
+
+Choix : https://forum.kodi.tv/showthread.php?tid=252916
+Outils MKV : https://mkvtoolnix.download/
+CoreElec : https://coreelec.org/#download
+
+Each USB 3.0 port can supply up to 900mA.	https://forum.odroid.com/viewtopic.php?t=33932
+
+
+Ambilight :
+https://discourse.coreelec.org/t/hyperion-ng-howto/8660/3
+Hyperion.ng 
+https://ambimod.jimdofree.com/mettre-en-place-une-installation-ambilight-hyperionng-hyperhdr-pc-%C2%B5pc-et-divers-elements-lumineux-partie-2-4/
+
+Case 3D :
+https://www.thingiverse.com/thing:3642102/files
+
+----------------------------------------------
+tinyMediaManager :
+${parent}
+${movie.parent}</
+
+${movieSet.title}
+
+${movie.mediaSource} : DVD
+
+${movie.video3DFormat}
+
+${- ,edition,}
+
+${parent}\${movieSet.title}\
+${title} ${- ,edition,} ${- [,movie.video3DFormat,]} (${year})
+
+https://gitlab.com/tinyMediaManager/tinyMediaManager/-/issues/919
+
+----------------------------------------------
+
+## TVRename
+https://tvrenamr.readthedocs.io/en/latest/index.html
+https://github.com/ghickman/tvrenamr/tree/master
+https://www.geeksforgeeks.org/scrape-imdb-movie-rating-and-details-using-python/
+https://github.com/leandcesar/themoviedb
+
+----------------------------------------------
+
+FORUM à voir :
+https://forum.odroid.com/viewforum.php?f=175
+
+Installation :
+SSH root EA@Adm
+	E...A...@Adm
+IP 192.168.1.102 Dynamique
+Ajouter clavier français
+Affichage en 1280x1024 24Hz
+System/Entrée/Periphériques
++ Voir les photos
+Services/Désactiver AirPlay
+CoreElec/Services/Désactiver AVAHI
+Install extensions :
+	Docker
+	LinusServer.io's Docker Add-ons
+Paramétrage des extensions :
+	The movies Database Film : en français
+	The movies Database Series : en français
+
+installtoemmc
+
+Réglage des dossiers : https://www.quadraphonicquad.com/forums/threads/kodi-how-to-access-storage-folders-from-windows-explorer-when-using-kodi-on-linux-libreelec-coreelec-etc.26972/
+
+MergerFS pour fusionnier plusieur HD : https://discourse.coreelec.org/t/trying-to-execute-mergerfs/10870
+
+	
+Problème disque USB
+https://wiki.odroid.com/odroid-n2/troubleshooting/hub_reset
+
+Intallation image Pyload (via SSH) :
+	Ancienne version
+	https://hub.docker.com/r/linuxserver/pyload
+
+	docker pull ghcr.io/linuxserver/pyload
+	docker run -d --name=pyload -e PUID=1000 -e PGID=1000 -e TZ=Europe/Paris -e UMASK=000 -p 8000:8000 -p 7227:7227 -v /storage/.config/dockers/pyload/config:/config -v /var/media/HD1:/downloads  --restart unless-stopped ghcr.io/linuxserver/pyload
+
+
+bd1efd3b1a0b   ghcr.io/linuxserver/pyload   "/init"   2 months ago   Up 3 weeks   0.0.0.0:7227->7227/tcp, :::7227->7227/tcp, 0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   pyload
+
+
+Nouvelle version
+https://github.com/linuxserver/docker-pyload-ng/
+
+
+docker pull lscr.io/linuxserver/pyload-ng:arm64v8-latest
+docker run -d --name=pyload -e PUID=1000 -e PGID=1000 -e TZ=Europe/Paris -e UMASK=000 -p 8000:8000 -p 9666:9666 -v /storage/.config/dockers/pyload/config:/config -v /var/media/HD1:/downloads  --restart unless-stopped lscr.io/linuxserver/pyload-ng:arm64v8-latest
+
+Aller sur http://192.168.1.102:8000/settings 
+General\Download
+	Maximum connections for one download: 1
+
+Extension pour chrome :
+https://chrome.google.com/webstore/detail/redirect-clicknload/hnjbnefgkiickkpfidpnlmcodicfgakk?hl=en-GB
+
+info : 
+docker restart pyload
+
+	docker stop pyload
+	docker container prune
+Pyload default password
+docker pull pyload
+docker down
+docker up -d
+docker image prune
+docker logs -f pyload
+
+Renamer :
+/storage/.kodi/userdata/mediarenamer/mediarenamer.py
+
+Methode nouvelle version :
+Télécharger image sur https://coreelec.org/#download
+Brancher clavier
+Préparer SD Card avec l'image et RUFUS
+Booter sur la SD Card sans EMMC et switch sur MMC
+Suivre les étapes d'installation
+
+Ajout Docker :
+AddOn \ Services \ Docker
+
+
+Installation sur emmc (en passant par SSH
+https://wiki.coreelec.org/coreelec:odroid
+
+Mise à jour Petitboot
+https://wiki.odroid.com/odroid-n2/os_images/petitboot#how_to_recover_or_upgrade
+
+
+Personalisation de Aeon_Nox_Silvo
+https://kodi.wiki/view/Custom_home_items/Aeon_Nox_Silvo

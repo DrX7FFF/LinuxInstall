@@ -1,0 +1,484 @@
+#MAJ :
+sudo apt -y update && sudo apt -y upgrade && sudo apt -y dist-upgrade
+sudo apt-get autoremove
+
+sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
+sudo apt autoremove
+
+docker compose pull
+docker compose down && docker compose up -d
+cat docker/nodered/mylog.txt
+// A faire qd les containers sont démarré pour purger les images inutiles
+docker image prune
+docker logs nodered
+docker exec -it nodered /bin/bash
+
+# Mise à jour package Python
+/usr/bin/python3 -m pip install --upgrade pip
+pip install --upgrade
+sudo pip3 install --upgrade
+#Lister les packages à mettre à jour
+pip list -o
+#Mise à jour de tous les packages Python
+pip freeze --local | awk -F "=" '{print "pip install -U "$1}' | sh
+
+# Sauvegarde 
+# voir G:\Mon Drive\Devel\homeserver Sauvegarde\backup.cmd
+
+Domos
+Domos150473_Bot
+5497669610:AAEyafzeMS66V6VwsmxYrFO6Iherk3G77MQ
+
+#Version :
+NodeRed
+	1.2.5	27/11/2020	OK
+	1.3.5	23/05/2021
+	2.0.6	06/10/2021
+	3.0.0	14/07/2022	OK
+	3.0.2	???			OK
+DeConz
+	06/10/2021
+		2.12.06 / 19/08/2021
+		266B0700
+	27/12/2021
+		2.12.06 / 19/08/2021
+		26720700
+	15/01/2023
+		2.20.00 / 19/09/2022
+		26780700
+	01/02/2023
+		2.20.01 / 19/09/2022
+		26780700
+	08/03/2023
+		2.21.00 / 19/09/2022
+		26780700
+	19/03/2023
+		2.21.01 / 19/09/2022
+		26780700
+	09/05/2023
+		2.22.00 / 19/09/2022
+		26780700
+	19/06/2023
+		2.22.01 / 19/09/2022
+		26780700
+	22/12/2023
+		2.25.0
+		26780700
+	21/02/2024
+		2.26.0
+		26780700
+
+Deconz Firmware
+	deCONZ_ConBeeII_0x26680700.bin.GCF	OK
+	deCONZ_ConBeeII_0x266b0700.bin.GCF	OK
+	deCONZ_ConBeeII_0x26720700.bin.GCF	OK
+	deCONZ_ConBeeII_0x26780700.bin.GCF 
+
+#NAS
+	root EA+@Ad.
+
+#MAJ firmware conbee
+	voir les vesions ici	http://deconz.dresden-elektronik.de/deconz-firmware/
+
+	docker stop deconz
+	docker run -it --rm --entrypoint "/firmware-update.sh" --privileged --cap-add=ALL -v /dev:/dev -v /lib/modules:/lib/modules -v /sys:/sys marthoc/deconz:stable
+	/dev/ttyACM0
+	deCONZ_ConBeeII_0x26580700.bin.GCF
+	docker start deconz
+
+	https://presentationdeconz.wordpress.com/mettre-a-jour-le-firmware-de-la-conbee-ou-deconz/
+	https://github.com/marthoc/docker-deconz
+	https://phoscon.de/en/conbee2/install#docker
+	https://github.com/dresden-elektronik/deconz-rest-plugin/releases
+	https://github.com/marthoc/docker-deconz/issues/236
+	https://github.com/marthoc/docker-deconz/issues/272
+	https://presentationdeconz.wordpress.com/ca-marche-pas/
+
+### Installation ###
+### Doc
+### https://wiki.friendlyelec.com/wiki/index.php/NanoPi_NEO2
+### https://www.armbian.com/nanopi-neo-2/
+### https://www.debian.org/releases/index.fr.html
+### Debian images :
+### https://fi.mirror.armbian.de/archive/nanopineo2/archive/
+### ou passage à
+### https://dietpi.com/docs/
+### https://dietpi.com/docs/hardware/#nanopi-series-friendlyarm
+ _   _ ____  _   _   _              ____
+| \ | |  _ \(_) | \ | | ___  ___   |___ \ 
+|  \| | |_) | | |  \| |/ _ \/ _ \    __) |
+| |\  |  __/| | | |\  |  __/ (_) |  / __/ 
+|_| \_|_|   |_| |_| \_|\___|\___/  |_____|
+                                          
+Welcome to Armbian 23.02.2 Buster with Linux 5.15.93-sunxi64
+
+No end-user support: untested automated build & unsupported (buster) userspace!
+
+System load:   2%           	Up time:       5:55	
+Memory usage:  56% of 482M   	Zram usage:    66% of 241M   	IP:	       172.18.0.1 172.17.0.1 192.168.1.100
+CPU temp:      57°C           	Usage of /:    57% of 15G
+
+
+### https://raspberry-pi.fr/raspberry-pi-sans-ecran-sans-clavier/
+# image : Raspbian Buster Lite avec Win32DiskImager
+https://raspberry-pi.fr/telechargements/
+## ajouter fichier à la racine de la partition boot
+# ssh
+(vide)
+# wpa_supplicant.conf
+country=fr
+update_config=1
+ctrl_interface=/var/run/wpa_supplicant
+
+network={
+ scan_ssid=1
+ ssid="Mackenzie-5GHz"
+ psk=""
+}
+
+# 1e démarrage
+ssh pi raspberry
+
+# configuration 
+sudo raspi-config
+	Expand partition
+	activer ssh
+	change hostname : homeserver
+	change localisation : fr_FR UTF8
+	change timezone : Europe Paris
+	passage memoire video de 64 a 16
+	reboot
+
+# mise à jour
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
+sudo apt-get autoremove
+
+### mise à jour du kernel 
+# http://www.tropfacile.net/doku.php/raspberry-pi/comment-mettre-a-jour-le-firmware-du-raspberry
+# version actuel du firmware
+uname -a
+
+# Mise à jour du firmware
+	# installé par défaut maintenant
+	sudo apt-get install rpi-update
+	# ou
+	sudo apt-get install ca-certificates git-core
+	sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
+
+sudo rpi-update
+sudo reboot
+#####
+
+# mot de passe par défaut
+sudo adduser adpihome
+	#EA+@Adm
+for GROUP in $(groups pi | sed 's/.*:\spi//'); do sudo adduser adpihome $GROUP; done
+sudo visudo
+	#ajouter à la fin sans tabulation
+	adpihome ALL=(ALL) NOPASSWD: ALL
+
+logout
+login
+sudo deluser --remove-home pi
+
+## désactiver le Wifi et Bluetooth https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
+sudo nano /boot/config.txt
+	#ajouter :
+# Disable Wifi
+dtoverlay=disable-wifi
+# Disable Bluetooth
+dtoverlay=disable-bt
+
+/*
+	# ip fixe
+	# DNS de Google : 8.8.4.4 8.8.8.8
+	sudo nano /etc/dhcpcd.conf
+
+	interface eth0
+	static ip_address=192.168.1.111/24
+	static routers=192.168.1.1
+	static domain_name_servers=8.8.4.4 8.8.8.8
+		ou
+interface wlan0
+static ip_address=192.168.1.101/24
+static routers=192.168.1.1
+static domain_name_servers=1.1.1.1 1.0.0.1 8.8.4.4 8.8.8.8
+*/
+ifconfig
+# si IP V6 désactiver IPV6
+sudo nano /etc/sysctl.conf
+
+ajouter:
+	net.ipv6.conf.all.disable_ipv6 = 1
+
+sudo reboot
+
+/*
+	## déjà fait via la partition boot
+	### Installation Wifi
+	# http://www.yadoms.com/blog/2017/05/22/tuto-3-activer-le-wifi-sur-une-raspberry-pi-3/
+	sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+	#Ajoute :
+	network={
+	 scan_ssid=1
+	 ssid="Mackenzie-5GHz"
+	 psk=""
+	}
+
+	sudo wpa_cli reconfigure
+	sudo reboot
+	# Controler :
+	ifconfig wlan0
+
+		# Afficher les réseaux Wifi
+		sudo iwlist wlan0 scan
+		# Créer la clé
+		wpa_passphrase "testing" "testingPassword"
+*/
+
+### Installation Docker 
+# https://projetsdiy.fr/tester-logiciels-domotique-raspberry-pi-docker/#Installer_Docker
+# https://www.framboise314.fr/installer-docker-sur-raspberry-pi/
+##### curl -sSL get.docker.com | sh
+##### Remplacé mais non testé par :
+curl -fsSL get.docker.com | sh
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+sudo reboot
+
+## Purge auto du log
+# https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container
+sudo nano /etc/docker/daemon.json
+	#ajout ou modif :
+	{
+	  "log-driver": "local",
+	  "log-opts": {"max-size": "10m", "max-file": "3"}
+	}
+#redémarrage du service
+sudo systemctl reload docker
+
+### Installation Docker Compose
+## Ancienne version/methode
+sudo apt-get install python3-distutils python3-dev libffi-dev libssl-dev
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+sudo python3 get-pip.py
+sudo pip3 install docker-compose
+
+sudo pip3 uninstall docker-compose
+
+##Nouvelle version :
+sudo apt-get install docker-compose-plugin
+
+
+
+#rapatrier les dossiers depuis commande dos
+scp -p adpihome@192.168.1.101:docker-compose.yml .
+scp -r -p adpihome@192.168.1.101:docker ~
+## scp -r -p adpihome@192.168.1.101:.node-red ~/docker
+## mv ~/docker/.node-red ~/docker/nodered
+## scp -r -p adpihome@192.168.1.101:/opt/deconz /docker
+
+
+#https://hub.docker.com/search?q=&type=image
+#Memo docker
+docker ps
+docker container ls
+docker attach nodered
+docker attach deconz
+docker pull nodered/node-red && docker restart nodered
+docker pull marthoc/deconz && docker restart deconz
+docker logs [container name]
+#Purge totale
+docker system prune 
+
+docker-compose config
+docker-compose pull
+docker-compose up -d
+docker-compose down
+nano docker-compose.yml
+
+# voir les images :
+docker images
+# Purge des images non utilisée
+docker image prune -a
+
+## NodeRed
+## Tout est ICI !!!
+## https://nodered.org/docs/getting-started/docker
+docker pull nodered/node-red
+
+//a revoir : pas utilisé
+// docker volume create --name node_red_user_data
+//pour récupérer l'ID du user 
+id $user 
+//création d'un dossier pour monter les data à l'extérieur (à executer dans le dossier ~)
+mkdir .node-red
+sudo chown -R 1000:1000 ".npm"
+//pour lister
+ls -nal
+#docker volume create nodered-vol
+
+# nom de l'image : https://github.com/node-red/node-red-docker/blob/master/README.md
+#docker run --restart unless-stopped -d -p 1880:1880 -p 8888:8888/udp --name nodered -v ~/.node-red:/data -e TZ=Europe/Paris nodered/node-red
+
+## Chemin des données utilisateur voir l'option "volume" du docker compose :
+##  - ~/docker/nodered:/data
+##	Ce qui veut dire /data = ~/docker/nodered
+## Dans node red, utiliser le chemin : /data/xxx pour retrouver le dossier xxx dans ~/docker/nodered
+
+
+## deConz
+## https://hub.docker.com/r/marthoc/deconz
+## https://github.com/marthoc/docker-deconz	## Explication pour mise à jour du firmware
+## https://presentationdeconz.wordpress.com/
+## https://presentationdeconz.wordpress.com/premier-contact/
+## https://phoscon.de/en/conbee2/install
+## VNC : 5900 changeme
+
+mkdir .deconz
+sudo usermod -a -G dialout $USER
+docker pull marthoc/deconz:stable
+
+
+## PiHole
+## https://mediacenterz.com/comment-executer-pihole-dans-docker-sur-ubuntu-avec-et-sans-proxy-inverse/
+https://hub.docker.com/r/pihole/pihole
+
+## Mosquitto
+# voir docker compose fichier
+# docker run -it -p 1883:1883 -p 9001:9001 -v mosquitto.conf:/mosquitto/config/mosquitto.conf 										eclipse-mosquitto
+# modifier fichier de config avec :
+istener 1883
+allow_anonymous true
+
+
+
+## OpenVPN
+## https://hub.docker.com/r/ixdotai/openvpn
+# initialisation
+docker run -v ~/docker/ovpn:/etc/openvpn --log-driver=none --rm registry.gitlab.com/ix.ai/openvpn ovpn_genconfig -u udp://unwelc0me.ddns.net
+docker run -v ~/docker/ovpn:/etc/openvpn --log-driver=none --rm -it registry.gitlab.com/ix.ai/openvpn ovpn_initpki
+	Pass : EA@Adm
+	Common Name : Home
+## Mis à jou dans le Compose
+#	docker run -v ~/docker/ovpn:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN registry.gitlab.com/ix.ai/openvpn
+
+docker run -v ~/docker/ovpn:/etc/openvpn --log-driver=none --rm -it registry.gitlab.com/ix.ai/openvpn easyrsa build-client-full Vincent
+docker run -v ~/docker/ovpn:/etc/openvpn --log-driver=none --rm registry.gitlab.com/ix.ai/openvpn ovpn_getclient Vincent > ~/ovpn/vincent.ovpn
+
+
+## Rapsbian VNC
+mkdir .vnc
+docker pull razikus/docker-raspbian-novnc
+docker run -d -p 80:8080 razikus/docker-raspbian-novnc:xfce4
+docker run -d -p 8080:8080 -e X11PASSWD=password --name novnc -v ~/.vnc razikus/docker-raspbian-novnc:xfce4
+
+#Mise à jour
+	docker pull razikus/docker-raspbian-novnc
+	docker stop novnc
+	docker start novnc
+
+
+## reconnaissance personne 
+https://www.framboise314.fr/i-a-realisez-un-systeme-de-reconnaissance-dobjets-avec-raspberry-pi/
+
+
+# Monter la partition de DATA
+
+# installer le driver "exfat"
+sudo apt-get install exfat-fuse
+sudo apt-get install ntfs-3g
+
+# créer un dossier
+sudo mkdir /media/DATA
+sudo chmod 777 -R /media/DATA
+sudo mkdir /media/system
+sudo chmod 777 -R /media/system
+
+# monter automatiquement 
+sudo nano /etc/fstab
+UUID=C665-EC5C	/media/DATA     exfat   defaults,auto,umask=000,users,rw    0       0
+UUID=75c6c216-319e-4360-a949-9064894ca3ed /media/system auto defaults,auto 	0		0
+
+#UUID=C665-EC5C /media/DATA     exfat   noatime,auto,umask=000,users,rw    0   $
+#UUID=75c6c216-319e-4360-a949-9064894ca3ed /media/system ext4 defaults,auto    $
+
+/dev/sda1 /media/DATA ext4   defaults   0   3
+
+# Recharger le "fstab"
+sudo mount -a
+
+# installer analyse d'utilisation de fichier
+apt-get install lsof
+
+### SAMBA
+# installation et paramétrage samba
+sudo apt-get install samba
+	# Vérifier l'installation
+	sudo systemctl status nmbd
+# Démarrage automatique du deamon
+sudo systemctl start nmbd
+# créer une copie de sauvegarde de la configuration d'origine
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.origin
+
+# modification de la configuration
+sudo nano /etc/samba/smb.conf
+[global]
+# desactiver les imprimantes
+load printers = no
+printing = bsd
+printcap name = /dev/null
+disable spoolss = yes
+
+# Paramétrage spécifique utilisateur section [homes]
+[homes]
+   browseable = no
+   read only = no
+   create mask = 0775
+   directory mask = 0775
+
+# Ajout des droits à 
+sudo smbpasswd -a adpihome
+
+# Redémarrage du service
+sudo systemctl restart smbd.service
+
+###
+# paramétrage miniDLNA
+sudo apt-get install minidlna 
+sudo cp /etc/minidlna.conf /etc/minidlna.conf.origin
+sudo nano /etc/minidlna.conf
+	media_dir=V,/media/HardDrive/Media/Video
+	 
+	log_dir=/var/log
+
+sudo systemctl restart minidlna.service
+sudo service minidlna force-reload
+sudo systemctl stop minidlna.service
+# rescan
+		# sudo minidlnad -R
+		# sudo service minidlna restart
+sudo service minidlna force-reload
+
+
+# Suppression du SWAP
+sudo dphys-swapfile uninstall
+sudo apt-get remove dphys-swapfile
+sudo rm -f /var/swap
+
+# Suppression de la détection d'USB et montage auto
+sudo apt-get remove usbmount --purge
+
+# installation FTP
+sudo apt-get install vsftpd
+cp /etc/vsftpd.conf /etc/vsftpd.conf.origin
+sudo nano /etc/vsftpd.conf
+
+
+##### ISSUES ######
+ERROR: for nodered  Cannot start service nodered: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: unable to apply apparmor profile: apparmor failed to apply profile: write /proc/self/attr/apparmor/exec: no such file or directory: unknown
+ERROR: Encountered errors while bringing up the project.
+
+# https://github.com/docker/for-linux/issues/1199
+sudo apt install apparmor
+sudo reboot

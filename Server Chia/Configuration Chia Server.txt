@@ -1,0 +1,99 @@
+# Plots :
+148 plots of size: 14.650 TiB
+
+# tuto : 
+	https://www.chiablockchain.com/2021/05/19/how-to-move-to-hpool/
+	https://blog.cyril.by/fr/free-speech/tutorial-install-hpool
+	https://www.chiablockchain.com/2021/06/16/add-hpool-miner-as-a-service/
+	
+# Ins CentOS
+https://www.how2shout.com/linux/download-install-centos-8-minimal-server-iso/
+
+## Monter les HD
+##Information sur les HD
+/dev/sda1: UUID="00c95148-1406-481c-977b-910b3bc066cd" TYPE="ext4" PARTUUID="2529c758-01"
+/dev/sda2: LABEL="data0" UUID="680307A465E13FDA" TYPE="ntfs" PTTYPE="dos" PARTUUID="2529c758-02"
+/dev/sdb1: LABEL="data1" UUID="20E8A1A7E8A17BA2" TYPE="ntfs" PARTUUID="a71cf7d2-01"
+/dev/sdc1: LABEL="data2" UUID="46A9B5D108F4C47E" TYPE="ntfs" PTTYPE="dos" PARTUUID="471ab5e5-01"
+/dev/sdd1: LABEL="data3" UUID="E872A75072A72274" TYPE="ntfs" PARTUUID="1142d589-01"
+/dev/sde1: LABEL="dataExt0" UUID="96A6EFF3A6EFD1B3" TYPE="ntfs" PARTUUID="39bdc1d9-01"
+/dev/sdf1: LABEL="Elements" UUID="86C8F357C8F34449" TYPE="ntfs" PTTYPE="atari" PARTLABEL="Elements" PARTUUID="3b5b09c1-38c3-4f8f-8a91-2c2a110d2a62"
+
+# Compléter /etc/fstab avec 
+# <file system>             <mount point>  <type>  <options>  <dump>  <pass>
+UUID=00c95148-1406-481c-977b-910b3bc066cd /              ext4    defaults   0 1
+UUID=680307A465E13FDA /media/chuser/data0 ntfs-3g rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 0 0
+UUID=20E8A1A7E8A17BA2 /media/chuser/data1 ntfs-3g rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 0 0
+UUID=46A9B5D108F4C47E /media/chuser/data2 ntfs-3g rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 0 0
+UUID=E872A75072A72274 /media/chuser/data3 ntfs-3g rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 0 0
+UUID=96A6EFF3A6EFD1B3 /media/chuser/dataExt0 ntfs-3g rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 0 0
+UUID=86C8F357C8F34449 /media/chuser/Elements ntfs-3g rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 0 0
+
+# Installation ou mise à jour HPOOL
+# trouver la version sur https://github.com/hpool-dev/chia-miner/releases
+sudo systemctl stop hpool
+wget https://github.com/hpool-dev/chia-miner/releases/download/1.5.5/HPool-Miner-chia-og-v1.5.5-2-linux.zip
+unzip -oj  HPool-Miner-chia-og-v1.5.5-2-linux.zip linux/hpool-miner-chia-linux-amd64
+sudo systemctl start hpool
+
+#### Attention : n'installer que le service HPOOL, le miner chia est inutile
+		## Information sur : https://pimylifeup.com/raspberry-pi-chia/
+		# Création d'un service pour Chia
+		sudo nano /etc/systemd/system/chiafarmer.service
+
+		[Unit]
+		Description=Chia Farmer
+		Wants=network-online.target
+		After=network.target network-online.target
+		StartLimitIntervalSec=0
+
+		[Service]
+		Type=forking
+		Restart=always
+		RestartSec=1
+		User=chuser
+
+		Environment=PATH=/home/chuser/chia-blockchain/venv/bin:${PATH}
+		ExecStart=/usr/bin/env chia start farmer -r
+		ExecStop=/usr/bin/env chia stop all -d
+
+		[Install]
+		WantedBy=multi-user.target
+
+########
+sudo nano /etc/systemd/system/hpool.service
+
+[Unit]
+Description=Farm Chia using HPOOL
+Wants=network-online.target
+After=network.target network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Restart=always
+RestartSec=1
+User=chuser
+
+WorkingDirectory=/home/chuser/hpool
+ExecStart=/home/chuser/hpool/hpool-miner-chia-linux-amd64
+
+[Install]
+WantedBy=default.target
+
+# Activation du service
+		sudo systemctl enable chiafarmer
+		sudo systemctl disable chiafarmer
+sudo systemctl enable hpool
+
+# Complément :
+		sudo systemctl start chiafarmer			#Démarrage du service
+		sudo systemctl stop chiafarmer			#Démarrage du service
+		sudo systemctl status chiafarmer		#Status du service
+sudo systemctl start hpool			#Démarrage du service
+sudo systemctl status hpool
+
+		# Controler l'état du deamon
+		cd ~/chia-blockchain/
+		. ./activate
+		chia show -s
+		chia farm summary

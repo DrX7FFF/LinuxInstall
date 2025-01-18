@@ -1,0 +1,236 @@
+#Docker
+#images https://hub.docker.com/u/arm32v7/
+#https://hub.docker.com/r/arm32v7/python
+
+#Paramétrage NodeRed
+#https://nodered.org/docs/user-guide/runtime/configuration#dashboard
+
+Organisation des dossiers sous Linux
+http://www.linux-france.org/article/sys/fichiers/fichiers-2.html
+
+#info CPU
+#ARM32V7 pour PI3 B+
+cat /proc/cpuinfo
+lscpu
+
+#  version du Kernel
+uname -a
+
+#recherche fichier
+sudo find -iname "fichier.ext"
+
+#info Debian (ARMBian)
+cat /etc/debian_version
+
+#information de fonctionnement
+uptime
+	-> [heure actuelle] up [Durée de fonctionnement] , [Nombre d'utilisateurs] [moyenne 1min][moyenne 5min][moyenne 15min]
+	(Moyenne doit être inférieur à 1)
+
+#information température	#Doit être inférieur à 85°C
+vcgencmd measure_temp
+	# 37,6°C	avec ventilateur
+
+#divers
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
+sudo apt-get autoremove
+ifconfig
+cat /etc/resolv.conf			# Pour afficher la liste des serveur DNS
+nslookup <nom_de_domaine>		# Pour résoudre un nom DNS
+reboot
+halt
+nano
+sudo passwd root
+rm -rf <folder>					# supprime un dossier récursif sans validation
+
+#Imdb // information sur les films
+	#Ne fonctionne pas ...
+	# https://zoomadmin.com/HowToInstall/UbuntuPackage/imdb-tools
+	sudo apt-get install imdb-tools
+	imdb-get
+#Via Filebot
+#https://www.filebot.net/forums/viewtopic.php?t=6028
+#Déclaration du package :
+## STOP Payant
+bash -xu <<< "$(curl -fsSL https://raw.githubusercontent.com/filebot/plugins/master/installer/deb.sh)"
+
+
+#Iperf
+sudo apt-get install iperf3 -y
+sudo iperf3 -s
+sudo iperf3 -c [IPServer]
+
+#Docker 
+
+# installation de modules
+sudo apt-get install python-requests
+sudo apt-get install exfat-utils -y
+sudo apt-get install exfat-fuse
+
+## Samba sur Pi
+## https://elinux.org/R-Pi_NAS
+## https://www.raspberrypi.org/forums/viewtopic.php?f=36&t=13695&start=125
+## EXT FAT : https://www.raspberrypi.org/forums/viewtopic.php?t=17402&p=342228
+
+sudo mount -t cifs //BBOX/Media_Vincen/mntRPI /mnt/bbox
+sudo mount -t cifs //192.168.1.33/Users/Public /mnt/portable
+
+	sudo mkdir toto
+	sudo chown 1000:1000 toto
+	sudo mount -t cifs -o uid=1000,gid=1000 //192.168.1.24/Share ~/.node-red/toto
+	sudo umount -l ~/.node-red/toto
+
+#Copier fichier depuis commande DOS
+scp -r -p 	//-r est pour la copie récursive //-p préservera les temps de modification et les attributs initiaux du fichier
+scp -r -p adpihome@192.168.1.101:.node-red /destination/node-red
+scp adpihome@192.168.1.100:docker/nodered/measure*.csv
+
+cd /mnt/bbox
+python test.py
+
+# Liste des disk avec information de nom et de type
+sudo blkid		#Liste des disques
+sudo fdisk -l	#Détails des disques
+sudo lsblk		#Liste des disques et partitions
+
+# Afficher le taux d'utilisation d'un disque
+df -h
+sudo du -hx / | sort -h
+
+# Afficher les fichiers modifié depuis 60 min
+find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -60
+
+# Editer un disk
+sudo cfdisk /dev/sda
+
+# Formater disk en ext4
+sudo mkfs.ext4 /dev/sda2
+
+# la liste des périphériques branchés en USB
+sudo lsusb
+
+#### Partage de fichier réseau, besoin de CIFS et SMB3 (CIFS : protocol de base, SMB3 est la dernière version)
+# tuto complet https://www.linode.com/docs/guides/linux-mount-smb-share/
+# vérifier version cifs-utils
+apt-cache policy cifs-utils
+
+# vérifier les partages disponibles
+smbclient -L 192.168.1.102
+
+# créer un dossier locla pour lier le lecteur réseau
+sudo mkdir /mnt/mediacenter
+sudo chmod 777 -R /mnt/mediacenter
+sudo mount -t cifs //192.168.1.102/hd1  /mnt/mediacenter -o guest,dir_mode=0777
+	sudo umount /mnt/mediacenter
+
+# monter une partition
+sudo mount -t auto /dev/sda1 /media/DATA
+sudo cat /etc/mtab				# Affichage des montages courants
+sudo nano /etc/fstab			# monter automatiquement. Recopier les lignes de mtab
+
+# affiche les montages en cours
+df -h 
+sudo mount -l
+
+/dev/sda1       /media/HD1      auto    noatime,nofail    0       0
+LABEL=SAMSUNG   /media/HD2      auto    noatime,nofail    0       0
+LABEL=Data      /media/DATA     exfat   noatime,nofail,umask=0    0       0
+LABEL=Data      /media/DATA     exfat   defaults,auto,umask=000,users,rw    0       0
+
+http://askubuntu.com/questions/113733/how-do-i-correctly-mount-a-ntfs-partition-in-etc-fstab
+http://lea-linux.org/documentations/Fstab
+https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=42957
+
+#Lubuntu accès console
+CTRL+ALT+F1 ou CTRL+ALT+F4
+
+# Cloner disque dur (Par paquet de 100Mo)
+sudo dd if=/dev/sda of=/dev/sdb bs=100M
+
+https://www.malekal.com/dd-sur-linux-clone-sauvegarde-et-copie-de-partition-de-disque-ssd/
+
+# paramétrage Samba
+sudo nano /etc/samba/smb.conf
+
+	[global]
+	load printers = no
+	printing = bsd
+	printcap name = /dev/null
+	disable spoolss = yes
+	
+	[DATA]
+	comment = Disque dur
+	path = /media/DATA
+	read-only = no
+    browsable = yes
+	writable = yes
+	guest ok = yes
+	guest only = yes
+	create mode = 0777
+	directory mode = 0777
+	;share modes = yes
+
+;[HomeConifg]
+;   comment = Configuration utilisateur
+;   path = /home/adpihome
+;   browsable = yes
+;   read-only = no
+;   writable = yes
+;   guest ok = yes
+;   guest only = yes
+;   create mode = 0777
+;   directory mode = 0777
+;   share modes = yes
+
+
+
+	;[HD2]
+	;comment = Disque dur 2
+	;path = /media/HD2
+	;writable = yes
+	;guest ok = yes
+	;#guest only = yes
+	;#create mode = 0777
+	;#directory mode = 0777
+	;share modes = yes
+
+# Gestion des services
+# voir : https://www.tutos.eu/3593
+
+
+#optimisation
+http://www.pihomeserver.fr/2013/06/17/raspberry-pi-home-server-techniques-doptimisation-de-votre-systeme/
+	
+
+sudo systemctl restart smbd.service
+
+sudo nano /etc/minidlna.conf
+	# Change the Media Dir's to point to the external hard drive, obviously change these to match your directory layout
+	media_dir=A,/media/HardDrive/Media/Music
+	media_dir=V,/media/HardDrive/Media/Video
+	media_dir=P,/media/HardDrive/Media/Photos
+
+	# Change db_dir so that the database is saved across reboots
+	db_dir=/home/pi/.minidlna
+	 
+
+
+# serveur ftp
+sudo apt-get install vsftpd
+sudo nano /etc/vsftpd.conf
+anon_root=/media/DATA
+sudo systemctl restart vsftpd.service
+
+# désinstaller  d'abord lister les dépendances
+dpkg --list | grep {nom_du_package}
+sudo apt-get remove {nom_du_package}
+#Lister les packages
+apt-mark showmanual 
+apt-mark showmanual | grep {filtre}
+
+
+
+# Renommer utilisateur PI
+http://raspberrypi.stackexchange.com/questions/36168/how-to-create-new-user-in-raspberry-pi-who-has-equal-privileges-as-default-user
+https://www.modmypi.com/blog/how-to-add-new-users-and-add-users-to-groups
+http://unixetc.co.uk/2016/01/07/how-to-rename-the-default-raspberry-pi-user/

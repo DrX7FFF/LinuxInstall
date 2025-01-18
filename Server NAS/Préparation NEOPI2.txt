@@ -1,0 +1,58 @@
+Tuto
+https://tomono.tokyo/2020/05/02/8312/
+
+Image Armbian Buster (Buster = base debian / Debian base de OMV)
+Debian 10 (Buster) or Ubuntu 20.04 (Focal)
+Debian considéré plus stable
+
+Test avec la version minimal
+https://www.armbian.com/nanopi-neo-2/#kernels-archive-all
+
+Flasher image sur SD avec Win32DiskImager
+
+Booter avec SD
+Default password 1234
+Changement pwd Root EA+@
+Création adpihome pwd EA+@
+Reboot
+
+# mise à jour
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
+sudo apt-get autoremove
+
+#configuration
+# Lire : https://docs.armbian.com/User-Guide_Getting-Started/#how-to-install-to-emmc-nand-sata-usb
+dd if=/dev/zero of=/dev/mmcblk0p1 bs=1024 seek=8 count=1
+
+sudo armbian-config
+	change timezone
+	change hostname	: homenas
+	change localisation : fr_FR UTF8
+	ip : 
+	3nd party application :
+		Softy :
+			OMV
+
+// Dans OMV
+# ip fixe
+# DNS de Google : 8.8.4.4 8.8.8.8
+sudo nano /etc/dhcpcd.conf
+
+interface eth0
+static ip_address=192.168.1.110/24
+static routers=192.168.1.1
+static domain_name_servers=8.8.4.4 8.8.8.8
+
+
+// Masquer les services :
+# https://forum.openmediavault.org/index.php?thread/31878-service-discovery-on-omv-5/
+sudo nano /etc/default/openmediavault
+OMV_SSHD_ZEROCONF_ENABLED="NO"
+OMV_NFSD_ZEROCONF_ENABLED="NO"
+OMV_SAMBA_ZEROCONF_ENABLED="NO"
+
+sudo omv-salt stage run prepare
+sudo omv-salt deploy run avahi
+
+# Message accueil
+. /etc/update-motd.d/30-armbian-sysinfo

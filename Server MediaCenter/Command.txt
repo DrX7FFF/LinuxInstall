@@ -1,0 +1,78 @@
+ssh root@192.168.1.102
+
+
+# restart pyload
+docker restart pyload
+
+# renamer
+/storage/.kodi/userdata/mediarenamer/mediarenamer.py
+
+# Docker pyload
+docker run -d \
+--name=pyload \
+-e PUID=1000 \
+-e PGID=1000 \
+-e TZ=Europe/Paris \
+-e UMASK=000 \
+-p 8000:8000 \
+-p 9666:9666 \
+-v /storage/.config/dockers/pyload/config:/config \
+-v /var/media/HD1:/downloads  \
+--restart unless-stopped \
+lscr.io/linuxserver/pyload-ng:arm64v8-latest
+
+
+
+
+# Docker Glances
+
+utilisation 
+9,2	1,9	90.3M	68.3M	19488	root	00:00:07	6	0	S	0	0	python3 -m glances -w
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND 
+20543 root      20   0   88240  69040  14276 S   0.6   1.8   0:05.82 python3  --disable-webui 
+21047 root      20   0   92004  67864  12208 S  14.2   1.8   0:03.96 python3  (avec webui)
+
+docker pull --platform linux/arm64 nicolargo/glances:latest
+
+
+# Version Web UI
+docker run -d \
+--name=glances \
+-p 61208-61209:61208-61209 \
+-e GLANCES_OPT="-w --disable-webui" \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock:ro \
+--pid host \
+--restart=unless-stopped \
+--platform linux/arm64 \
+nicolargo/glances:latest
+
+docker run -d \
+--name=glances \
+-p 61208-61209:61208-61209 \
+-e GLANCES_OPT="-w" \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock:ro \
+--pid host \
+--restart=unless-stopped \
+--platform linux/arm64 \
+nicolargo/glances:latest
+
+# Version ChatGPT
+docker run -d \
+--name=glances \
+--restart=unless-stopped \
+-p 61208:61208 \
+--pid host \
+nicolargo/glances:latest
+
+
+# Version Console
+docker run --rm \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock:ro \
+--pid host \
+--network host \
+-it \
+nicolargo/glances:latest

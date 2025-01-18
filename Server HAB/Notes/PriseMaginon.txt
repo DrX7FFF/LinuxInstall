@@ -1,0 +1,54 @@
+
+http 8080
+https 443
+/home/pi/domoticz
+
+Documentation constructeur :
+http://www.maginon.com/website/index.php?eID=pi_dl&urn=urn%3Adocl%3API%3ACustItemAbstractBranded_818%3AMaginon%2520Smart-Plug-98x148_FR.pdf
+
+URL Par défaut
+http://10.10.10.254/rd.asp
+
+
+Compte par défaut
+admin
+admin
+
+NoIP secret question do nothing
+
+Lire puissance en commande Telnet :
+GetInfo W
+GetInfo I
+GetInfo V
+GetInfo E
+
+http://admin:admin@192.168.1.4/goform/SystemCommand?command=GetInfo+E
+http://admin:admin@192.168.1.4/goform/SystemCommand?command=GetInfo+W
+http://admin:admin@192.168.1.4/goform/SystemCommand?command=GpioForCrond+0
+I	10000
+V	1000
+W	100
+E	1000
+
+$01E00 026017	26,017 kW/h
+$01W00 001165	11,65W
+$01I00 001899	 0.1899 A
+$01V00 227231	227.231 V
+$01W00 002360	 23.60  W
+$01I00 001631	  163.1 mA
+$01W00 001688
+
+
+
+Désactiver Wifi AP
+Sur la page rd.asp 
+	"Administration" 
+		"System command"
+		entre cette commande :
+	ifconfig ra0 down
+	
+http://192.168.1.41/login.cgi?lu=admin&lp=pw
+
+http://admin:pw@192.168.1.41/login.cgi?lu=admin&lp=pw	
+http://admin:pw@192.168.1.41/?xr1=1
+http://admin:pw@mxboard/?xr1=1

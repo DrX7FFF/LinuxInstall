@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<smartplaylist type="movies">
+    <name>ListAnimesEncours</name>
+    <match>all</match>
+    <rule field="path" operator="startswith">
+        <value>/media/HD1/Animes/</value>
+    </rule>
+    <rule field="inprogress" operator="true" />
+</smartplaylist>
