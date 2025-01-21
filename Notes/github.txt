@@ -1,0 +1,9 @@
+I found a way to get the latest with the raw URL. 
+You will need your commit hash of the file version you want. 
+Then simply use the following format: 
+raw_url = "https://raw.githubusercontent.com/{username}/{repository}/{commit hash}/{file_path}?v=1".
+In my case I am fetching the commit hash on every push so I always have the latest commit hash, thus I download the latest file version.
+
+1 reply
+Thanks. For anyone wondering, you can fetch latest commit hash by calling GET https://api.github.com/repos/:user/:repo/branches/:branchName
+
