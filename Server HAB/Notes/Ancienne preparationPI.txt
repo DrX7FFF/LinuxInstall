@@ -27,7 +27,7 @@ pip freeze --local | awk -F "=" '{print "pip install -U "$1}' | sh
 
 Domos
 Domos150473_Bot
-5497669610:AAEyafzeMS66V6VwsmxYrFO6Iherk3G77MQ
+
 
 #Version :
 NodeRed
