@@ -87,6 +87,11 @@ Relancer la copie de la conf de deconz :
 sudo systemctl restart deconzramcopy.service
 ```
 
+Rendre les scripts exécutables :
+```
+chmod +x ~/docker/nodered/scripts/*
+```
+
 Démarrer les containers :
 ```
 docker compose up -d
