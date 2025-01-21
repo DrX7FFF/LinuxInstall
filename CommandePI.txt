@@ -19,6 +19,14 @@ uname -a
 #recherche fichier
 sudo find -iname "fichier.ext"
 
+# Type et verson distribution
+# https://www.malekal.com/comment-connaitre-version-linux/
+cat /etc/lsb-release
+# pour CoreElec
+# https://discourse.coreelec.org/t/display-info/8425/5
+dispinfo
+/storage/.kodi/userdata/disp_cap
+
 #info Debian (ARMBian)
 cat /etc/debian_version
 
