@@ -12,9 +12,16 @@ apt info {package Name}
 chmod +x *
 
 # information charge CPU + uptime
+# https://linux.die.net/man/5/proc
 uptime
 cat /proc/loadavg
+cat /proc/uptime
+cat /proc/meminfo
+https://www.baeldung.com/linux/proc-meminfo
 
+# AWK
+https://www.funix.org/fr/unix/awk.htm
+la fonction read permet une version plus simple de récupérer les informations mais ne permet pas de faire de traitement comme des calculs
 
 ## version bureau
 echo $XDG_SESSION_TYPE

@@ -1,0 +1,19 @@
+La différence principale entre /usr/bin et /usr/local/bin réside dans leur usage prévu et la manière dont les fichiers y sont gérés. Voici un résumé :
+
+/usr/bin
+Usage principal : Contient les programmes standard fournis par la distribution Linux et gérés par le système de paquets (comme apt, dnf, ou yum).
+Géré par : Le gestionnaire de paquets du système. Les fichiers peuvent être remplacés ou supprimés lors des mises à jour du système.
+Ne pas utiliser pour : Des scripts ou programmes que tu crées manuellement.
+Exemple de contenu : Commandes comme ls, cp, grep.
+/usr/local/bin
+Usage principal : Répertoire destiné aux programmes installés manuellement par l'administrateur ou créés localement.
+Géré par toi : Le système ne touche pas à ce répertoire lors des mises à jour.
+Idéal pour : Tes scripts ou programmes personnalisés. Ces fichiers prennent généralement la priorité sur ceux de /usr/bin dans le PATH.
+Exemple de contenu : Tes scripts Bash, ou des programmes compilés manuellement.
+Résumé des différences
+Aspect	/usr/bin	/usr/local/bin
+Gestionnaire	Distribution Linux	Administrateur utilisateur
+Mises à jour système	Modifie son contenu	Non affecté
+Usage prévu	Logiciels standards	Logiciels personnalisés
+Recommandation :
+Utilise /usr/local/bin pour tout ce que tu crées ou installes manuellement, afin d'éviter qu'une mise à jour système ne perturbe tes fichiers.
