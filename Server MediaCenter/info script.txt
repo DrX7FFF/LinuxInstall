@@ -1,0 +1,14 @@
+Add on pour basculer le mode audio (local / external)
+https://forum.kodi.tv/showthread.php?tid=199579
+
+Exemple de création de script avec un appel extérieur
+https://forum.kodi.tv/showthread.php?tid=234884
+
+Autoexec
+https://kodi.wiki/view/Autoexec_Service
+
+Nouvelle doc (à vérifier)
+https://xbmc.github.io/docs.kodi.tv/master/kodi-base/index.html
+
+Lutris Addon
+https://github.com/solbero/repository.solbero.matrix
