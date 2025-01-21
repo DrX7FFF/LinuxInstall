@@ -7,3 +7,4 @@ In my case I am fetching the commit hash on every push so I always have the late
 1 reply
 Thanks. For anyone wondering, you can fetch latest commit hash by calling GET https://api.github.com/repos/:user/:repo/branches/:branchName
 
+TTT
