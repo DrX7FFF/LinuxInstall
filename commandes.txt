@@ -28,6 +28,9 @@ echo $XDG_SESSION_TYPE
 
 # Informations sur les périphériques 
 sudo lspci -v
+lspci -k | grep -EA3 'VGA|3D|Display' output:
+lspci -k | grep -EA3 'VGA|3D|Display'
+lspci -knnn | grep -A3 -E 'VGA|Display|3D'
 
 # Liste des derniers fichiers modifiés
 sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -10 -type f
