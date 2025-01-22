@@ -1,8 +1,11 @@
+## Linux
 ### Gestion des paquets
 
 - Mise à jour des paquets :
   ```bash
   sudo apt update && sudo apt -y upgrade
+  ```
+  ```bash
   sudo apt dist-upgrade -y
   sudo apt autoremove
   ```
@@ -30,11 +33,17 @@
   uname -a
   ```
 - Charge CPU et uptime :
+  https://linux.die.net/man/5/proc
+  https://www.baeldung.com/linux/proc-meminfo
   ```bash
   uptime
   cat /proc/loadavg
+  cat /proc/loadavg
+  cat /proc/uptime
+  cat /proc/meminfo
   ```
 - Température CPU :
+  (Doit être inférieur à 85°C)
   ```bash
   vcgencmd measure_temp
   ```
@@ -44,22 +53,44 @@
   vulkaninfo --summary
   glxinfo -B
   ```
-- Version Debian :
+- Type et verson distribution :
+  https://www.malekal.com/comment-connaitre-version-linux/
+  ```bash
+  cat /etc/lsb-release
+  ```
+  Pour Debian :
   ```bash
   cat /etc/debian_version
   ```
+  Pour CoreElec :
+  https://discourse.coreelec.org/t/display-info/8425/5
+  ```bash
+  dispinfo
+  /storage/.kodi/userdata/disp_cap
+  ```
 
 ### Gestion des disques et des fichiers
-
+- Rendre executable
+  ```bash
+  chmod +x *
+  ```
 - Recherche de fichiers :
   ```bash
   sudo find -iname "fichier.ext"
   sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -10 -type f
   ```
-- Afficher le taux d'utilisation des disques :
+- Afficher capacité des disques :
   ```bash
   df -h
   ```
+- Afficher d'utilisation des dossiers :
+  ```bash
+  sudo du -hx / | sort -h
+  ```
+- Editer un disk
+  ```bash
+  sudo cfdisk /dev/sda
+  ```  
 - Formater un disque en ext4 :
   ```bash
   sudo mkfs.ext4 /dev/sda2
@@ -68,7 +99,13 @@
   ```bash
   sudo lsblk
   sudo blkid
+  sudo fdisk -l
   ```
+- Liste des périphériques branchés en USB :
+  ```bash
+  sudo lsusb
+  ```
+
 - Monter une partition :
   ```bash
   sudo mount -t auto /dev/sda1 /media/DATA
@@ -80,7 +117,7 @@
   ```bash
   sudo dd if=/dev/sda of=/dev/sdb bs=100M
   ```
-- Supprimer un dossier récursivement :
+- Supprimer un dossier récursivement sans validation :
   ```bash
   rm -rf <folder>
   ```
@@ -89,18 +126,32 @@
 
 - Informations IP et DNS :
   ```bash
+  ifconfig
   ip a
   resolvectl status
+  sudo resolvectl statistics
+  ```
+  info réseau sous netplan
+  ```bash
+  sudo netplan status --all
+  ```
+
+  Pour afficher la liste des serveurs DNS et resolution d'un nom :
+  ```bash
   cat /etc/resolv.conf
-  nslookup <nom_de_domaine>
+  nslookup example.com
+  dig example.com
   sudo resolvectl flush-caches
   ```
+  
 - Ports ouverts :
   ```bash
   netstat
   ```
 - Tester un serveur avec iperf :
   ```bash
+  sudo apt-get install iperf3
+  sudo iperf3 -s
   sudo iperf3 -c [IPServer]
   ```
 
@@ -120,24 +171,27 @@
   ```
 
 ### Divers
-
-- Afficher l'heure système :
+  - Informations sur les périphériques 
+  ```bash
+  sudo lspci -v
+  lspci -k | grep -EA3 'VGA|3D|Display' output:
+  lspci -k | grep -EA3 'VGA|3D|Display'
+  lspci -knnn | grep -A3 -E 'VGA|Display|3D'
+  ```
+  - Afficher l'heure système :
   ```bash
   timedatectl
   date
   ```
-- Autres commandes courantes :
+  - Autres commandes courantes :
   ```bash
-  ifconfig
   reboot
   halt
-  nano
-  sudo passwd root
   ```
 
 ---
 
-## 3. Docker
+## Docker
 
 ### Gestion des containers
 
@@ -156,9 +210,11 @@
   ```bash
   docker compose pull
   ```
-- Purger les images inutiles :
+- Purger les images inutiles (A faire qd les containers sont démarrés) :
   ```bash
   docker system prune -a
+  ```
+  ```bash
   docker image prune
   ```
 
@@ -171,6 +227,7 @@
 
 ---
 
+## GIT
 ### Commandes de base
 
 - Vérifier l'état :
@@ -189,20 +246,35 @@
   ```bash
   git push
   ```
+  ```bash
+  git pull
+  ```
 
-### Gestion des fichiers
+## Divers
+### Commandes Bash
+  - AWK
+  https://www.funix.org/fr/unix/awk.htm
+  la fonction read permet une version plus simple de récupérer les informations mais ne permet pas de faire de traitement comme des calculs
 
-- Modifier .gitignore :
+### Armbian
+  - Afficher le bandeau d'accueil :
+  ```bash
+  sudo /etc/update-motd.d/10-armbian-header && \
+  sudo /etc/update-motd.d/30-armbian-sysinfo
+  ```
+  ```bash
+  armbianmonitor
+  ```
+  
+  - Modifier .gitignore :
   ```bash
   nano .gitignore
   ```
-
-### Lien Firebase
-
-- Data :
-  [Lien Firebase Data](https://console.firebase.google.com/project/hab-datalog/database/hab-datalog-default-rtdb/data)
-- Paramètres :
-  [Lien Firebase Settings](https://console.firebase.google.com/u/0/project/hab-datalog/settings/general/web:MjUyMDY2NDYtZGQzYS00ZTBjLTg2NjItZmM3MTgzODIzN2Jl)
+### Ubuntu
+  - version bureau
+  ```bash
+  echo $XDG_SESSION_TYPE
+  ```
 
 ### Sources utiles
 
