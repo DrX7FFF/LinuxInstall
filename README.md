@@ -11,6 +11,13 @@
   ```bash
   apt info {package Name}
   ```
+- Installation de modules supplémentaires :
+  ```bash
+  sudo apt-get install python-requests
+  sudo apt-get install exfat-utils -y
+  sudo apt-get install iperf3 -y
+  sudo apt-get install imdb-tools
+  ```
 
 ### Informations système
 
@@ -38,9 +45,18 @@
   vulkaninfo --summary
   glxinfo -B
   ```
+- Version Debian :
+  ```bash
+  cat /etc/debian_version
+  ```
 
 ### Gestion des disques et des fichiers
 
+- Recherche de fichiers :
+  ```bash
+  sudo find -iname "fichier.ext"
+  sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -10 -type f
+  ```
 - Afficher le taux d'utilisation des disques :
   ```bash
   df -h
@@ -52,10 +68,22 @@
 - Liste des disques et partitions :
   ```bash
   sudo lsblk
+  sudo blkid
   ```
-- Trouver les fichiers modifiés récemment :
+- Monter une partition :
   ```bash
-  sudo find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -10 -type f
+  sudo mount -t auto /dev/sda1 /media/DATA
+  sudo mount -t cifs //[IP]/[Partage] /mnt/[Dossier] -o guest
+  sudo nano /etc/fstab
+  sudo cat /etc/mtab
+  ```
+- Cloner un disque dur :
+  ```bash
+  sudo dd if=/dev/sda of=/dev/sdb bs=100M
+  ```
+- Supprimer un dossier récursivement :
+  ```bash
+  rm -rf <folder>
   ```
 
 ### Réseau
@@ -64,6 +92,9 @@
   ```bash
   ip a
   resolvectl status
+  cat /etc/resolv.conf
+  nslookup <nom_de_domaine>
+  sudo resolvectl flush-caches
   ```
 - Ports ouverts :
   ```bash
@@ -84,6 +115,10 @@
   ```bash
   sudo systemctl restart smbd.service
   ```
+- Redémarrer un serveur FTP :
+  ```bash
+  sudo systemctl restart vsftpd.service
+  ```
 
 ### Divers
 
@@ -92,9 +127,13 @@
   timedatectl
   date
   ```
-- Cloner un disque dur :
+- Autres commandes courantes :
   ```bash
-  sudo dd if=/dev/sda of=/dev/sdb bs=100M
+  ifconfig
+  reboot
+  halt
+  nano
+  sudo passwd root
   ```
 
 ---
@@ -165,19 +204,8 @@
 
 ## 5. Raspberry Pi (Références et astuces)
 
-- Version Debian :
-  ```bash
-  cat /etc/debian_version
-  ```
-- Installation de modules :
-  ```bash
-  sudo apt-get install python-requests
-  sudo apt-get install exfat-utils -y
-  ```
-- Montage CIFS/SMB :
-  ```bash
-  sudo mount -t cifs //[IP]/[Partage] /mnt/[Dossier] -o guest
-  ```
+- Optimisation Raspberry Pi :
+  [Lien vers les astuces](http://www.pihomeserver.fr/2013/06/17/raspberry-pi-home-server-techniques-doptimisation-de-votre-systeme/)
 
 ---
 
@@ -193,6 +221,5 @@
 ### Sources utiles
 
 - [Organisation des dossiers sous Linux](http://www.linux-france.org/article/sys/fichiers/fichiers-2.html)
-- [Optimisation Raspberry Pi](http://www.pihomeserver.fr/2013/06/17/raspberry-pi-home-server-techniques-doptimisation-de-votre-systeme/)
 - [Montage SMB](https://www.linode.com/docs/guides/linux-mount-smb-share/)
 
