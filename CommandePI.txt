@@ -5,52 +5,6 @@
 #Paramétrage NodeRed
 #https://nodered.org/docs/user-guide/runtime/configuration#dashboard
 
-Organisation des dossiers sous Linux
-http://www.linux-france.org/article/sys/fichiers/fichiers-2.html
-
-#info CPU
-#ARM32V7 pour PI3 B+
-cat /proc/cpuinfo
-lscpu
-
-#  version du Kernel
-uname -a
-
-#recherche fichier
-sudo find -iname "fichier.ext"
-
-# Type et verson distribution
-# https://www.malekal.com/comment-connaitre-version-linux/
-cat /etc/lsb-release
-# pour CoreElec
-# https://discourse.coreelec.org/t/display-info/8425/5
-dispinfo
-/storage/.kodi/userdata/disp_cap
-
-#info Debian (ARMBian)
-cat /etc/debian_version
-
-#information de fonctionnement
-uptime
-	-> [heure actuelle] up [Durée de fonctionnement] , [Nombre d'utilisateurs] [moyenne 1min][moyenne 5min][moyenne 15min]
-	(Moyenne doit être inférieur à 1)
-
-#information température	#Doit être inférieur à 85°C
-vcgencmd measure_temp
-	# 37,6°C	avec ventilateur
-
-#divers
-sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-sudo apt-get autoremove
-ifconfig
-cat /etc/resolv.conf			# Pour afficher la liste des serveur DNS
-nslookup <nom_de_domaine>		# Pour résoudre un nom DNS
-reboot
-halt
-nano
-sudo passwd root
-rm -rf <folder>					# supprime un dossier récursif sans validation
-
 #Imdb // information sur les films
 	#Ne fonctionne pas ...
 	# https://zoomadmin.com/HowToInstall/UbuntuPackage/imdb-tools
@@ -61,14 +15,6 @@ rm -rf <folder>					# supprime un dossier récursif sans validation
 #Déclaration du package :
 ## STOP Payant
 bash -xu <<< "$(curl -fsSL https://raw.githubusercontent.com/filebot/plugins/master/installer/deb.sh)"
-
-
-#Iperf
-sudo apt-get install iperf3 -y
-sudo iperf3 -s
-sudo iperf3 -c [IPServer]
-
-#Docker 
 
 # installation de modules
 sudo apt-get install python-requests
@@ -96,26 +42,6 @@ scp adpihome@192.168.1.100:docker/nodered/measure*.csv
 cd /mnt/bbox
 python test.py
 
-# Liste des disk avec information de nom et de type
-sudo blkid		#Liste des disques
-sudo fdisk -l	#Détails des disques
-sudo lsblk		#Liste des disques et partitions
-
-# Afficher le taux d'utilisation d'un disque
-df -h
-sudo du -hx / | sort -h
-
-# Afficher les fichiers modifié depuis 60 min
-find / -not -path '/sys*' -not -path '/dev*' -not -path '/proc*' -mmin -60
-
-# Editer un disk
-sudo cfdisk /dev/sda
-
-# Formater disk en ext4
-sudo mkfs.ext4 /dev/sda2
-
-# la liste des périphériques branchés en USB
-sudo lsusb
 
 #### Partage de fichier réseau, besoin de CIFS et SMB3 (CIFS : protocol de base, SMB3 est la dernière version)
 # tuto complet https://www.linode.com/docs/guides/linux-mount-smb-share/
