@@ -1,33 +1,22 @@
-Installation PC
+# Installation PC
 
-sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
-sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-sudo apt autoremove
-
-# A activer
+## A activer
 Activer FireWall
 (?) Activer TimeShift : Quotidienne sur 5J
 
 ## Installer depuis la logitèque (Paquet système sont moins volumineux mais pas isolés):
-Meld
-VLC
-Hardinfo
-Solaar ou Piper ou logiops 
-# Piper ne fonctionne pas avec Fusion
-# logiops difficile à paramétrer
-# Solaar ne semble pas fonctionner avec Fusion
+- Meld
+- VLC
+- Hardinfo
 
 ## Installer avec des AppImages
-DB_Browser_for_SQLite-v3.12.2-x86_64
+- DB_Browser_for_SQLite-v3.12.2-x86_64
 
-OrcaSlicer_Linux_V2.0.0
-https://github.com/SoftFever/OrcaSlicer/releases/latest/download/package.zip
-https://github.com/SoftFever/OrcaSlicer/releases/download/v2.1.1/OrcaSlicer_Linux_V2.1.1.AppImage
+- OrcaSlicer_Linux_V2.0.0
+  https://github.com/SoftFever/OrcaSlicer/releases/latest/download/package.zip
+  https://github.com/SoftFever/OrcaSlicer/releases/download/v2.1.1/OrcaSlicer_Linux_V2.1.1.AppImage
 
-KDiskMark
-https://github.com/JonMagon/KDiskMark
-
-balenaEtcher-1.18.11-x64
+- balenaEtcher-1.18.11-x64
 
 
 ## Installer extension Gnome : 
@@ -36,35 +25,29 @@ https://extensions.gnome.org/extension/5177/vertical-workspaces/
 https://extensions.gnome.org/extension/841/freon/
 
 
-## Exemple de Desktop entry
+# Notes
+
+## Exemple de Desktop entry pour des AppImage
 [Desktop Entry]
 Name=GravitDesigner
 Exec=/home/<path-to-folder>/GravitDesigner.AppImage
 Type=Application
 
+## Divers
+- chemin d'enregistrement des applications :
+  /home/moi/.var/app/
 
-## chemin d'enregistrement des applications :
-/home/moi/.var/app/
+- Chemin des raccourcis Snap :
+  /var/lib/snapd/desktop/applications
 
-## Chemin des raccourcis Snap :
-/var/lib/snapd/desktop/applications
-
-# Creation usb iso
-sudo apt install -y usb-creator-gtk
-
-## Installation driver Vulkan AMD Ubuntu 
-# https://linuxconfig.org/install-and-test-vulkan-on-linux
-# https://linuxconfig.org/improve-your-wine-gaming-on-linux-with-dxvk
-sudo add-apt-repository ppa:oibaf/graphics-drivers
-sudo apt update
-sudo apt upgrade
-apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
-
-# retour arrière 
-sudo apt-get install ppa-purge
-sudo ppa-purge ppa:oibaf/graphics-drivers
-# Si pas suffisant 
-sudo add-apt-repository --remove ppa:appimagelauncher-team/stable
+- Installation driver Vulkan AMD Ubuntu :  
+  https://linuxconfig.org/install-and-test-vulkan-on-linux
+  https://linuxconfig.org/improve-your-wine-gaming-on-linux-with-dxvk
+  # Si retour arrière 
+  sudo apt-get install ppa-purge
+  sudo ppa-purge ppa:oibaf/graphics-drivers
+  # Si pas suffisant 
+  sudo add-apt-repository --remove ppa:appimagelauncher-team/stable
 
 ## Fusion 360
 # Installation manuelle de FireFox
@@ -113,31 +96,44 @@ https://wiki.archlinux.org/title/Logitech_MX_Master
 # https://github.com/TheAssassin/AppImageLauncher
 ./appimagelauncher-lite* install
 
+## Gestion boot
+### Version simple
+```bash
+sudo add-apt-repository ppa:yannubuntu/boot-repair \
+sudo apt update \
+sudo apt install boot-repair \
+```
+### Version de paramétrage
+```bash
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer \
+sudo apt update \
+sudo apt install grub-customizer \
+```
+
+# Plus utile
+
 ## Bottle
-## chemin d'enregistrement des bottles :
+- chemin d'enregistrement des bottles :
 /home/moi/.var/app/com.usebottles.bottles/data/bottles/bottles
-## Commande pour lanceur :
+- Commande pour lanceur :
 flatpak run --command=bottles-cli com.usebottles.bottles run -b MyNotePad++ -p notepad++
 flatpak run --command=bottles-cli com.usebottles.bottles run -b NomDeLaBouteille -p ProgrammeDansLaBouteille 
 
-## Gestion boot
-# Version simple
-sudo add-apt-repository ppa:yannubuntu/boot-repair
-sudo apt update
-sudo apt install boot-repair
 
-# Version de paramétrage
-sudo add-apt-repository ppa:danielrichter2007/grub-customizer
-sudo apt update
-sudo apt upgrade
-sudo apt install grub-customizer
+## Benchmark disque dur
+KDiskMark : https://github.com/JonMagon/KDiskMark
 
+## Gestion Logitech
+- Solaar ou Piper ou logiops 
+  Piper ne fonctionne pas avec Fusion  
+  logiops difficile à paramétrer  
+  Solaar ne semble pas fonctionner avec Fusion  
 
 ## NotePad Next
 https://github.com/dail8859/NotepadNext/releases
 
-
--- Plus utile --
+## Creation usb iso
+sudo apt install -y usb-creator-gtk
 
 ## NotePadQQ
 # Pas maintenu
