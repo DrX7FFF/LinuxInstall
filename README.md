@@ -1,10 +1,9 @@
-## 2. Commandes Linux
-
 ### Gestion des paquets
 
 - Mise à jour des paquets :
   ```bash
-  sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
+  sudo apt update && sudo apt -y upgrade
+  sudo apt dist-upgrade -y
   sudo apt autoremove
   ```
 - Informations sur un package :
@@ -172,8 +171,6 @@
 
 ---
 
-## 4. Git
-
 ### Commandes de base
 
 - Vérifier l'état :
@@ -200,17 +197,6 @@
   nano .gitignore
   ```
 
----
-
-## 5. Raspberry Pi (Références et astuces)
-
-- Optimisation Raspberry Pi :
-  [Lien vers les astuces](http://www.pihomeserver.fr/2013/06/17/raspberry-pi-home-server-techniques-doptimisation-de-votre-systeme/)
-
----
-
-## 6. Annexes
-
 ### Lien Firebase
 
 - Data :
@@ -223,3 +209,5 @@
 - [Organisation des dossiers sous Linux](http://www.linux-france.org/article/sys/fichiers/fichiers-2.html)
 - [Montage SMB](https://www.linode.com/docs/guides/linux-mount-smb-share/)
 
+- Optimisation Raspberry Pi :
+  [Lien vers les astuces](http://www.pihomeserver.fr/2013/06/17/raspberry-pi-home-server-techniques-doptimisation-de-votre-systeme/)
