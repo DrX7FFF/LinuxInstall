@@ -1,6 +1,8 @@
+Paramétrage NodeRed
+https://nodered.org/docs/user-guide/runtime/configuration#dashboard
+
 icones :
 https://pictogrammers.com/library/mdi/
-
 
 ## Sauvegarder variable de contexte sur disque :
 https://nodered.org/docs/user-guide/context#context-stores
@@ -12,8 +14,6 @@ Dans settings.js
           memory: { module: 'memory' },
           file: { module: 'localfilesystem' }
     },
-
-		
 
 # Paramétrage de settings.js pour simplifier l'url du dashboard
     uiPort: process.env.PORT || 1880,
