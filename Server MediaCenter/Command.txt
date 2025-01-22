@@ -5,6 +5,29 @@ ssh root@192.168.1.102
 ./deluge.sh
 ./radarr.sh
 
+./protonwire.sh
+./jackett.sh
+./qbittorrent.sh
+./radarr.sh
+
+
+docker stop radarr && \
+docker rm radarr && \
+docker stop deluge && \
+docker rm deluge && \
+docker stop jackett && \
+docker rm jackett && \
+docker stop protonwire && \
+docker rm protonwire
+
+docker stop qbittorrent && \
+docker rm qbittorrent && \
+docker stop jackett && \
+docker rm jackett && \
+docker stop protonwire && \
+docker rm protonwire
+
+
 # Chemins
 cd ~/.kodi/userdata
 cd /storage/.kodi/userdata
