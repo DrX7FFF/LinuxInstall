@@ -18,8 +18,6 @@
 # Radarr
   # -p 7878:7878 \
 
-  # -e PROTONVPN_SERVER="node-nl-96.protonvpn.net" \
-  # -e WIREGUARD_PRIVATE_KEY="OIBT7avl5u6UWdDEJtq9CIKUW2wsLXXppNuH7tFmbkw=" \
 
 docker run -d \
   --name=vpn \
@@ -27,10 +25,10 @@ docker run -d \
   --cap-add NET_ADMIN \
   --sysctl net.ipv4.conf.all.rp_filter=2 \
   --sysctl net.ipv6.conf.all.disable_ipv6=1 \
-  -e PROTONVPN_SERVER="node-fr-15.protonvpn.net" \
+  -e PROTONVPN_SERVER="node-nl-96.protonvpn.net" \
   -e DEBUG=0 \
   -e KILL_SWITCH=1 \
-  -e WIREGUARD_PRIVATE_KEY=uM/X6zSy5yX4q5b35IE7asKaghWp22APULlvUxFnx0U= \
+  -e WIREGUARD_PRIVATE_KEY="OIBT7avl5u6UWdDEJtq9CIKUW2wsLXXppNuH7tFmbkw=" \
   --tmpfs /tmp \
   -p 6881:6881 \
   -p 6881:6881/udp \

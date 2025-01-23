@@ -1,32 +1,21 @@
 ssh root@192.168.1.102
 
-./protonwire.sh
 ./jackett.sh
-./deluge.sh
-./radarr.sh
 
-./protonwire.sh
-./jackett.sh
+./gluetun.sh
+./flaresolverr.sh
+./prowlarr.sh
 ./qbittorrent.sh
 ./radarr.sh
 
+docker stop deluge && docker rm deluge
+docker stop portcheck && docker rm portcheck
+docker stop jackett && docker rm jackett
 
-docker stop radarr && \
-docker rm radarr && \
-docker stop deluge && \
-docker rm deluge && \
-docker stop jackett && \
-docker rm jackett && \
-docker stop vpn && \
-docker rm vpn
-
-docker stop qbittorrent && \
-docker rm qbittorrent && \
-docker stop jackett && \
-docker rm jackett && \
-docker stop vpn && \
-docker rm vpn
-
+docker stop radarr && docker rm radarr
+docker stop prowlarr && docker rm prowlarr
+docker stop qbittorrent && docker rm qbittorrent
+docker stop vpn && docker rm vpn
 
 # Chemins
 cd ~/.kodi/userdata

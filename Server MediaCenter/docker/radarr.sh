@@ -15,7 +15,7 @@ docker run -d \
   -e TZ=Europe/Paris \
   -v /storage/.config/dockers/radarr/data:/config \
   -v /var/media/HD1/radarr/movies:/movies \
-  -v /var/media/HD1/radarr/download-client-downloads:/downloads \
+  -v /var/media/HD1/torrent:/downloads \
   --restart unless-stopped \
   --platform linux/arm64 \
   lscr.io/linuxserver/radarr:latest
