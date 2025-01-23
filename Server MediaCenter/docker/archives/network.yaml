@@ -1,0 +1,33 @@
+services:
+  pihole:
+    container_name: pihole
+    image: cbcrowe/pihole-unbound:latest
+    restart: unless-stopped
+    hostname: pihole
+    domainname: pihole.local
+    ports:
+      # - 4443:443/tcp # Tester, sinon enlever
+      - 53:53/tcp
+      - 53:53/udp
+      - 8081:80/tcp  #Allows use of different port to access pihole web interface when other docker containers use port 80
+      # - 5335:5335/tcp # Uncomment to enable unbound access on local server
+      # - 22/tcp # Uncomment to enable SSH
+    environment:
+      - FTLCONF_LOCAL_IPV4=192.168.1.100
+      - TZ=Europe/Paris
+      - WEBPASSWORD=PIHOLEWEBPASSWORD
+      - WEBTHEME=default-dark
+      - REV_SERVER=true
+      - REV_SERVER_TARGET=192.168.1.1
+      - REV_SERVER_DOMAIN=local
+      - REV_SERVER_CIDR=192.168.0.0/16  # 192.168.1.0/24  #192.168.0.0/16
+      - PIHOLE_DNS_=127.0.0.1#5335
+      - DNSSEC="true"
+      - DNSMASQ_LISTENING=single
+    volumes:
+      - ~/docker/pihole/pihole:/etc/pihole:rw
+      - ~/docker/pihole/dnsmasq.d:/etc/dnsmasq.d:rw
+      # - ~/docker.ram/pihole/pihole-FTL.log:/var/log/pihole-FTL.log  #Test
+      # - ~/docker.ram/pihole/pihole.log:/var/log/pihole/pihole.log  #Test
+    # cap_add:  # Pas utile en principe
+    #   - NET_ADMIN

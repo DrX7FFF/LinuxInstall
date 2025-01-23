@@ -8,8 +8,8 @@
 #   -e DELUGE_LOGLEVEL=error  \
 
 docker run -d \
-  --name=deluge \
-  --network container:protonwire \
+  --name deluge \
+  --network container:vpn \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Europe/Paris \

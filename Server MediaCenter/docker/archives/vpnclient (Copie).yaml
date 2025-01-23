@@ -1,0 +1,58 @@
+# https://carloalbertoscola.it/2023/linux/infrastructure/how-to-tunnel-container-traffic-vpn-wireguard/
+
+networks:
+  VPN_net:
+    driver: bridge
+  #   driver: macvlan
+  #   driver_opts:
+  #     parent: end0                # Remplace par l'interface réseau du host
+  #   ipam:
+  #     config:
+  #       - subnet: 192.168.1.0/24
+  #         gateway: 192.168.1.1
+
+
+services:
+  wireguard:
+    container_name: wireguard
+    image: linuxserver/wireguard
+    restart: unless-stopped
+    networks:
+      - VPN_net
+      # VPN_net:
+      #   ipv4_address: 192.168.1.90 # Adresse IP du serveur WireGuard
+    volumes:
+      - ./wireguard:/config # Répertoire où tu mets tes fichiers ProtonVPN (*.conf)
+      - /lib/modules:/lib/modules:ro # Nécessaire pour WireGuard
+      # - ./etc/hosts:/etc/hosts
+    environment:
+      - PUID=1000 # Remplace par ton UID
+      - PGID=1000 # Remplace par ton GID
+      - TZ=Europe/Paris # Change selon ton fuseau horaire
+    ports:
+    #   - 51820:51820/udp # Port WireGuard
+      - 6081:6081
+      - 7881:6881
+      - 7881:6881/udp
+    cap_add:
+      - NET_ADMIN
+    #   - SYS_MODULE
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+
+  qbit:
+    container_name: qbit
+    image: lscr.io/linuxserver/qbittorrent:latest
+    # ports:
+    #   - 8082:8082 # WebPort
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - WEBUI_PORT=8082
+    volumes:
+      - ./qbit:/config
+      - ./data:/downloads
+    restart: unless-stopped
+    network_mode: container:wireguard
+  

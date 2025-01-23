@@ -1,7 +1,7 @@
 #! /bin/bash
 
 docker run -d \
-  --name=pyload \
+  --name pyload \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Europe/Paris \

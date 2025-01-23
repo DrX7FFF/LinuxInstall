@@ -1,0 +1,81 @@
+networks:
+  vpn:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+          gateway: 192.168.2.1
+
+services:
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard
+    networks:
+      vpn:
+        ipv4_address: 192.168.2.2
+    dns:
+      - 192.168.1.1 # Force DNS queries through WireGuard
+    ports:
+      - 51820:51820/udp
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - NETWORK=192.168.2.0/24
+    volumes:
+      - ./wireguard:/config
+      # - /lib/modules:/lib/modules #optional
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    networks:
+      vpn:
+        ipv4_address: 192.168.2.3
+    # dns:
+    #   - 192.168.2.2 # Force DNS queries through WireGuard
+    ports:
+      - 8082:8082
+    environment:
+      - UMASK_SET=022
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - WEBUI_PORT=8082
+    volumes:
+      - ./qbittorrent/config:/config
+      - ./qbittorrent/downloads:/downloads
+    restart: unless-stopped
+    # cap_add:
+    #   - NET_ADMIN
+    # sysctls:
+    #   - net.ipv4.conf.all.src_valid_mark=1
+    # command: >
+    #   bash -c "iptables -A OUTPUT -o eth0 -j REJECT && iptables -A OUTPUT ! -o eth0 -j ACCEPT && \
+    #   /init"
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    networks:
+      vpn:
+        ipv4_address: 192.168.2.4
+    # dns:
+    #   - 192.168.2.2 # Force DNS queries through WireGuard
+    ports:
+      - 9117:9117
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - ./jackett/data:/config
+      - ./jackett/blackhole:/downloads
+    restart: unless-stopped

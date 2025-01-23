@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md
+
+
 # wireguard
   # -p 51820:51820/udp \
 # qBitTorrent
@@ -18,17 +21,16 @@
 # Radarr
   # -p 7878:7878 \
 
+  
 docker run -d \
   --name vpn \
-  --init \
   --cap-add=NET_ADMIN \
-  --sysctl net.ipv4.conf.all.rp_filter=2 \
-  --sysctl net.ipv6.conf.all.disable_ipv6=1 \
-  -e PROTONVPN_SERVER="node-nl-96.protonvpn.net" \
-  -e DEBUG=0 \
-  -e KILL_SWITCH=1 \
-  -e WIREGUARD_PRIVATE_KEY="OIBT7avl5u6UWdDEJtq9CIKUW2wsLXXppNuH7tFmbkw=" \
-  --tmpfs /tmp \
+  --device /dev/net/tun \
+  -e VPN_SERVICE_PROVIDER=protonvpn \
+  -e VPN_TYPE=wireguard \
+  -e WIREGUARD_PRIVATE_KEY=OIBT7avl5u6UWdDEJtq9CIKUW2wsLXXppNuH7tFmbkw= \
+  -e SERVER_COUNTRIES=Netherlands \
+  -e SERVER_HOSTNAMES="node-nl-149.protonvpn.net" \
   -p 51820:51820/udp \
   -p 9117:9117 \
   -p 8082:8082 \
@@ -37,4 +39,4 @@ docker run -d \
   -p 7878:7878 \
   --restart unless-stopped \
   --platform linux/arm64 \
-  ghcr.io/tprasadtp/protonwire:latest
+  qmcgaw/gluetun

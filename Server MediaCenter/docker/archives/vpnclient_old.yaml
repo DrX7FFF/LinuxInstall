@@ -1,0 +1,76 @@
+# https://github.com/bubuntux/nordvpn
+# https://github.com/veerendra2/raspberrypi-homeserver
+# https://carloalbertoscola.it/2023/linux/infrastructure/how-to-tunnel-container-traffic-vpn-wireguard/
+networks:
+  vpn:
+    driver: bridge
+
+services:
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard
+    networks:
+      - vpn
+    ports:
+      - 51820:51820/udp
+      # - 8082:8082
+      # - 9117:9117
+    cap_add:
+      - NET_ADMIN
+      # - NET_RAW                 # Required
+      # - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      # - PEERDNS=auto
+      - NETWORK=192.168.1.0/24
+    volumes:
+      - ./wireguard:/config
+      - /lib/modules:/lib/modules #optional
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    # depends_on:
+    #   - wireguard
+    networks:
+      - vpn
+    ports:
+      - 8082:8082
+    # network_mode: service:wireguard
+    environment:
+      - UMASK_SET=022
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - WEBUI_PORT=8082
+    volumes:
+      - ./qbittorrent/config:/config
+      - ./qbittorrent/downloads:/downloads
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    # depends_on:
+    #   - wireguard
+    # userns_mode: "host"
+    # network_mode: service:wireguard
+    networks:
+      - vpn
+    ports:
+      - 9117:9117
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - ./jackett/data:/config
+      - ./jackett/blackhole:/downloads
+    restart: unless-stopped

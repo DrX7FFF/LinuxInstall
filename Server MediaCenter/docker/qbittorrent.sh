@@ -2,7 +2,7 @@
 
 docker run -d \
   --name qbittorrent \
-  --network container:protonwire \
+  --network container:vpn \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Europe/Paris \

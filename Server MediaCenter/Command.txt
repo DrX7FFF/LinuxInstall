@@ -17,15 +17,15 @@ docker stop deluge && \
 docker rm deluge && \
 docker stop jackett && \
 docker rm jackett && \
-docker stop protonwire && \
-docker rm protonwire
+docker stop vpn && \
+docker rm vpn
 
 docker stop qbittorrent && \
 docker rm qbittorrent && \
 docker stop jackett && \
 docker rm jackett && \
-docker stop protonwire && \
-docker rm protonwire
+docker stop vpn && \
+docker rm vpn
 
 
 # Chemins
