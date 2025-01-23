@@ -123,7 +123,7 @@
   ```
 
 ### Réseau
-
+https://blog.stephane-robert.info/docs/admin-serveurs/linux/reseaux/
 - Informations IP et DNS :
   ```bash
   ifconfig
@@ -142,6 +142,22 @@
   nslookup example.com
   dig example.com
   sudo resolvectl flush-caches
+  ```
+  
+  Vérifier parcours réseau (network path) :
+  ```bash  
+  tracepath -b www.google.com
+  ```
+
+  Vérifier les routes :
+  ```bash  
+  ip route | grep default # ou la vrai "commande" ip route show default
+  ```
+  https://www.it-connect.fr/linux-et-windows-comment-prioriser-une-route-ou-une-interface-pour-acceder-a-internet/
+
+  Vérifier son adresse IP public
+  ```bash  
+  curl -v ipinfo.io/ip
   ```
   
 - Ports ouverts :
@@ -194,7 +210,7 @@
 ## Docker
 
 ### Gestion des containers
-
+https://www.malekal.com/comment-lister-arreter-demarrer-un-conteneur-docker/
 - Relancer les containers :
   ```bash
   docker compose down && docker compose up -d
@@ -205,7 +221,10 @@
   ```
 
 ### Gestion des images
-
+- Listes des container :
+  ```bash
+  docker ps -a
+  ```
 - Mise à jour des images :
   ```bash
   docker compose pull
@@ -224,7 +243,18 @@
   ```bash
   docker logs [container_name]
   ```
-
+### Network & diagnostique
+  ```bash
+  docker network ls
+  docker network inspect <Network Name>
+  docker stats
+  docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
+  docker inspect --format='{{json .State}}' httpdc
+  docker stats --no-stream  --format "{{.CPUPerc}}" httpdc
+  ```
+https://devopssec.fr/article/fonctionnement-manipulation-reseau-docker
+https://devopssec.fr/article/deboguer-vos-conteneurs-et-images-dockers
+https://www.n0tes.fr/2019/05/11/Docker-et-IPtables/
 ---
 
 ## GIT
