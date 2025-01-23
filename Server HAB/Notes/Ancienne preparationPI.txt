@@ -1,17 +1,5 @@
 #MAJ :
-sudo apt -y update && sudo apt -y upgrade && sudo apt -y dist-upgrade
-sudo apt-get autoremove
-
-sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
-sudo apt autoremove
-
-docker compose pull
-docker compose down && docker compose up -d
 cat docker/nodered/mylog.txt
-// A faire qd les containers sont démarré pour purger les images inutiles
-docker image prune
-docker logs nodered
-docker exec -it nodered /bin/bash
 
 # Mise à jour package Python
 /usr/bin/python3 -m pip install --upgrade pip
@@ -148,10 +136,6 @@ sudo raspi-config
 	change timezone : Europe Paris
 	passage memoire video de 64 a 16
 	reboot
-
-# mise à jour
-sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-sudo apt-get autoremove
 
 ### mise à jour du kernel 
 # http://www.tropfacile.net/doku.php/raspberry-pi/comment-mettre-a-jour-le-firmware-du-raspberry
