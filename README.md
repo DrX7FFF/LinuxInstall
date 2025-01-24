@@ -158,6 +158,7 @@ https://blog.stephane-robert.info/docs/admin-serveurs/linux/reseaux/
   Vérifier son adresse IP public
   ```bash  
   curl -v ipinfo.io/ip
+  curl ifconfig.me
   ```
   
 - Ports ouverts :

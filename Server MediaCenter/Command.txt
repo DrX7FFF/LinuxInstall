@@ -1,27 +1,31 @@
 ssh root@192.168.1.102
 
-./jackett.sh
 
-./gluetun.sh
-./flaresolverr.sh
-./prowlarr.sh
-./qbittorrent.sh
-./radarr.sh
+Attention car pour les docker sous CoreElec tout se fait en mode Root donc pas de PUID et PGID
+Pour les dossiers voir :
+https://wiki.coreelec.org/coreelec:docker
 
-docker stop deluge && docker rm deluge
-docker stop portcheck && docker rm portcheck
-docker stop jackett && docker rm jackett
+Docker path :
+cd ~/.kodi/userdata/docker
+cd ~/.config/dockers
 
-docker stop radarr && docker rm radarr
-docker stop prowlarr && docker rm prowlarr
-docker stop qbittorrent && docker rm qbittorrent
-docker stop vpn && docker rm vpn
 
 # Chemins
 cd ~/.kodi/userdata
 cd /storage/.kodi/userdata
-cd ~/.kodi/userdata/docker
+
+docker pull --platform linux/arm64 lscr.io/linuxserver/prowlarr:latest
+
+ghcr.io/flaresolverr/flaresolverr:latest
+
+
 cd ~/.kodi/userdata/mediarenamer
 
 # renamer
 /storage/.kodi/userdata/mediarenamer/mediarenamer.py
+
+
+docker image inspect --format '{{json .}}' "8717c5b2ff2d" | jq -r '. | {Id: .Id, Digest: .Digest, RepoDigests: .RepoDigests, Labels: .Config.Labels}'
+
+https://ryandaniels.ca/blog/find-version-tag-latest-docker-image/
+https://github.com/ryandaniels/docker-script-find-latest-image-tag

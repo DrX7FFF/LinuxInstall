@@ -28,21 +28,21 @@ services:
       - 9117:9117         # Port de jackett
     restart: unless-stopped
 
-  # qbittorrent:
-  #   image: lscr.io/linuxserver/qbittorrent:latest
-  #   container_name: qbittorrent
-  #   network_mode: service:protonwire
-  #   environment:
-  #     # - UMASK_SET=022 # Non nécessaire en principe
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Europe/Paris
-  #     - WEBUI_PORT=8082
-  #     - TORRENTING_PORT=6881
-  #   volumes:
-  #     - ./qbittorrent:/config
-  #     - ./downloads:/downloads
-  #   restart: unless-stopped
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    network_mode: service:protonwire
+    environment:
+      # - UMASK_SET=022 # Non nécessaire en principe
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - WEBUI_PORT=8082
+      - TORRENTING_PORT=6881
+    volumes:
+      - ./qbittorrent:/config
+      - ./downloads:/downloads
+    restart: unless-stopped
 
   jackett:
     image: lscr.io/linuxserver/jackett:latest

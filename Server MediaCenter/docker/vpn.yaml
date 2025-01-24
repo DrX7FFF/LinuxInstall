@@ -1,0 +1,60 @@
+services:
+  vpn:
+    image: qmcgaw/gluetun
+    container_name: vpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports: # These are the qBittorrent ports, I like to use random ports and not the default ports 49152
+      - 6881:6881 # Listening port for TCP
+      - 6881:6881/udp # Listening port for UDP
+      - 8000:8000/tcp # Gluetun WebUI Port
+      - 8082:8082 # This is for the qBittorrent WebUI Port
+      - 9117:9117         # Port de jackett
+      - 51820:51820/udp   # Port de WirreGuard
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=uM/X6zSy5yX4q5b35IE7asKaghWp22APULlvUxFnx0U=
+      - SERVER_COUNTRIES=France # The server countries we'll use. They have to be P2P
+      # - SERVER_HOSTNAMES="node-fr-15.protonvpn.net"
+      - PORT_FORWARD_ONLY=on
+      - VPN_PORT_FORWARDING=on
+      - VPN_PORT_FORWARDING_PROVIDER=protonvpn
+    volumes:
+      - ./gluetun:/gluetun
+      - ./gluetun/config.toml:/gluetun/auth/config.toml
+    restart: unless-stopped
+
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    network_mode: service:vpn
+    environment:
+      # - UMASK_SET=022 # Non nécessaire en principe
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - WEBUI_PORT=8082
+      - TORRENTING_PORT=6881
+    volumes:
+      - ./qbittorrent:/config
+      - ./downloads:/downloads
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    network_mode: service:vpn
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - AUTO_UPDATE=true #optional
+      # - RUN_OPTS= #optional
+    volumes:
+      - ./jackett:/config
+      - ./jackett/blackhole:/downloads
+    restart: unless-stopped
