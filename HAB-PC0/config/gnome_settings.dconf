@@ -33,10 +33,10 @@ slog-interval=300
 
 [apps/update-manager]
 first-run=false
-launch-count=15
-launch-time=int64 1736683703
+launch-count=16
+launch-time=int64 1737328696
 show-details=true
-window-height=914
+window-height=1157
 window-width=1273
 
 [ca/desrt/dconf-editor]
@@ -48,7 +48,7 @@ window-is-maximized=false
 window-width=985
 
 [com/ubuntu/update-notifier]
-release-check-time=uint32 1736115397
+release-check-time=uint32 1737325573
 
 [org/gnome/Disks]
 image-dir-uri='file:///home/moi/T%C3%A9l%C3%A9chargements'
@@ -82,7 +82,7 @@ panel-id='alarm'
 size=(870, 690)
 
 [org/gnome/control-center]
-last-panel='keyboard'
+last-panel='network'
 window-state=(980, 1271, false)
 
 [org/gnome/desktop/app-folders]
@@ -165,12 +165,19 @@ numlock-state=true
 [org/gnome/desktop/peripherals/touchpad]
 two-finger-scrolling-enabled=true
 
+[org/gnome/desktop/privacy]
+old-files-age=uint32 30
+recent-files-max-age=-1
+
 [org/gnome/desktop/screensaver]
 primary-color='#2c001e'
 secondary-color='#2c001e'
 
 [org/gnome/desktop/session]
 idle-delay=uint32 900
+
+[org/gnome/evince]
+pictures-directory=@ms nothing
 
 [org/gnome/evince/default]
 continuous=true
@@ -181,15 +188,16 @@ fullscreen=false
 inverted-colors=false
 show-sidebar=true
 sidebar-page='thumbnails'
-sidebar-size=132
-sizing-mode='automatic'
-window-ratio=(3.178763440860215, 1.3766153553781832)
+sidebar-size=148
+sizing-mode='free'
+window-ratio=(15.169421268939729, 12.417758806201824)
+zoom=3.5831807999999974
 
 [org/gnome/evolution-data-server]
 migrated=true
 
 [org/gnome/gnome-system-monitor]
-current-tab='processes'
+current-tab='resources'
 show-dependencies=false
 show-whose-processes='user'
 window-height=1092
@@ -198,7 +206,7 @@ window-width=1578
 [org/gnome/gnome-system-monitor/disktreenew]
 col-6-visible=true
 col-6-width=0
-columns-order=[5]
+columns-order=[6]
 sort-col=1
 sort-order=0
 
@@ -225,7 +233,7 @@ migrated-gtk-settings=true
 search-filter-time-type='last_modified'
 
 [org/gnome/nautilus/window-state]
-initial-size=(1266, 1194)
+initial-size=(1652, 1055)
 
 [org/gnome/nm-applet/eap/dcbeef95-db40-448d-86c1-558e9745c873]
 ignore-ca-cert=false
@@ -299,8 +307,8 @@ overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>, 'org.gnome.m
 locations=@av []
 
 [org/gnome/software]
-check-timestamp=int64 1736660182
-flatpak-purge-timestamp=int64 1736645716
+check-timestamp=int64 1737882382
+flatpak-purge-timestamp=int64 1737849915
 
 [org/gnome/terminal/legacy/keybindings]
 copy='<Control>c'
@@ -319,9 +327,9 @@ date-format='regular'
 location-mode='path-bar'
 show-hidden=true
 sidebar-width=140
-sort-column='name'
+sort-column='modified'
 sort-directories-first=true
-sort-order='ascending'
+sort-order='descending'
 type-format='category'
 view-type='list'
 window-size=(1435, 822)
@@ -333,7 +341,7 @@ selected-color=(true, 0.10196078431372549, 0.37254901960784315, 0.70588235294117
 [org/gtk/settings/file-chooser]
 date-format='regular'
 location-mode='path-bar'
-show-hidden=true
+show-hidden=false
 show-size-column=true
 show-type-column=true
 sidebar-width=199
@@ -341,5 +349,5 @@ sort-column='name'
 sort-directories-first=false
 sort-order='ascending'
 type-format='category'
-window-position=(140, 262)
+window-position=(96, 41)
 window-size=(1441, 902)
