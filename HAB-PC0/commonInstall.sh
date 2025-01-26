@@ -16,6 +16,8 @@ git config --global user.email "dubourg.v@gmail.com"
 git config --global init.defaultBranch main
 mkdir -p ~/GIT
 
+# outil GH GitHub
+sudo apt install -y gh
 
 # Packet Manager
 sudo apt install -y synaptic
