@@ -29,3 +29,16 @@ docker image inspect --format '{{json .}}' "8717c5b2ff2d" | jq -r '. | {Id: .Id,
 
 https://ryandaniels.ca/blog/find-version-tag-latest-docker-image/
 https://github.com/ryandaniels/docker-script-find-latest-image-tag
+
+
+## Générateur de clés pour le site Gluetun
+docker run --rm qmcgaw/gluetun genkey
+
+## Téléchargement de jq
+curl -Lo jq https://github.com/stedolan/jq/releases/latest/download/jq-linux64
+
+## Liste des containers avec leur état
+docker inspect -f '{{.Name}} {{.State.Running}}' $(docker ps -aq)
+### Résultat
+/vpn true
+/pyload true

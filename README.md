@@ -205,7 +205,8 @@ https://blog.stephane-robert.info/docs/admin-serveurs/linux/reseaux/
   reboot
   halt
   ```
-
+  - Operateurs bash :
+https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
 ---
 
 ## Docker
