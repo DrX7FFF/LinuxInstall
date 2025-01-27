@@ -205,6 +205,24 @@ https://blog.stephane-robert.info/docs/admin-serveurs/linux/reseaux/
   reboot
   halt
   ```
+  - Générer clé SSH
+  ```bash
+  ssh-keygen -t rsa -b 4096 -C "Clé SSH HAB"
+  ```
+  - Démarrer l'AgentSSH
+  ```bash
+  eval "$(ssh-agent -s)"
+  ```
+  - Ajout clé SSH à l'AgentSSH
+  ```bash
+  ssh-add ~/.ssh/id_rsa
+  ssh-add -l
+  ```
+  - Copier clé SSH sur le serveur distant :
+  ```bash
+  ssh-copy-id -i [user]@[ip]
+  ```
+  
   - Operateurs bash :
 https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
 ---

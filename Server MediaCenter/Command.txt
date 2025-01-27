@@ -42,3 +42,6 @@ docker inspect -f '{{.Name}} {{.State.Running}}' $(docker ps -aq)
 ### Résultat
 /vpn true
 /pyload true
+
+## afficher version de l'image
+docker inspect -f '{{ index .Config.Labels "build_version" }}' pyload-ng
