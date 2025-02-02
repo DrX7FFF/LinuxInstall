@@ -5,25 +5,6 @@ Attention car pour les docker sous CoreElec tout se fait en mode Root donc pas d
 Pour les dossiers voir :
 https://wiki.coreelec.org/coreelec:docker
 
-Docker path :
-cd ~/.kodi/userdata/docker
-cd ~/.config/dockers
-
-
-# Chemins
-cd ~/.kodi/userdata
-cd /storage/.kodi/userdata
-
-docker pull --platform linux/arm64 lscr.io/linuxserver/prowlarr:latest
-
-ghcr.io/flaresolverr/flaresolverr:latest
-
-
-cd ~/.kodi/userdata/mediarenamer
-
-# renamer
-/storage/.kodi/userdata/mediarenamer/mediarenamer.py
-
 
 docker image inspect --format '{{json .}}' "8717c5b2ff2d" | jq -r '. | {Id: .Id, Digest: .Digest, RepoDigests: .RepoDigests, Labels: .Config.Labels}'
 
@@ -31,11 +12,15 @@ https://ryandaniels.ca/blog/find-version-tag-latest-docker-image/
 https://github.com/ryandaniels/docker-script-find-latest-image-tag
 
 
-## Générateur de clés pour le site Gluetun
-docker run --rm qmcgaw/gluetun genkey
-
 ## Téléchargement de jq
 curl -Lo jq https://github.com/stedolan/jq/releases/latest/download/jq-linux64
+
+
+# Installation de docker compose
+mkdir dockercompose
+curl -SL https://github.com/docker/compose/releases/download/v2.32.4/docker-compose-linux-armv7 -o docker-compose
+chmod +x docker-compose
+./docker-compose -v
 
 ## Liste des containers avec leur état
 docker inspect -f '{{.Name}} {{.State.Running}}' $(docker ps -aq)
@@ -45,3 +30,36 @@ docker inspect -f '{{.Name}} {{.State.Running}}' $(docker ps -aq)
 
 ## afficher version de l'image
 docker inspect -f '{{ index .Config.Labels "build_version" }}' pyload-ng
+
+## Pour se connecter à un partage NFS (Pas utilisé):
+systemctl enable media-HD1.mount
+systemctl start media-HD1.mount
+
+# Si pb il y les commandes suivantes :
+systemctl daemon-reload
+systemctl restart var-media-HD1.mount
+
+vérifier les montage NFS
+exportfs -rv
+
+## Activer le montage NFS 
+# Ajouter fichier : /configfiles/exports
+/var/media/HD1            *(all_squash,rw,sync,no_subtree_check,fsid=0,anonuid=0,anongid=0)
+
+Puis 
+systemctl daemon-reload && systemctl restart nfs-server.service
+
+
+
+https://wiki.libreelec.tv/how-to/mount_network_share
+https://kodi.wiki/view/Userdata
+https://kodi.wiki/view/Template:Userdata
+
+
+## Librairie statique de FFmpeg
+ffmpeg-release-arm64-static.tar.xz
+https://johnvansickle.com/ffmpeg/
+https://www.ffmpeg.org/download.html#build-linux
+
+# Transcodeage :
+https://trac.ffmpeg.org/wiki/Hardware/VAAPI

@@ -220,12 +220,18 @@ https://blog.stephane-robert.info/docs/admin-serveurs/linux/reseaux/
   ```
   - Copier clé SSH sur le serveur distant :
   ```bash
-  ssh-copy-id -i [user]@[ip]
+  ssh-copy-id habadm@192.168.1.100
+  ssh-copy-id root@192.168.1.102
   ```
-  
+  Puis se connecter en SSH pour valider et activer la clé SSH  
   - Operateurs bash :
 https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
----
+
+  Tuer un processus :
+  ```bash
+  ps -edf |grep [process_name]
+  kill -9 [PID]
+  ```
 
 ## Docker
 
@@ -251,7 +257,7 @@ https://www.malekal.com/comment-lister-arreter-demarrer-un-conteneur-docker/
   ```
 - Purger les images inutiles (A faire qd les containers sont démarrés) :
   ```bash
-  docker system prune -a
+  docker system prune -a -f
   ```
   ```bash
   docker image prune

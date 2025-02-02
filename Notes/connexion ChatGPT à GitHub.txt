@@ -1,0 +1,5 @@
+curl -H "Authorization: token MYTOKEN" https://api.github.com/repos/DrX7FFF/Sofia
+
+curl -X PUT -H "Authorization: token MYTOKEN" \
+    -d '{"message": "Ajout de test.txt", "content": "VGVzdCBkZSBjb250ZW51cyBxdWkgb25mIGxldHkgY29kaWZmZSBsYSBkZWFuY2U="}' \
+    https://api.github.com/repos/DrX7FFF/Sofia/contents/test.txt

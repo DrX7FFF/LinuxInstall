@@ -29,10 +29,12 @@ sudo apt -y install zsh
 touch ~/.zshrc
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-syntax-highlighting
+git clone --depth=1 https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
-
+# redémarrage de zsh
+# source ~/.zshrc
 
 # Installe la font UbuntuMonoNerdFontMono-Regular.ttf pour le shell (https://www.nerdfonts.com/)
 mkdir -p ~/.local/share/fonts
@@ -84,6 +86,9 @@ sudo apt -y install samba
 # accéder aux ressources partagées sur des serveurs Windows
 sudo apt -y install winbind
 
+# autre
+sudo apt -y install nfs-common
+sudo apt -y install cifs-utils
 
 ### Configuration de Gnome Ubuntu
 # Personalisation Gnome
@@ -102,3 +107,5 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-
 # traitement basic d'images
 #sudo apt -y install gthumb
 
+# Outil de gestion des médias
+sudo apt install ffmpeg
