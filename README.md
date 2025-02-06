@@ -195,6 +195,10 @@ https://blog.stephane-robert.info/docs/admin-serveurs/linux/reseaux/
   lspci -k | grep -EA3 'VGA|3D|Display'
   lspci -knnn | grep -A3 -E 'VGA|Display|3D'
   ```
+  - Touver le chemin source d'un executable :
+  ```bash
+  which [executable]
+  ```
   - Afficher l'heure système :
   ```bash
   timedatectl
