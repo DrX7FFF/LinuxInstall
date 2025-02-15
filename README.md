@@ -105,6 +105,24 @@
   ```bash
   sudo lsusb
   ```
+- Diag de toute la chaine USB USB Hub USB1 USB2 high-speed USB3 SuperSpeed :
+  ```bash
+  dmesg | grep -i usb
+  ```
+- Tester débit écriture disque :
+  ```bash
+  dd if=/dev/zero of=/media/HD1/test bs=1M count=1000 oflag=direct
+  ```
+  résultat attentu 190MB/s c'est ok :
+  1048576000 bytes (1000.0MB) copied, 5.285930 seconds, 189.2MB/s
+
+- Tester débit lecture disque :
+  ```bash
+  dd if=/media/HD1/test of=/dev/null bs=1M count=1000
+  ```
+  résultat attentu 1.1GB/s c'est exceptionnel (surement grace au cache) :
+  1048576000 bytes (1000.0MB) copied, 0.891628 seconds, 1.1GB/s
+
 
 - Monter une partition :
   ```bash

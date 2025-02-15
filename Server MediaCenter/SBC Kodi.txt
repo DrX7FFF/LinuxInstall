@@ -11,6 +11,9 @@ Choix : https://forum.kodi.tv/showthread.php?tid=252916
 Outils MKV : https://mkvtoolnix.download/
 CoreElec : https://coreelec.org/#download
 
+
+Problème disque USB
+https://wiki.odroid.com/odroid-n2/troubleshooting/hub_reset
 Each USB 3.0 port can supply up to 900mA.	https://forum.odroid.com/viewtopic.php?t=33932
 
 
@@ -77,9 +80,6 @@ Réglage des dossiers : https://www.quadraphonicquad.com/forums/threads/kodi-how
 MergerFS pour fusionnier plusieur HD : https://discourse.coreelec.org/t/trying-to-execute-mergerfs/10870
 
 	
-Problème disque USB
-https://wiki.odroid.com/odroid-n2/troubleshooting/hub_reset
-
 Intallation image Pyload (via SSH) :
 	Ancienne version
 	https://hub.docker.com/r/linuxserver/pyload

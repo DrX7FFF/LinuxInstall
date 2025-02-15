@@ -1,9 +1,22 @@
 ssh root@192.168.1.102
 
 
+
+
 Attention car pour les docker sous CoreElec tout se fait en mode Root donc pas de PUID et PGID
-Pour les dossiers voir :
+Pour les dossiers chemins voir :
 https://wiki.coreelec.org/coreelec:docker
+
+It is recommended that all docker container images needing access to storage use the following convention:
+
+Virtual Storage	Actual CoreELEC Storage
+/storage	                /storage
+/media	                    /media
+/config	                    /storage/.config/dockers/<app_name>/config
+
+Generally this means linking /storage/dockers to /storage/.config/dockers
+
+
 
 
 docker image inspect --format '{{json .}}' "8717c5b2ff2d" | jq -r '. | {Id: .Id, Digest: .Digest, RepoDigests: .RepoDigests, Labels: .Config.Labels}'
