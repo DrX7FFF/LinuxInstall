@@ -267,6 +267,9 @@ https://www.malekal.com/comment-lister-arreter-demarrer-un-conteneur-docker/
   ```bash
   docker exec -it [container_name] /bin/bash
   ```
+  ```bash
+  docker exec -it [container_name] sh
+  ```
 
 ### Gestion des images
 - Listes des container :

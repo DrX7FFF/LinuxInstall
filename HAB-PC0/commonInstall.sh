@@ -109,3 +109,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-
 
 # Outil de gestion des médias
 sudo apt install ffmpeg
+
+# MKVToolkit
+sudo apt install mkvtoolnix mkvtoolnix-gui

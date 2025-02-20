@@ -31,7 +31,7 @@ curl -Lo jq https://github.com/stedolan/jq/releases/latest/download/jq-linux64
 
 # Installation de docker compose
 mkdir dockercompose
-curl -SL https://github.com/docker/compose/releases/download/v2.32.4/docker-compose-linux-armv7 -o docker-compose
+curl -SL https://github.com/docker/compose/releases/download/v2.33.0/docker-compose-linux-armv7 -o docker-compose
 chmod +x docker-compose
 ./docker-compose -v
 
