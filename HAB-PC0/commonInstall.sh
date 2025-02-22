@@ -83,6 +83,9 @@ sudo apt -y install vulkan-tools
 ### Complément pour Fusion 360
 # Samba
 sudo apt -y install samba
+# prise en charge exFAT
+sudo apt -y install exfat-fuse
+
 # accéder aux ressources partagées sur des serveurs Windows
 sudo apt -y install winbind
 
