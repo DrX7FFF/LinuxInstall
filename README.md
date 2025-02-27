@@ -131,6 +131,10 @@
   sudo nano /etc/fstab
   sudo cat /etc/mtab
   ```
+  Afficher les partages distants :
+  ```bash
+  showmount -e 192.168.1.102
+  ```
 - Cloner un disque dur :
   ```bash
   sudo dd if=/dev/sda of=/dev/sdb bs=100M

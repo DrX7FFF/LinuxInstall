@@ -81,6 +81,7 @@ sudo apt -y install vulkan-tools
 
 
 ### Complément pour Fusion 360
+sudo apt -y install gparted
 # Samba
 sudo apt -y install samba
 # prise en charge exFAT
