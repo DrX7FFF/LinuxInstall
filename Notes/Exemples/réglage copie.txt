@@ -1,0 +1,22 @@
+réglage actuel :
+❯ sysctl vm.dirty_ratio
+vm.dirty_ratio = 20
+❯ sysctl vm.dirty_background_ratio
+vm.dirty_background_ratio = 10
+
+
+réglage temporaire :
+sudo sysctl vm.dirty_ratio=80
+sudo sysctl vm.dirty_background_ratio=50
+
+
+rsync -ah --info=progress2 /media/moi/HD1/Films/Temp /media/moi/HDTemp
+rsync -avh --progress "/home/moi/Copie HD1/Films/" "/media/moi/HD1/Films/"
+rsync -avh --progress --partial "/home/moi/Copie HD1/Films/" "/media/moi/HD1/Films/"
+
+rsync -avhz --progress --partial "/home/moi/Copie HD1/Films/" "root@192.168.1.102:/media/HD1/Films/"
+rsync -avhz --progress --partial "/media/moi/6FFD-A753/" "root@192.168.1.102:/media/HD1/Films/"
+rsync -avhz --progress --partial "/media/moi/500exFAT" "root@192.168.1.102:/media/HD1/Films/"
+
+rsync -avh --progress --remove-source-files "/home/moi/Copie HD1/Films/" "/media/moi/HD1/Films/"
+rsync -avh --progress --partial --inplace --remove-source-files "/home/moi/Copie HD1/Films/" "/media/moi/HD1/Films/"

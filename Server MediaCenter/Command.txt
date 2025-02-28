@@ -1,6 +1,7 @@
 ssh root@192.168.1.102
 
-
+# Pour donner access aux disques dur :
+chmod -R 777 /var/media/HD1 && chown -R nobody:nogroup /var/media/HD1
 
 
 Attention car pour les docker sous CoreElec tout se fait en mode Root donc pas de PUID et PGID
@@ -57,9 +58,11 @@ exportfs -rv
 
 ## Activer le montage NFS 
 # Ajouter fichier : /configfiles/exports
-/var/media/HD1            *(all_squash,rw,sync,no_subtree_check,fsid=0,anonuid=0,anongid=0)
+### En NTFS /var/media/HD1            *(all_squash,rw,sync,no_subtree_check,fsid=0,anonuid=0,anongid=0)
+/var/media/HD1      *(rw,sync,no_subtree_check,no_root_squash)
 
 Puis 
+
 systemctl daemon-reload && systemctl restart nfs-server.service
 
 
