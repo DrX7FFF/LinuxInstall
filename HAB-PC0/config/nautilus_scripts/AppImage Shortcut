@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Vérifier si un fichier est sélectionné
+if [ -z "$1" ]; then
+    notify-send "Erreur" "Aucun fichier sélectionné."
+    exit 1
+fi
+
+# Vérifier si c'est un AppImage
+if [[ "$1" != *.AppImage ]]; then
+    notify-send "Erreur" "Le fichier sélectionné n'est pas un AppImage."
+    exit 1
+fi
+
+APPIMAGE_PATH="$(realpath "$1")"
+APP_NAME=$(basename "$APPIMAGE_PATH" .AppImage)
+DESKTOP_FILE="$HOME/.local/share/applications/$APP_NAME.desktop"
+
+# Générer une icône temporaire si disponible
+ICON_PATH=""
+EXTRACT_DIR="/tmp/$APP_NAME-extract"
+mkdir -p "$EXTRACT_DIR"
+chmod +x "$APPIMAGE_PATH"
+(cd "$EXTRACT_DIR" && "$APPIMAGE_PATH" --appimage-extract > /dev/null 2>&1)
+ICON_FILE=$(find "$EXTRACT_DIR/squashfs-root" -name "*.png" | head -n 1)
+if [ -n "$ICON_FILE" ]; then
+    ICON_PATH="$HOME/.local/share/icons/$APP_NAME.png"
+    cp "$ICON_FILE" "$ICON_PATH"
+fi
+rm -rf "$EXTRACT_DIR"
+
+# Création du fichier .desktop
+echo "[Desktop Entry]" > "$DESKTOP_FILE"
+echo "Name=$APP_NAME" >> "$DESKTOP_FILE"
+echo "Exec=$APPIMAGE_PATH" >> "$DESKTOP_FILE"
+echo "Type=Application" >> "$DESKTOP_FILE"
+echo "Categories=Utility;" >> "$DESKTOP_FILE"
+echo "Terminal=false" >> "$DESKTOP_FILE"
+if [ -n "$ICON_PATH" ]; then
+    echo "Icon=$ICON_PATH" >> "$DESKTOP_FILE"
+fi
+
+# Appliquer les permissions
+chmod +x "$DESKTOP_FILE"
+update-desktop-database "$HOME/.local/share/applications/"
+notify-send "Raccourci créé" "Le raccourci pour $APP_NAME a été ajouté au menu."

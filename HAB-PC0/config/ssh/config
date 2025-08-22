@@ -7,4 +7,9 @@ Host mediacenter
     HostName 192.168.1.102
     User root
     Port 22
+
+Host ender3
+    HostName 192.168.1.101
+    User adpi3d
+    Port 22
     
